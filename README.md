@@ -2,9 +2,9 @@
 
 A two-piece system for catechetical HTML slide decks. **Presenter** loads any deck in the repo and shows presenter notes side-by-side on a second monitor. **Slide-Craft** is a deterministic generator that produces new decks honoring the Catechism Design System (`DESIGN.md`) with stable, repeatable rules.
 
-- **Status**: v0.1.1 — see [CHANGELOG.md](CHANGELOG.md).
+- **Status**: v0.2.1 — see [CHANGELOG.md](CHANGELOG.md).
 - **Design contract**: [DESIGN.md](DESIGN.md) (canonical, 850 lines).
-- **Tests**: 49 cases, all green — `node --test`.
+- **Tests**: 72 cases, all green — `node --test`.
 
 ## Contents
 
@@ -12,11 +12,14 @@ A two-piece system for catechetical HTML slide decks. **Presenter** loads any de
 - [Quick start](#quick-start)
 - [The Presenter](#the-presenter) — load and present a deck with notes
 - [The Slide-Craft](#the-slide-craft) — generate new catechetical decks
+- [PPTX Importer (v0.2.0)](#pptx-importer-v020) — convert any PPTX to HTML
 - [Visual styles & shapes (v0.1.1)](#visual-styles--shapes-v011) — compose the look of a deck
 - [How to extend](#how-to-extend) — add a style, shape, or archetype
+- [Recipes & Customization](#recipes--customization) — examples + folder layout
 - [Architecture](#architecture) — file map
 - [Tests](#tests) — how to run them
 - [Versioning](#versioning) — version policy and changelog
+- [License](#license)
 
 ## What you need
 
@@ -161,7 +164,7 @@ Insert Divider (G) between sub-chapters and Prayer (E) as connective tissue. Nev
 node scripts/lint-deck.js demo-deck.html index.html
 ```
 
-Current results: v1 + index clean; v2 + v3 each show one P1 (`<img>` without `loading="lazy"`). These are pre-existing deviations in the older decks, not from slide-craft.
+Current results: both decks clean (0 issues).
 
 ## PPTX Importer (v0.2.0)
 
@@ -528,57 +531,69 @@ Mirá `01-cover.html` o `demo-deck.html` como referencia. No hay nada sagrado �
 
 ```
 SlidesChurch/
-├── presenter.html              # main app + presenter-window popup shell (?popup=1)
-├── presenter.js                # main app logic: deck loader, nav, hotkeys, popup sync
-├── presenter-shared.js         # pure helpers: parseDeckHtml, parseSidecar, parseShape
+├── presenter.html              # the app shell (with popup shell on ?popup=1)
+├── presenter.js                # app logic: deck loader, nav, hotkeys, popup sync
+├── presenter-shared.js         # pure helpers: parseDeckHtml, parseSidecar, …
 │                               #   dual-environment: window + CommonJS
 ├── serve.sh                    # python3 -m http.server launcher
 │
 ├── slides/
-│   ├── img/cleaned/            # cleaned slide images used by the v1 catechism deck
-│   ├── bbox/                   # OCR work artifacts (regenerable)
-│   ├── ocr/                    # OCR text output per slide
-│   └── _scaffold/              # 8 working archetype scaffolds
-│       ├── 00-divider.html
-│       ├── 01-cover.html
-│       ├── 02-scripture.html
-│       ├── 03-doctrine.html
-│       ├── 04-reflection.html
-│       ├── 05-prayer.html
-│       ├── 06-summary.html
-│       ├── 99-closing.html
-│       ├── _looks/             # CSS libraries: monastic, festive, typographic
-│       └── _shapes/            # CSS libraries: 16-9, 3-4, 1-1, 21-9
+│   ├── _scaffold/              # 8 working archetype scaffolds
+│   │   ├── 00-divider.html
+│   │   ├── 01-cover.html
+│   │   ├── 02-scripture.html
+│   │   ├── 03-doctrine.html
+│   │   ├── 04-reflection.html
+│   │   ├── 05-prayer.html
+│   │   ├── 06-summary.html
+│   │   ├── 99-closing.html
+│   │   ├── _looks/             # monastic, festive, typographic
+│   │   └── _shapes/            # 16:9, 3:4, 1:1, 21:9
+│   ├── img/cleaned/            # raster viejo (gitignored, regenerable)
+│   ├── img/imported/           # imágenes de PPTX importados (gitignored)
+│   └── bbox/, ocr/, ocr.*      # OCR work artifacts (gitignored)
 │
 ├── scripts/
-│   └── lint-deck.js            # P0/P1/P2 deterministic checks
+│   ├── lint-deck.js            # P0/P1/P2 deterministic checks
+│   ├── pptx-to-deck.js         # CLI: PPTX → catechetical HTML
+│   └── build-demo-pptx.js      # genera demo.pptx con pptxgenjs
 │
 ├── agent/                      # source of truth for Pi integration
-│   ├── slide-craft/SKILL.md    # user-global install at ~/.pi/agent/skills/
-│   └── gentle-ai-slide-builder.md  # user-global install at ~/.pi/agent/agents/
+│   ├── slide-craft/SKILL.md          # → ~/.pi/agent/skills/slide-craft/
+│   ├── slide-pptx-importer/SKILL.md   # → ~/.pi/agent/skills/slide-pptx-importer/
+│   ├── gentle-ai-slide-builder.md    # → ~/.pi/agent/agents/
+│   └── gentle-ai-pptx-importer.md     # → ~/.pi/agent/agents/
 │
 ├── tests/
 │   ├── presenter-shared.test.js   # 28 unit tests
 │   ├── lint-deck.test.js          # 21 unit tests
-│   ├── smoke-parse-decks.js       # CLI smoke test for all decks
+│   ├── pptx-to-deck.test.js       # 23 unit tests
+│   ├── smoke-parse-decks.js       # CLI smoke (manual)
 │   └── fixtures/                  # mini-deck, deck-clean, deck-bad
 │
 ├── docs/
-│   └── extending-slide-craft.md   # how to add a new style/shape/archetype
+│   └── extending-slide-craft.md   # cómo extender el sistema
 │
-├── DESIGN.md                   # canonical catechism design contract (850 lines)
+├── odd/                        # feature plans + Engram mirrors
+│   ├── tasks/                       # planes por feature
+│   ├── slide-craft/                 # Engram mirror
+│   ├── slide-styles-shapes/         # Engram mirror
+│   └── pptx-importer/               # Engram mirror
+│
+├── DESIGN.md                  # canonical catechism design contract (850 lines)
 ├── demo-deck.html             # generated demo (PPTX importer output)
-├── demo-deck.notes.json       # empty sidecar, ready for notes
+├── demo-deck.notes.json       # empty sidecar
+├── index.html                 # cover corto (3 slides, deck histórico)
 │
-├── package.json                # npm scripts: test, lint
-├── LICENSE                     # MIT
-├── CHANGELOG.md                # v0.1.0, v0.1.1
-└── README.md                   # this file
+├── package.json               # npm scripts: test, lint, pptx-to-deck
+├── LICENSE                    # MIT
+├── CHANGELOG.md               # v0.1.0 → v0.2.1
+└── README.md                  # este archivo
 ```
 
 `presenter-shared.js` is deliberately free of DOM access so it can run under `node --test` without jsdom. Browser-only code lives in `presenter.js`.
 
-The two agent files in `agent/` are the source of truth for the slide-craft skill. Whenever you update them, mirror the change to `~/.pi/agent/skills/slide-craft/SKILL.md` and `~/.pi/agent/agents/gentle-ai-slide-builder.md` in the same commit.
+The agent files in `agent/` are the source of truth. Whenever you update them, mirror the change to `~/.pi/agent/skills/...` and `~/.pi/agent/agents/...` in the same commit (or via `scripts/install-agent.sh`).
 
 ## Tests
 
@@ -586,15 +601,21 @@ The two agent files in `agent/` are the source of truth for the slide-craft skil
 node --test
 ```
 
-Auto-discovers every `*.test.js` inside `tests/`. 49 cases, all green:
+Auto-discovers every `*.test.js` inside `tests/`. **72 cases, all green.**
 
+**28 unit tests** in `presenter-shared.test.js`:
 - `parseDeckHtml`: regex pulls `<style>` and `<section class="slide">`; ignores other sections.
 - `parseSidecar`: bare-array and `{slides: []}` shapes, padding, truncation, malformed JSON, type coercion.
 - `emptySidecar`: valid JSON template with N empty slots.
 - `computeStageScale`: arbitrary canvas fitted to any viewport.
 - `createBus`: pub-sub with `BroadcastChannel` when available, in-process fallback otherwise.
 - `SHAPE_DIMENSIONS`, `extractShape`, `shapeDimensions` (v0.1.1).
+
+**21 unit tests** in `lint-deck.test.js`:
 - Lint rules: canvas, counter, screen-label, slide-count, sans-serif-display, motif-budget, emoji, script-tags, script-shape, palette-tokens, image-lazy, image-decode, animation-duration, look-valid, shape-valid, shape-dimensions, combination, look-budget.
+
+**23 unit tests** in `pptx-to-deck.test.js`:
+- `emuToPx`, `parseShape`, `parseSlideXml`, `parseRelsXml`, `parseSlideSize`, `heuristicArchetype`, `summarizeSlide`, `parseMapArg`.
 
 Smoke test: `node tests/smoke-parse-decks.js` parses every HTML deck in the project root and asserts slide counts.
 
