@@ -1,0 +1,133 @@
+{
+  "$schema": "../../../schemas/catechism-liturgical.schema.json",
+  "id": "full",
+  "title": "Catechism Liturgical · every layout",
+  "lang": "es",
+  "design": "catechism-liturgical",
+  "palette": "ordinary",
+  "meta": { "sources": ["Catecismo de la Iglesia Católica"] },
+  "slides": [
+    {
+      "id": "cover",
+      "layout": "cover",
+      "label": "Cover",
+      "eyebrow": "CURSO DE CATEQUESIS",
+      "lead": "Confirmación de Adultos",
+      "title": "Creo en Dios",
+      "subtitle": "Padre todopoderoso",
+      "reference": "CEC 198-421",
+      "invocation": "En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.",
+      "motif": "cross",
+      "variant": "festive"
+    },
+    {
+      "id": "scripture",
+      "layout": "scripture",
+      "label": "Scripture with image",
+      "reference": "Génesis 1, 1",
+      "text": "«En el principio creó Dios el cielo y la tierra.»",
+      "commentary": "Dios crea por amor y sin necesidad.",
+      "citation": "Gn 1, 1 · CEC 279",
+      "images": [{ "src": "assets/plate.svg", "alt": "Abstract circular plate with a cross", "slot": "right", "credit": "Example asset" }],
+      "animation": { "image": "slow-zoom" }
+    },
+    {
+      "id": "doctrine-points",
+      "layout": "doctrine",
+      "label": "Doctrine · points",
+      "kicker": "LA CREACIÓN",
+      "title": "Dios Padre, Creador",
+      "lead": "Profesamos un solo Dios porque se ha revelado como el único.",
+      "points": [
+        { "text": "Creemos en un solo Dios, Padre, Hijo y Espíritu Santo." },
+        { "text": "Este Dios único crea todas las cosas por su Verbo." },
+        { "text": "La creación es obra de su amor y de su providencia." }
+      ],
+      "citation": "CEC 279 · SC 38",
+      "animation": { "steps": true }
+    },
+    {
+      "id": "doctrine-columns",
+      "layout": "doctrine",
+      "label": "Doctrine · columns",
+      "kicker": "LA UNIÓN HIPOSTÁTICA",
+      "title": "Verdadero Dios y verdadero hombre",
+      "columns": [
+        { "heading": "Naturaleza divina", "text": "Jesucristo es la Segunda Persona de la Trinidad." },
+        { "heading": "Naturaleza humana", "text": "Alma, espíritu y cuerpo como los nuestros." }
+      ],
+      "closing": "«Dos naturalezas, divina y humana, unidas en la única Persona del Hijo de Dios.»",
+      "citation": "CEC 461-469"
+    },
+    {
+      "id": "doctrine-terms",
+      "layout": "doctrine",
+      "label": "Doctrine · terms and image",
+      "kicker": "EL NOMBRE DE LA UNCIÓN",
+      "title": "Cristo",
+      "subtitle": "«Ungido» · «Mesías»",
+      "points": [
+        { "term": "Sacerdote", "text": "ungido para ofrecer el sacrificio de la Alianza (Hb 4, 14)." },
+        { "term": "Profeta", "text": "ungido para anunciar la Palabra del Señor (Mt 13, 57)." },
+        { "term": "Rey", "text": "ungido para servir y dar su vida en rescate por muchos (Mc 10, 45)." }
+      ],
+      "citation": "CEC 436-440",
+      "images": [{ "src": "assets/plate.svg", "alt": "Abstract circular plate with a cross", "slot": "top", "fit": "cover", "focal": { "x": 0.5, "y": 0.4 } }]
+    },
+    {
+      "id": "reflection",
+      "layout": "reflection",
+      "label": "Reflection",
+      "kicker": "REFLEXIÓN",
+      "text": "«Antes de que la luz fuera luz, ya eras Tú.»",
+      "attribution": "— Adaptado de una homilía de San Agustín",
+      "motif": "ichthys"
+    },
+    {
+      "id": "prayer",
+      "layout": "prayer",
+      "label": "Padre Nuestro",
+      "title": "Padre Nuestro",
+      "text": "Padre nuestro, que estás en el cielo,\nsantificado sea tu Nombre;\nvenga a nosotros tu reino;\nhágase tu voluntad en la tierra como en el cielo.\n\nDanos hoy nuestro pan de cada día;\nperdona nuestras ofensas,\ncomo también nosotros perdonamos a los que nos ofenden;\nno nos dejes caer en tentación,\ny líbranos del mal."
+    },
+    {
+      "id": "summary",
+      "layout": "summary",
+      "label": "Summary",
+      "kicker": "EN RESUMEN",
+      "title": "Lo que confesamos",
+      "items": [
+        { "text": "Dios Padre es el principio sin principio de todas las cosas." },
+        { "text": "Crea por amor, no por necesidad." },
+        { "text": "Su providencia sostiene lo creado hacia su plenitud." }
+      ],
+      "citation": "CEC 279-324",
+      "animation": { "steps": true }
+    },
+    {
+      "id": "divider",
+      "layout": "divider",
+      "label": "Divider",
+      "kicker": "SEGUNDA PARTE",
+      "title": "La Providencia",
+      "subtitle": "Dios sostiene y guía su creación",
+      "motif": "compass"
+    },
+    {
+      "id": "plate-overlay",
+      "layout": "image-overlay",
+      "label": "Image overlay (core layout)",
+      "title": "Image overlay",
+      "body": "A translucent panel over a full-bleed plate.",
+      "images": [{ "src": "assets/plate.svg", "alt": "Abstract circular plate with a cross", "slot": "background" }]
+    },
+    {
+      "id": "closing",
+      "layout": "closing",
+      "label": "Closing",
+      "kicker": "BENDICIÓN",
+      "text": "«El Señor os bendiga y os guarde;\nhaga resplandecer su rostro sobre vosotros\ny os conceda su paz.»",
+      "motif": "cross"
+    }
+  ]
+}

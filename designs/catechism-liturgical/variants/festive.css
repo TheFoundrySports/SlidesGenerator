@@ -1,0 +1,13 @@
+/* Variant: festive — solemnities and feast days. Budget: max 2 slides per deck.
+   Valid layouts: cover, prayer, divider, closing. */
+.slide[data-variant="festive"]::before {
+  content: "";
+  position: absolute;
+  inset: 32px;
+  border: 2px double var(--gold);
+  pointer-events: none;
+}
+.slide[data-variant="festive"] .title { color: var(--accent); }
+.slide[data-variant="festive"] .ornament,
+.slide[data-variant="festive"] .amen,
+.slide[data-variant="festive"] .blessing { color: var(--accent); }

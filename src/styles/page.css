@@ -1,0 +1,85 @@
+/* Engine · page scope. Only used by the standalone deck page; the presenter skips it. */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+.stage {
+  width: var(--stage-w);
+  height: var(--stage-h);
+  transform: scale(var(--scale, 1));
+  transform-origin: center center;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.counter {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  z-index: 100;
+}
+.help {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  z-index: 100;
+}
+.help kbd {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--muted);
+}
+
+@supports (height: 100dvh) {
+  html, body { height: 100dvh; }
+  body { width: 100vw; height: 100dvh; }
+}
+
+/* Small screens: the slide is a scaled canvas, so drop the keyboard hint and slim the counter. */
+@media (max-width: 760px), (max-height: 480px) {
+  .help { display: none; }
+  .counter { bottom: 8px; right: 12px; font-size: 14px; letter-spacing: 0.1em; }
+}
+
+@media print {
+  @page { size: landscape; margin: 0; }
+  html, body { height: auto; overflow: visible; }
+  body { display: block; width: auto; height: auto; }
+  .stage { transform: none; width: auto; height: auto; overflow: visible; }
+  .slide {
+    position: relative;
+    width: var(--stage-w);
+    height: var(--stage-h);
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .slide:last-of-type { page-break-after: auto; }
+  .counter, .help { display: none !important; }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Abstract plate">
+  <rect width="800" height="600" fill="#EFE3CC"/>
+  <circle cx="400" cy="300" r="190" fill="none" stroke="#B5A285" stroke-width="3"/>
+  <circle cx="400" cy="300" r="130" fill="none" stroke="#A8915C" stroke-width="2"/>
+  <path d="M400 150 L400 450 M300 230 L500 230" stroke="#5C1A1B" stroke-width="6" fill="none"/>
+</svg>
