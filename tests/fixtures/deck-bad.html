@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- Test fixture: a deck that should fail every P0/P1 check. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<style>
+:root { --bg: #ff00ff; }  /* raw hex outside tokens */
+.stage { width: 1280px; height: 720px; transform: scale(var(--scale,1)); }  /* wrong canvas */
+.slide h1 { font-family: Inter, sans-serif; }  /* sans-serif display */
+.slide { transition: opacity 800ms ease-in-out; }  /* wrong animation duration */
+</style>
+</head>
+<body>
+<div class="stage">
+  <!-- missing data-screen-label -->
+  <section class="slide">
+    <h1>Hola</h1>
+    <p>Body with 🚀 emoji</p>  <!-- forbidden emoji -->
+    <!-- 3 SVG motifs — over budget -->
+    <svg viewBox="0 0 100 100"><path d="M50 16 L50 84"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M50 16 L50 84"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M50 16 L50 84"/></svg>
+    <!-- <img> missing lazy/decode -->
+    <img src="x.png" alt="x">
+  </section>
+  <section data-screen-label="02">
+    <p>Body.</p>
+  </section>
+</div>
+<!-- no .counter -->
+<!-- no scripts block -->
+<script>console.log("one");</script>
+<script>console.log("two");</script>
+</body>
+</html>

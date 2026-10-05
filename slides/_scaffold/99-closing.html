@@ -1,0 +1,143 @@
+<!doctype html>
+<!--
+  Scaffold · 99-closing.html
+  Archetype H — Closing blessing (Cierre).
+  Compose: centered ornament above + a single line of exhortation + «Amén.» footer.
+
+  Cómo usar:
+    1) Cambiá la exhortación central por la bendición final.
+    2) El monogram-cross ya viene armado (puede reemplazarse por otro ornamento).
+    3) La línea "Amén." NO se modifica salvo cambio litúrgico.
+
+  Reglas: la bendición cierra deck O capítulo; nunca se usa como body slide.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cierre — [Lección]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5EBD9; --surface: #EFE3CC; --fg: #5C1A1B; --muted: #8A7560;
+  --border: #B5A285; --accent: #73201D; --gold: #A8915C;
+  --font-display: "Cormorant Garamond", "EB Garamond", "Iowan Old Style", "Charter", Georgia, serif;
+  --font-body: "EB Garamond", "Lora", "Iowan Old Style", "Charter", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace;
+  --text-meta: 18px; --text-sm: 22px; --text-base: 28px; --text-lg: 36px;
+  --text-xl: 56px; --text-2xl: 80px; --text-3xl: 112px;
+  --leading-tight: 1.15; --leading-body: 1.45;
+  --tracking-display: -0.01em;
+  --space-3: 24px; --space-4: 32px; --space-5: 48px; --space-6: 64px; --space-8: 96px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+body {
+  width: 100vw; height: 100vh; display: grid; place-items: center;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  color: var(--fg); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body);
+}
+.stage {
+  width: 1920px; height: 1080px;
+  transform: scale(var(--scale, 1)); transform-origin: center center;
+  position: relative; background: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  flex-shrink: 0;
+}
+.slide {
+  position: absolute; inset: 0; display: none; padding: 96px 140px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 350ms cubic-bezier(.2,.7,.3,1), transform 350ms cubic-bezier(.2,.7,.3,1);
+}
+.slide.is-active { display: flex; flex-direction: column; justify-content: center; opacity: 1; transform: translateY(0); }
+
+.counter { position: absolute; bottom: 32px; right: 48px; font-family: var(--font-mono); font-size: var(--text-meta); letter-spacing: 0.18em; color: var(--muted); z-index: 100; }
+.help { position: absolute; bottom: 32px; left: 48px; font-family: var(--font-mono); font-size: var(--text-meta); letter-spacing: 0.10em; color: var(--muted); z-index: 100; }
+.help kbd { display: inline-block; font-family: var(--font-mono); font-size: 16px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); color: var(--muted); margin: 0 1px; }
+
+.ornament {
+  display: grid; place-items: center; color: var(--fg);
+  position: absolute; top: 200px; left: 50%; transform: translateX(-50%);
+}
+.ornament svg { width: 200px; height: 200px; display: block; }
+.blessing {
+  font-family: var(--font-display); font-style: italic;
+  font-size: var(--text-xl); line-height: 1.45;
+  text-align: center; max-width: 32ch;
+  margin: auto;
+}
+.amen {
+  position: absolute; bottom: 96px; left: 0; right: 0;
+  text-align: center; font-family: var(--font-display);
+  font-style: italic; font-size: var(--text-lg); color: var(--fg);
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- EDITAR: data-screen-label. -->
+  <section class="slide is-active" data-screen-label="99 Cierre">
+    <!-- EDITAR (opcional): cambiá el ornamento por otro de §7 si querés. -->
+    <div class="ornament" aria-hidden="true">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M50 16 L50 84 M28 38 L72 38"/>
+      </svg>
+    </div>
+    <!-- EDITAR: bendición / exhortación central. -->
+    <p class="blessing">[«El Señor os bendiga y os guarde;<br>
+      haga resplandecer su rostro sobre vosotros<br>
+      y os conceda su paz.»]</p>
+    <p class="amen">Amén.</p>
+  </section>
+
+</div>
+
+<div class="counter" aria-live="polite">
+  <span id="cNow">01</span><span class="counter-sep">/</span><span id="cTotal">01</span>
+</div>
+<div class="help" aria-hidden="true">
+  <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Inicio</kbd> <kbd>Fin</kbd> extremos
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const stage = document.querySelector('.stage');
+  const slides = Array.from(stage.querySelectorAll('.slide'));
+  const total = slides.length;
+  const cNow = document.getElementById('cNow');
+  const cTotal = document.getElementById('cTotal');
+  cTotal.textContent = String(total).padStart(2, '0');
+
+  function fit() {
+    const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.setProperty('--scale', s);
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  function show(i) {
+    const clamped = Math.max(0, Math.min(total - 1, i));
+    slides.forEach((s, j) => s.classList.toggle('is-active', j === clamped));
+    cNow.textContent = String(clamped + 1).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    const cur = slides.findIndex((s) => s.classList.contains('is-active'));
+    if (cur < 0) return;
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown': case ' ': show(cur + 1); e.preventDefault(); break;
+      case 'ArrowLeft':  case 'PageUp':     show(cur - 1); e.preventDefault(); break;
+      case 'Home': show(0); e.preventDefault(); break;
+      case 'End':  show(total - 1); e.preventDefault(); break;
+    }
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Test fixture: a deck that should pass every lint check. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clean fixture</title>
+<style>
+:root {
+  --bg: #F5EBD9; --surface: #EFE3CC; --fg: #5C1A1B; --muted: #8A7560;
+  --border: #B5A285; --accent: #73201D; --gold: #A8915C;
+  --font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+.stage { width: 1920px; height: 1080px; transform: scale(var(--scale,1)); }
+.slide { transition: opacity 350ms cubic-bezier(.2,.7,.3,1), transform 350ms cubic-bezier(.2,.7,.3,1); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <section class="slide" data-screen-label="01 Clean">
+    <h1>Hola</h1>
+    <p>Body.</p>
+    <svg viewBox="0 0 100 100"><path d="M50 16 L50 84"/></svg>
+  </section>
+</div>
+<div class="counter"><span id="cNow">01</span><span>/</span><span id="cTotal">01</span></div>
+<script>(function(){ 'use strict'; const slides=document.querySelectorAll('.slide'); slides[0].classList.add('is-active'); })();</script>
+</body>
+</html>
