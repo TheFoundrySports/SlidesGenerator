@@ -1,0 +1,182 @@
+{
+  "lines" : [
+    {
+      "h" : 62,
+      "confidence" : 1,
+      "w" : 1090,
+      "text" : "El Gran Designio: Síntesis del Plan del Padre",
+      "x" : 76,
+      "y" : 54
+    },
+    {
+      "confidence" : 1,
+      "text" : "El Credo",
+      "x" : 643,
+      "y" : 171,
+      "w" : 90,
+      "h" : 26
+    },
+    {
+      "h" : 22,
+      "y" : 201,
+      "w" : 104,
+      "text" : "(Nuestra Fe",
+      "confidence" : 1,
+      "x" : 635
+    },
+    {
+      "y" : 222,
+      "x" : 651,
+      "w" : 72,
+      "text" : "Común)",
+      "h" : 25,
+      "confidence" : 1
+    },
+    {
+      "confidence" : 1,
+      "w" : 96,
+      "x" : 441,
+      "h" : 26,
+      "text" : "La Gloria",
+      "y" : 277
+    },
+    {
+      "text" : "La Trinidad",
+      "w" : 126,
+      "h" : 28,
+      "x" : 825,
+      "y" : 288,
+      "confidence" : 1
+    },
+    {
+      "h" : 26,
+      "w" : 69,
+      "text" : "Eterna",
+      "confidence" : 1,
+      "x" : 455,
+      "y" : 302
+    },
+    {
+      "y" : 316,
+      "confidence" : 0.5,
+      "w" : 80,
+      "text" : "(El Dios",
+      "h" : 29,
+      "x" : 848
+    },
+    {
+      "y" : 330,
+      "w" : 80,
+      "text" : "(Nuestro",
+      "confidence" : 1,
+      "x" : 447,
+      "h" : 22
+    },
+    {
+      "y" : 345,
+      "text" : "Amor)",
+      "w" : 59,
+      "h" : 24,
+      "x" : 858,
+      "confidence" : 1
+    },
+    {
+      "x" : 449,
+      "y" : 352,
+      "h" : 25,
+      "w" : 78,
+      "text" : "Destino)",
+      "confidence" : 1
+    },
+    {
+      "h" : 27,
+      "x" : 839,
+      "confidence" : 1,
+      "y" : 510,
+      "w" : 94,
+      "text" : "Creación"
+    },
+    {
+      "text" : "Providencia",
+      "w" : 124,
+      "y" : 518,
+      "x" : 425,
+      "confidence" : 1,
+      "h" : 25
+    },
+    {
+      "y" : 534,
+      "w" : 97,
+      "x" : 837,
+      "confidence" : 1,
+      "text" : "Ex Nihilo",
+      "h" : 29
+    },
+    {
+      "x" : 437,
+      "h" : 24,
+      "text" : "(El Guía en",
+      "confidence" : 1,
+      "y" : 545,
+      "w" : 100
+    },
+    {
+      "confidence" : 1,
+      "x" : 837,
+      "text" : "(El Origen)",
+      "w" : 98,
+      "h" : 26,
+      "y" : 565
+    },
+    {
+      "w" : 98,
+      "text" : "el Camino)",
+      "x" : 439,
+      "confidence" : 1,
+      "h" : 25,
+      "y" : 568
+    },
+    {
+      "x" : 649,
+      "confidence" : 1,
+      "y" : 617,
+      "text" : "Causas",
+      "w" : 76,
+      "h" : 24
+    },
+    {
+      "x" : 633,
+      "y" : 643,
+      "text" : "Segundas",
+      "h" : 28,
+      "confidence" : 1,
+      "w" : 108
+    },
+    {
+      "y" : 669,
+      "x" : 647,
+      "w" : 81,
+      "h" : 26,
+      "confidence" : 1,
+      "text" : "(Nuestra"
+    },
+    {
+      "x" : 645,
+      "confidence" : 1,
+      "w" : 86,
+      "h" : 25,
+      "y" : 692,
+      "text" : "Libertad)"
+    },
+    {
+      "y" : 749,
+      "h" : 12,
+      "confidence" : 0.30000001192092896,
+      "x" : 1269,
+      "w" : 96,
+      "text" : "AI NotebookL"
+    }
+  ],
+  "width" : 1376,
+  "height" : 768
+}

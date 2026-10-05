@@ -1,0 +1,54 @@
+{
+  "height" : 768,
+  "width" : 1376,
+  "lines" : [
+    {
+      "text" : "Creer en Dios Padre",
+      "x" : 428,
+      "y" : 506,
+      "w" : 522,
+      "h" : 48,
+      "confidence" : 1
+    },
+    {
+      "h" : 40,
+      "confidence" : 1,
+      "y" : 567,
+      "text" : "Es confiar profundamente en que nuestra existencia no",
+      "x" : 299,
+      "w" : 778
+    },
+    {
+      "w" : 779,
+      "x" : 298,
+      "y" : 604,
+      "h" : 40,
+      "text" : "es producto del azar, sino un diseño amoroso sostenido",
+      "confidence" : 1
+    },
+    {
+      "confidence" : 1,
+      "x" : 314,
+      "text" : "por una Providencia que, paso a paso, nos guía a casa.",
+      "h" : 40,
+      "y" : 646,
+      "w" : 752
+    },
+    {
+      "y" : 705,
+      "h" : 31,
+      "text" : "Amén.",
+      "confidence" : 1,
+      "x" : 644,
+      "w" : 92
+    },
+    {
+      "x" : 1270,
+      "w" : 98,
+      "text" : "A) NotebookLM",
+      "h" : 12,
+      "confidence" : 0.5,
+      "y" : 748
+    }
+  ]
+}

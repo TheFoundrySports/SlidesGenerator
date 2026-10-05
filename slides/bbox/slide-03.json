@@ -1,0 +1,86 @@
+{
+  "lines" : [
+    {
+      "confidence" : 1,
+      "x" : 136,
+      "text" : "El \"Symbolon\": Nuestro Lenguaje Común",
+      "h" : 84,
+      "w" : 1102,
+      "y" : 432
+    },
+    {
+      "x" : 80,
+      "y" : 534,
+      "w" : 1221,
+      "h" : 28,
+      "text" : "La palabra griega symbolon significaba la mitad de un objeto partido (como un sello) que se presentaba",
+      "confidence" : 1
+    },
+    {
+      "w" : 1192,
+      "text" : "como una señal para darse a conocer. Las partes rotas se ponían juntas para verificar una identidad.",
+      "x" : 80,
+      "y" : 568,
+      "confidence" : 1,
+      "h" : 29
+    },
+    {
+      "x" : 925,
+      "y" : 644,
+      "h" : 52,
+      "w" : 366,
+      "text" : "• Nos une y ensambla en",
+      "confidence" : 1
+    },
+    {
+      "y" : 648,
+      "h" : 44,
+      "w" : 312,
+      "confidence" : 0.5,
+      "x" : 76,
+      "text" : "• E! Credo es nuestro"
+    },
+    {
+      "h" : 42,
+      "confidence" : 1,
+      "w" : 386,
+      "y" : 648,
+      "text" : "• Resume la fe apostólica y",
+      "x" : 492
+    },
+    {
+      "x" : 125,
+      "w" : 312,
+      "h" : 34,
+      "text" : "signo de identificación.",
+      "y" : 688,
+      "confidence" : 1
+    },
+    {
+      "y" : 691,
+      "x" : 540,
+      "w" : 338,
+      "text" : "sus verdades principales.",
+      "h" : 31,
+      "confidence" : 1
+    },
+    {
+      "h" : 27,
+      "confidence" : 1,
+      "text" : "una sola comunión.",
+      "x" : 980,
+      "w" : 262,
+      "y" : 694
+    },
+    {
+      "text" : "Al NotebookLM",
+      "w" : 98,
+      "x" : 1270,
+      "confidence" : 0.5,
+      "y" : 748,
+      "h" : 12
+    }
+  ],
+  "width" : 1376,
+  "height" : 768
+}

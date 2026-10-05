@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 Cover · Dios Padre Creador · Curso de Catequesis</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* ── Catechism Design System · Ordinary Time · v1 ─────────────── */
+  --bg: oklch(94% 0.022 80);          /* parchment cream */
+  --surface: oklch(96% 0.018 80);
+  --fg: oklch(28% 0.085 25);          /* oxblood */
+  --muted: oklch(48% 0.045 35);       /* faded oxblood */
+  --border: oklch(82% 0.035 75);
+  --accent: oklch(34% 0.095 25);      /* deep oxblood */
+  --gold: oklch(60% 0.062 75);        /* subdued gold */
+
+  --font-display: "Cormorant Garamond", "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --font-body: "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--bg); }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.5;
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 14%) 100%);
+}
+
+/* ── Stage: fixed 1920×1080 canvas, scaled to fit viewport ─────── */
+.stage {
+  width: 1920px;
+  height: 1080px;
+  transform: scale(var(--scale, 1));
+  transform-origin: center center;
+  position: relative;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  flex-shrink: 0;
+}
+
+/* ── HUD: counter + help ──────────────────────────────────────── */
+.counter {
+  position: absolute;
+  bottom: 32px;
+  left: 48px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  z-index: 100;
+}
+.counter-sep { opacity: 0.4; padding: 0 6px; }
+
+.help {
+  position: absolute;
+  bottom: 32px;
+  right: 48px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  color: var(--muted);
+  z-index: 100;
+}
+.help kbd {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--muted);
+  margin: 0 1px;
+}
+
+/* ── Slide primitive ─────────────────────────────────────────── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  padding: 100px 140px;
+}
+.slide.is-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 36px;
+}
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 144px;
+  line-height: 0.95;
+  letter-spacing: -0.018em;
+  margin: 0;
+  color: var(--fg);
+}
+.subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1.25;
+  color: var(--muted);
+  margin: 16px 0 0;
+}
+.byline {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 96px 0 0;
+}
+
+/* ── Cover (slide 1) ─────────────────────────────────────────── */
+.slide--cover { align-items: flex-start; }
+.slide--cover .display { font-size: 192px; }
+.slide--cover .subtitle { font-size: 56px; max-width: 900px; }
+.slide--cover .byline { margin-top: 144px; }
+
+.ornament { position: absolute; pointer-events: none; color: var(--gold); }
+.ornament--monogram-tr {
+  top: 80px;
+  right: 140px;
+  width: 96px;
+  height: 96px;
+  opacity: 0.7;
+}
+
+/* ── Doctrine (slide 2) ──────────────────────────────────────── */
+.slide--doctrine { justify-content: flex-start; padding-top: 100px; }
+.doctrine-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+}
+.scripture {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.scripture-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1.15;
+  color: var(--fg);
+  margin: 0;
+  padding-left: 32px;
+  border-left: 2px solid var(--gold);
+  text-wrap: balance;
+}
+.scripture-ref {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 32px;
+}
+.rule {
+  border: 0;
+  border-top: 1px solid var(--gold);
+  margin: 0;
+  width: 80px;
+  opacity: 0.6;
+}
+.doctrine-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1080px;
+}
+.doctrine-body p {
+  font-family: var(--font-body);
+  font-size: 26px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin: 0;
+  text-align: left;
+  text-wrap: pretty;
+}
+.scripture-inline-ref {
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.doctrine-foot { margin-top: 24px; }
+
+/* ── Prayer (slide 3) ────────────────────────────────────────── */
+.slide--prayer {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.ornament--alpha-omega-tr {
+  top: 100px;
+  right: 140px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: 32px;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+.ornament--alpha-omega-tr .line {
+  display: inline-block;
+  width: 72px;
+  height: 1px;
+  background: var(--gold);
+}
+.prayer-stack { max-width: 1280px; }
+.prayer-stack .display {
+  font-size: 96px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.prayer-source {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--muted);
+  margin: 40px 0 0;
+}
+.prayer-amen {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 80px;
+  letter-spacing: 0.06em;
+  color: var(--fg);
+  margin: 80px 0 0;
+}
+
+/* ── Reduce motion: respect user preference ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 1 · COVER                                              -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide slide--cover is-active" data-screen-label="01 Cover">
+    <svg class="ornament ornament--monogram-tr" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <circle cx="40" cy="40" r="32" />
+        <circle cx="40" cy="40" r="26" />
+        <path d="M40 12 L40 68" />
+        <path d="M22 32 L58 32" />
+        <circle cx="40" cy="40" r="6" />
+      </g>
+    </svg>
+
+    <p class="kicker">Lección I</p>
+    <h1 class="display">Dios Padre</h1>
+    <p class="subtitle">Creador del cielo y de la tierra</p>
+    <p class="byline">Curso de Catequesis para Adultos · Símbolo de los Apóstoles</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 2 · DOCTRINA                                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide slide--doctrine" data-screen-label="02 Doctrina">
+    <div class="doctrine-grid">
+      <header>
+        <p class="kicker">Doctrina</p>
+      </header>
+
+      <blockquote class="scripture">
+        <p class="scripture-text">«En el principio creó Dios el cielo y la tierra.»</p>
+        <div class="scripture-ref">Génesis 1, 1 · Biblia de Jerusalén</div>
+      </blockquote>
+
+      <hr class="rule" />
+
+      <div class="doctrine-body">
+        <p>Dios Padre es el Creador de todas las cosas, visibles e invisibles. Creó el cielo y la tierra por su libre voluntad y por amor, sin necesitar nada fuera de sí mismo.</p>
+        <p>La obra creadora es obra de la Santísima Trinidad: el Padre crea por el Hijo en el Espíritu Santo. Todo lo que existe recibe de Él el ser, la bondad y la hermosura que le son propias.</p>
+        <p>«Y vio Dios todo lo que había hecho, y era muy bueno» <span class="scripture-inline-ref">(Gn 1, 31)</span>. La creación entera lleva la huella del Creador y está llamada a alabarlo.</p>
+      </div>
+
+      <footer class="doctrine-foot">
+        <p class="byline">Símbolo de los Apóstoles · Génesis 1</p>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SLIDE 3 · ORACIÓN                                            -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide slide--prayer" data-screen-label="03 Oración">
+    <div class="ornament ornament--alpha-omega-tr" aria-hidden="true">
+      <span>α</span>
+      <span class="line"></span>
+      <span>Ω</span>
+    </div>
+
+    <div class="prayer-stack">
+      <p class="kicker">Oración</p>
+      <p class="display">Creo en Dios,<br>Padre Todopoderoso,<br>Creador del cielo<br>y de la tierra.</p>
+      <p class="prayer-source">Símbolo de los Apóstoles</p>
+      <p class="prayer-amen">Amén.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="counter" aria-live="polite">
+  <span id="cNow">01</span><span class="counter-sep">/</span><span id="cTotal">03</span>
+</div>
+<div class="help" aria-hidden="true">
+  <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Inicio</kbd> <kbd>Fin</kbd> extremos
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const DECK_TITLE = 'Dios Padre Creador · Curso de Catequesis';
+  const STORAGE_KEY = 'catechism-deck-pos';
+
+  const stage = document.getElementById('stage');
+  const slides = Array.from(stage.querySelectorAll('.slide'));
+  const total = slides.length;
+  const cNow = document.getElementById('cNow');
+  const cTotal = document.getElementById('cTotal');
+  cTotal.textContent = String(total).padStart(2, '0');
+
+  // ── Scale stage to fit viewport while preserving 16:9 ─────────
+  function fit() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const s = Math.min(vw / 1920, vh / 1080);
+    stage.style.setProperty('--scale', s);
+  }
+  fit();
+  window.addEventListener('resize', fit);
+
+  // ── Position management with sessionStorage persistence ───────
+  let current = 0;
+  try {
+    const saved = sessionStorage.getItem(STORAGE_KEY);
+    if (saved !== null) {
+      const n = parseInt(saved, 10);
+      if (!isNaN(n) && n >= 0 && n < total) current = n;
+    }
+  } catch (e) { /* sessionStorage unavailable */ }
+
+  function go(n) {
+    if (n < 0) n = 0;
+    if (n >= total) n = total - 1;
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === n));
+    current = n;
+    cNow.textContent = String(n + 1).padStart(2, '0');
+    try { sessionStorage.setItem(STORAGE_KEY, String(n)); } catch (e) {}
+    document.title = slides[n].dataset.screenLabel + ' · ' + DECK_TITLE;
+  }
+
+  go(current);
+
+  // ── Keyboard navigation ──────────────────────────────────────
+  document.addEventListener('keydown', function(e) {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault();
+        go(current + 1);
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault();
+        go(current - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        go(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        go(total - 1);
+        break;
+      default:
+        const n = parseInt(e.key, 10);
+        if (!isNaN(n) && n >= 1 && n <= total) {
+          e.preventDefault();
+          go(n - 1);
+        }
+    }
+  });
+
+  // ── Touch swipe (lightweight) ─────────────────────────────────
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) go(current + 1);
+      else go(current - 1);
+    }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

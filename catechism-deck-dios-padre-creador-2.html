@@ -1,0 +1,360 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 · Dios Padre · Curso de Catequesis</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="slides/img/slide-01.png">
+<link rel="preload" as="image" href="slides/img/slide-02.png">
+<link rel="preload" as="image" href="slides/img/slide-03.png">
+
+<style>
+:root {
+  --bg: oklch(94% 0.022 80);
+  --surface: oklch(96% 0.018 80);
+  --fg: oklch(28% 0.085 25);
+  --muted: oklch(48% 0.045 35);
+  --border: oklch(82% 0.035 75);
+  --accent: oklch(34% 0.095 25);
+  --gold: oklch(60% 0.062 75);
+
+  --font-display: "Cormorant Garamond", "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --font-body: "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--bg); }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.5;
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 14%) 100%);
+}
+
+.stage {
+  width: 1920px;
+  height: 1080px;
+  transform: scale(var(--scale, 1));
+  transform-origin: center center;
+  position: relative;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.slide.is-active { display: block; }
+
+.slide-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.slide--blank.is-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.slide--blank .blank-mark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 96px;
+  color: color-mix(in oklab, var(--muted), transparent 35%);
+  letter-spacing: 0.04em;
+}
+.slide--blank .blank-caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--muted);
+  margin-top: 24px;
+  max-width: 720px;
+  line-height: 1.4;
+}
+
+.counter {
+  position: absolute;
+  bottom: 32px;
+  left: 48px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  z-index: 100;
+  background: color-mix(in oklab, var(--bg), transparent 25%);
+  padding: 6px 14px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.counter-sep { opacity: 0.4; padding: 0 6px; }
+
+.help {
+  position: absolute;
+  bottom: 32px;
+  right: 48px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  color: var(--muted);
+  z-index: 100;
+  background: color-mix(in oklab, var(--bg), transparent 25%);
+  padding: 6px 14px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.help kbd {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--muted);
+  margin: 0 1px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <section class="slide is-active" data-screen-label="01 · Dios Padre" aria-label="Dios Padre. El Misterio, la Creación y la Providencia.">
+    <img class="slide-img" src="slides/img/slide-01.png" alt="Dios Padre. El Misterio, la Creación y la Providencia." width="1920" height="1080" decoding="async">
+    <p class="sr-only">Dios Padre. El Misterio, la Creación y la Providencia.</p>
+  </section>
+
+  <section class="slide" data-screen-label="02 · Creo en Dios" aria-label="Creo en Dios. Es la afirmación más importante. La fuente de todas las demás verdades sobre el hombre y sobre el mundo y de toda la vida del que cree en Dios. Profesamos un solo Dios porque Él se ha revelado al pueblo de Israel como el único.">
+    <img class="slide-img" src="slides/img/slide-02.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">Creo en Dios. Es la afirmación más importante. La fuente de todas las demás verdades sobre el hombre y sobre el mundo y de toda la vida del que cree en Dios. Profesamos un solo Dios porque Él se ha revelado al pueblo de Israel como el único.</p>
+  </section>
+
+  <section class="slide" data-screen-label="03 · El Symbolon" aria-label="El Symbolon: Nuestro Lenguaje Común. La palabra griega symbolon significaba la mitad de un objeto partido (como un sello) que se presentaba como una señal para darse a conocer. Las partes rotas se ponían juntas para verificar una identidad. El Credo es nuestro signo de identificación. Resume la fe apostólica y sus verdades principales. Nos une y ensambla en una sola comunión.">
+    <img class="slide-img" src="slides/img/slide-03.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">El Symbolon: Nuestro Lenguaje Común. La palabra griega symbolon era la mitad de un objeto partido (como un sello) que se presentaba como señal para darse a conocer. Las partes se juntaban para verificar una identidad. El Credo es nuestro signo de identificación. Resume la fe apostólica y sus verdades principales. Nos une y ensambla en una sola comunión.</p>
+  </section>
+
+  <section class="slide" data-screen-label="04 · El nombre de Dios" aria-label="El nombre de Dios: Yo soy el que soy. Es Misterio. El que es, sin origen y sin fin, desde siempre y por siempre. Él transciende el mundo y la historia. Dios es misterio, infinitamente por encima de todo lo que podemos comprender o decir. YHWH. Es Verdad y Amor. Dios es la Verdad misma, ni se engaña ni puede engañar. Dios es Luz, en Él no hay tiniebla alguna (1 Jn 1, 5). Dios es amor (1 Jn 4, 8.16). Él es rico en amor y fidelidad (Ex 34, 6).">
+    <img class="slide-img" src="slides/img/slide-04.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">El nombre de Dios: Yo soy el que soy. Es Misterio. El que es, sin origen y sin fin, desde siempre y por siempre. Él transciende el mundo y la historia. Dios es misterio, infinitamente por encima de todo lo que podemos comprender o decir. YHWH. Es Verdad y Amor. Dios es la Verdad misma, ni se engaña ni puede engañar. Dios es Luz, en Él no hay tiniebla alguna (1 Jn 1, 5). Dios es amor (1 Jn 4, 8.16). Él es rico en amor y fidelidad (Ex 34, 6).</p>
+  </section>
+
+  <section class="slide slide--blank" data-screen-label="05 · (slide omitida)" aria-label="Slide omitida en el PowerPoint original.">
+    <div>
+      <div class="blank-mark">·</div>
+      <p class="blank-caption">Slide omitida en el PowerPoint original.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-screen-label="06 · La Omnipotencia de Dios" aria-label="La Omnipotencia de Dios. Universal. Dios creó todo, rige todo, lo puede todo.">
+    <img class="slide-img" src="slides/img/slide-06.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">La Omnipotencia de Dios. Universal. Dios creó todo, rige todo, lo puede todo.</p>
+  </section>
+
+  <section class="slide" data-screen-label="07 · Dios Creador Ex Nihilo" aria-label="Dios Creador Ex Nihilo. La Nada. De la nada. Dios crea a partir de la nada absoluta; no requiere materia preexistente. Obra Trinitaria. La creación es obra conjunta del Padre (por su Palabra, el Hijo) en el Espíritu (Dador de vida). El Cosmos. Libre Voluntad. Dios no creó por necesidad ni por soledad. La Trinidad ya era perfectamente feliz. Crea por pura sabiduría y amor desbordante.">
+    <img class="slide-img" src="slides/img/slide-07.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">Dios Creador Ex Nihilo. La Nada. De la nada. Dios crea a partir de la nada absoluta; no requiere materia preexistente. Obra Trinitaria. La creación es obra conjunta del Padre (por su Palabra, el Hijo) en el Espíritu (Dador de vida). El Cosmos. Libre Voluntad. Dios no creó por necesidad ni por soledad. La Trinidad ya era perfectamente feliz. Crea por pura sabiduría y amor desbordante.</p>
+  </section>
+
+  <section class="slide" data-screen-label="08 · La Creación, obra de la Trinidad" aria-label="La Creación: Obra Común de la Trinidad. Aunque atribuimos la creación al Padre, es el principio único e indivisible de las tres Personas. El Padre. El Verbo (Hijo). El Aliento (Espíritu Santo). Crea por medio de. Vivifica por. La Creación. El Hijo y el Espíritu son como las manos del Padre. — San Ireneo.">
+    <img class="slide-img" src="slides/img/slide-08.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">La Creación: Obra Común de la Trinidad. Aunque atribuimos la creación al Padre, es el principio único e indivisible de las tres Personas. El Padre. El Verbo (Hijo). El Aliento (Espíritu Santo). Crea por medio de. Vivifica por. La Creación. El Hijo y el Espíritu son como las manos del Padre. — San Ireneo.</p>
+  </section>
+
+  <section class="slide" data-screen-label="09 · ¿Por qué y cómo creó Dios?" aria-label="¿Por qué y cómo creó Dios? Lo que NO es: fruto del azar, de un destino ciego, o de una necesidad. Dios no necesitaba crear para ser plenamente feliz. Lo que SÍ es: creado libremente por sabiduría y puro amor. Creado Ex Nihilo, de la absoluta nada, sin materia preexistente.">
+    <img class="slide-img" src="slides/img/slide-09.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">¿Por qué y cómo creó Dios? Lo que NO es: fruto del azar, de un destino ciego, o de una necesidad. Dios no necesitaba crear para ser plenamente feliz. Lo que SÍ es: creado libremente por sabiduría y puro amor. Creado Ex Nihilo, de la absoluta nada, sin materia preexistente.</p>
+  </section>
+
+  <section class="slide" data-screen-label="10 · El Propósito de la Creación" aria-label="El Propósito de la Creación. El mundo ha sido creado para la gloria de Dios, no para aumentarla, sino para manifestarla y comunicarla. — San Buenaventura. La gloria de Dios es que el hombre viva, y la vida del hombre es la visión de Dios. — San Ireneo.">
+    <img class="slide-img" src="slides/img/slide-10.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">El Propósito de la Creación. El mundo ha sido creado para la gloria de Dios, no para aumentarla, sino para manifestarla y comunicarla. — San Buenaventura. La gloria de Dios es que el hombre viva, y la vida del hombre es la visión de Dios. — San Ireneo.</p>
+  </section>
+
+  <section class="slide" data-screen-label="11 · La Divina Providencia y el Estado de Vía" aria-label="La Divina Providencia y el Estado de Vía. Punto A: Creación Original. El mundo salió de las manos de Dios bueno, pero no perfectamente acabado. Estado de Vía: la creación está en camino, guiada por la Divina Providencia, las disposiciones por las que Dios conduce su obra. Punto B: Perfección Última. El destino final en Dios (La Gloria).">
+    <img class="slide-img" src="slides/img/slide-11.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">La Divina Providencia y el Estado de Vía. Punto A: Creación Original. El mundo salió de las manos de Dios bueno, pero no perfectamente acabado. Estado de Vía: la creación está en camino, guiada por la Divina Providencia, las disposiciones por las que Dios conduce su obra. Punto B: Perfección Última. El destino final en Dios (La Gloria).</p>
+  </section>
+
+  <section class="slide" data-screen-label="12 · Una Creación en Camino" aria-label="Una Creación en Camino. Creación Buena, pero no terminada: el mundo es maravillosamente bueno, pero no salió plenamente acabado de las manos de Dios. Estado de Vía: la creación se encuentra en camino, en un estado de progresión temporal. Perfección Última: el destino final hacia el que Dios guía y destina a toda la obra creada.">
+    <img class="slide-img" src="slides/img/slide-12.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">Una Creación en Camino. Creación Buena, pero no terminada: el mundo es maravillosamente bueno, pero no salió plenamente acabado de las manos de Dios. Estado de Vía: la creación se encuentra en camino, en un estado de progresión temporal. Perfección Última: el destino final hacia el que Dios guía y destina a toda la obra creada.</p>
+  </section>
+
+  <section class="slide" data-screen-label="13 · La Divina Providencia" aria-label="La Divina Providencia. Llamamos providencia a las disposiciones por las que Dios conduce con sabiduría y amor la obra de su creación hacia su perfección última. Dios no solo da la existencia; Él mantiene y sostiene a sus criaturas a cada instante por medio de su Verbo.">
+    <img class="slide-img" src="slides/img/slide-13.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">La Divina Providencia. Llamamos providencia a las disposiciones por las que Dios conduce con sabiduría y amor la obra de su creación hacia su perfección última. Dios no solo da la existencia; Él mantiene y sostiene a sus criaturas a cada instante por medio de su Verbo.</p>
+  </section>
+
+  <section class="slide" data-screen-label="14 · La Dignidad de Nuestra Libertad" aria-label="La Dignidad de Nuestra Libertad. Causa Primera: Dios. El origen absoluto y mantenedor de todo lo que existe. Dios no crea todo directamente de una sola vez; delega la acción a sus criaturas. Causas Segundas: criaturas inteligentes y libres. Dios nos otorga la inmensa dignidad de actuar por nosotros mismos (procrear, hacer el bien, evangelizar) para completar libremente la obra de la creación.">
+    <img class="slide-img" src="slides/img/slide-14.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">La Dignidad de Nuestra Libertad. Causa Primera: Dios. El origen absoluto y mantenedor de todo lo que existe. Dios no crea todo directamente de una sola vez; delega la acción a sus criaturas. Causas Segundas: criaturas inteligentes y libres. Dios nos otorga la inmensa dignidad de actuar por nosotros mismos (procrear, hacer el bien, evangelizar) para completar libremente la obra de la creación.</p>
+  </section>
+
+  <section class="slide" data-screen-label="15 · El Escándalo del Mal" aria-label="El Escándalo del Mal. Si Dios es Todopoderoso y Bueno, ¿por qué existe el mal? 1. Dios no creó un mundo estático y perfectamente cerrado; lo creó en estado de vía. 2. Al darnos el don de la libertad real (ser causas segundas), existe inherentemente la posibilidad de desviarse, y por tanto, la posibilidad del mal.">
+    <img class="slide-img" src="slides/img/slide-15.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">El Escándalo del Mal. Si Dios es Todopoderoso y Bueno, ¿por qué existe el mal? 1. Dios no creó un mundo estático y perfectamente cerrado; lo creó en estado de vía. 2. Al darnos el don de la libertad real (ser causas segundas), existe inherentemente la posibilidad de desviarse, y por tanto, la posibilidad del mal.</p>
+  </section>
+
+  <section class="slide" data-screen-label="16 · La Sabiduría Infinita de Dios" aria-label="La Sabiduría Infinita de Dios. En su poder infinito, Dios podría haber creado un mundo sin mal. Pero en su bondad prefirió un mundo libre en vías de perfección. San Agustín enseña que Dios nunca permitiría el mal si no fuera lo suficientemente omnipotente y bueno para sacar de ese mismo mal un bien mayor.">
+    <img class="slide-img" src="slides/img/slide-16.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">La Sabiduría Infinita de Dios. En su poder infinito, Dios podría haber creado un mundo sin mal. Pero en su bondad prefirió un mundo libre en vías de perfección. San Agustín enseña que Dios nunca permitiría el mal si no fuera lo suficientemente omnipotente y bueno para sacar de ese mismo mal un bien mayor.</p>
+  </section>
+
+  <section class="slide" data-screen-label="17 · El Gran Designio: Síntesis" aria-label="El Gran Designio: Síntesis del Plan del Padre. El Credo (Nuestra Fe Común). La Trinidad (El Dios Amor). Creación Ex Nihilo (El Origen). Providencia (El Guía en el Camino). Causas Segundas (Nuestra Libertad). La Gloria Eterna (Nuestro Destino).">
+    <img class="slide-img" src="slides/img/slide-17.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">El Gran Designio: Síntesis del Plan del Padre. El Credo (Nuestra Fe Común). La Trinidad (El Dios Amor). Creación Ex Nihilo (El Origen). Providencia (El Guía en el Camino). Causas Segundas (Nuestra Libertad). La Gloria Eterna (Nuestro Destino).</p>
+  </section>
+
+  <section class="slide" data-screen-label="18 · Creer en Dios Padre" aria-label="Creer en Dios Padre. Es confiar profundamente en que nuestra existencia no es producto del azar, sino un diseño amoroso sostenido por una Providencia que, paso a paso, nos guía a casa. Amén.">
+    <img class="slide-img" src="slides/img/slide-18.png" alt="" loading="lazy" width="1920" height="1080" decoding="async">
+    <p class="sr-only">Creer en Dios Padre. Es confiar profundamente en que nuestra existencia no es producto del azar, sino un diseño amoroso sostenido por una Providencia que, paso a paso, nos guía a casa. Amén.</p>
+  </section>
+
+</div>
+
+<div class="counter" aria-live="polite">
+  <span id="cNow">01</span><span class="counter-sep">/</span><span id="cTotal">18</span>
+</div>
+<div class="help" aria-hidden="true">
+  <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Inicio</kbd> <kbd>Fin</kbd> extremos
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const DECK_TITLE = 'Dios Padre · Curso de Catequesis';
+  const STORAGE_KEY = 'catechism-deck-dios-padre-pos';
+
+  const stage = document.getElementById('stage');
+  const slides = Array.from(stage.querySelectorAll('.slide'));
+  const total = slides.length;
+  const cNow = document.getElementById('cNow');
+  const cTotal = document.getElementById('cTotal');
+  cTotal.textContent = String(total).padStart(2, '0');
+
+  function fit() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const s = Math.min(vw / 1920, vh / 1080);
+    stage.style.setProperty('--scale', s);
+  }
+  fit();
+  window.addEventListener('resize', fit);
+
+  let current = 0;
+  try {
+    const saved = sessionStorage.getItem(STORAGE_KEY);
+    if (saved !== null) {
+      const n = parseInt(saved, 10);
+      if (!isNaN(n) && n >= 0 && n < total) current = n;
+    }
+  } catch (e) { }
+
+  function go(n) {
+    if (n < 0) n = 0;
+    if (n >= total) n = total - 1;
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === n));
+    current = n;
+    cNow.textContent = String(n + 1).padStart(2, '0');
+    try { sessionStorage.setItem(STORAGE_KEY, String(n)); } catch (e) {}
+    document.title = slides[n].dataset.screenLabel + ' · ' + DECK_TITLE;
+  }
+
+  go(current);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault();
+        go(current + 1);
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault();
+        go(current - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        go(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        go(total - 1);
+        break;
+      default:
+        const n = parseInt(e.key, 10);
+        if (!isNaN(n) && n >= 1 && n <= total) {
+          e.preventDefault();
+          go(n - 1);
+        }
+    }
+  });
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) go(current + 1);
+      else go(current - 1);
+    }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

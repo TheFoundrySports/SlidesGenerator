@@ -1,0 +1,25 @@
+# Slide-Craft — feature plan
+
+> Feature slug: `slide-craft`
+> Goal: a stable, repeatable system that generates catechetical HTML slides honoring `DESIGN.md` plus extended rules for images, animations, and text positioning with images.
+> Decisions (locked 2025-10-05): ship all four pieces — skill + subagent + scaffold library + lint.
+
+## What lives where
+
+```
+~/.pi/agent/skills/slide-craft/SKILL.md      # condensed rules + archetype index
+~/.pi/agent/agents/gentle-ai-slide-builder.md # subagent for full deck work
+slides/_scaffold/                             # 8 working archetypes
+scripts/lint-deck.js                          # deterministic P0/P1 checks
+tests/lint-deck.test.js                       # green-path + red-flag fixtures
+```
+
+## Tasks
+
+1. SKILL.md
+2. Scaffold library
+3. Lint script
+4. Lint tests
+5. Subagent
+6. README updates
+7. Run lint on existing 4 decks

@@ -1,0 +1,126 @@
+{
+  "height" : 768,
+  "lines" : [
+    {
+      "x" : 73,
+      "h" : 60,
+      "confidence" : 1,
+      "w" : 779,
+      "y" : 57,
+      "text" : "La Dignidad de Nuestra Libertad"
+    },
+    {
+      "h" : 51,
+      "text" : "Causas Segundas: Nosotros",
+      "y" : 260,
+      "confidence" : 1,
+      "x" : 751,
+      "w" : 549
+    },
+    {
+      "y" : 262,
+      "h" : 45,
+      "confidence" : 1,
+      "w" : 406,
+      "x" : 152,
+      "text" : "Causa Primera: Dios"
+    },
+    {
+      "x" : 103,
+      "h" : 41,
+      "confidence" : 1,
+      "text" : "El origen absoluto y mantenedor",
+      "y" : 333,
+      "w" : 504
+    },
+    {
+      "x" : 791,
+      "text" : "Criaturas inteligentes y libres.",
+      "y" : 334,
+      "w" : 458,
+      "confidence" : 1,
+      "h" : 40
+    },
+    {
+      "x" : 198,
+      "w" : 327,
+      "h" : 40,
+      "y" : 378,
+      "text" : "de todo lo que existe.",
+      "confidence" : 1
+    },
+    {
+      "h" : 40,
+      "text" : "Dios nos otorga la inmensa",
+      "w" : 414,
+      "confidence" : 1,
+      "x" : 820,
+      "y" : 381
+    },
+    {
+      "x" : 784,
+      "w" : 485,
+      "y" : 422,
+      "confidence" : 1,
+      "text" : "dignidad de actuar por nosotros",
+      "h" : 40
+    },
+    {
+      "text" : "Dios no crea todo",
+      "h" : 33,
+      "y" : 423,
+      "w" : 280,
+      "confidence" : 1,
+      "x" : 226
+    },
+    {
+      "confidence" : 1,
+      "w" : 457,
+      "x" : 125,
+      "h" : 49,
+      "text" : "directamente de una sola vez;",
+      "y" : 460
+    },
+    {
+      "h" : 46,
+      "text" : "mismos (procrear, hacer el bien,",
+      "w" : 495,
+      "x" : 780,
+      "confidence" : 1,
+      "y" : 465
+    },
+    {
+      "y" : 506,
+      "confidence" : 1,
+      "h" : 40,
+      "text" : "evangelizar) para completar",
+      "x" : 814,
+      "w" : 426
+    },
+    {
+      "confidence" : 1,
+      "y" : 508,
+      "text" : "delega la acción a sus criaturas.",
+      "x" : 111,
+      "h" : 39,
+      "w" : 487
+    },
+    {
+      "x" : 771,
+      "y" : 544,
+      "w" : 510,
+      "text" : "libremente la obra de la creación.",
+      "h" : 45,
+      "confidence" : 1
+    },
+    {
+      "x" : 1270,
+      "y" : 748,
+      "text" : "A) NotebookLM",
+      "w" : 98,
+      "h" : 12,
+      "confidence" : 0.5
+    }
+  ],
+  "width" : 1376
+}

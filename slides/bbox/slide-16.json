@@ -1,0 +1,158 @@
+{
+  "width" : 1376,
+  "height" : 768,
+  "lines" : [
+    {
+      "text" : "La Sabiduría Infinita de Dios",
+      "x" : 74,
+      "w" : 727,
+      "y" : 55,
+      "h" : 51,
+      "confidence" : 1
+    },
+    {
+      "w" : 292,
+      "h" : 40,
+      "confidence" : 1,
+      "y" : 268,
+      "text" : "San Agustín enseña",
+      "x" : 1010
+    },
+    {
+      "w" : 298,
+      "x" : 74,
+      "y" : 273,
+      "text" : "En su poder infinito,",
+      "h" : 42,
+      "confidence" : 1
+    },
+    {
+      "text" : "Dios podría haber",
+      "w" : 264,
+      "x" : 91,
+      "y" : 308,
+      "confidence" : 1,
+      "h" : 42
+    },
+    {
+      "text" : "que Dios nunca",
+      "x" : 1039,
+      "h" : 39,
+      "w" : 230,
+      "y" : 308,
+      "confidence" : 1
+    },
+    {
+      "w" : 275,
+      "text" : "permitiría el mal si",
+      "y" : 343,
+      "h" : 44,
+      "confidence" : 1,
+      "x" : 1019
+    },
+    {
+      "confidence" : 1,
+      "w" : 311,
+      "text" : "creado un mundo sin",
+      "x" : 64,
+      "y" : 348,
+      "h" : 36
+    },
+    {
+      "y" : 389,
+      "confidence" : 1,
+      "x" : 1079,
+      "text" : "no fuera lo",
+      "h" : 32,
+      "w" : 156
+    },
+    {
+      "y" : 392,
+      "w" : 66,
+      "x" : 188,
+      "text" : "mal.",
+      "h" : 34,
+      "confidence" : 1
+    },
+    {
+      "confidence" : 1,
+      "y" : 426,
+      "x" : 1037,
+      "w" : 233,
+      "text" : "suficientemente",
+      "h" : 34
+    },
+    {
+      "h" : 31,
+      "confidence" : 1,
+      "text" : "Pero en su bondad",
+      "x" : 83,
+      "y" : 432,
+      "w" : 275
+    },
+    {
+      "text" : "omnipotente y bueno",
+      "w" : 311,
+      "x" : 996,
+      "y" : 467,
+      "confidence" : 1,
+      "h" : 40
+    },
+    {
+      "y" : 470,
+      "w" : 264,
+      "confidence" : 1,
+      "x" : 89,
+      "text" : "prefirió un mundo",
+      "h" : 37
+    },
+    {
+      "confidence" : 1,
+      "h" : 40,
+      "x" : 1027,
+      "y" : 505,
+      "w" : 259,
+      "text" : "para sacar de ese"
+    },
+    {
+      "y" : 509,
+      "x" : 106,
+      "w" : 224,
+      "h" : 31,
+      "confidence" : 1,
+      "text" : "libre en vías de"
+    },
+    {
+      "x" : 1052,
+      "text" : "mismo mal un",
+      "y" : 547,
+      "w" : 210,
+      "h" : 31,
+      "confidence" : 1
+    },
+    {
+      "text" : "perfección.",
+      "x" : 136,
+      "y" : 549,
+      "w" : 168,
+      "h" : 38,
+      "confidence" : 1
+    },
+    {
+      "confidence" : 1,
+      "h" : 36,
+      "text" : "bien mayor.",
+      "x" : 1069,
+      "y" : 589,
+      "w" : 177
+    },
+    {
+      "x" : 1270,
+      "h" : 12,
+      "text" : "Al NotebookLM",
+      "confidence" : 0.30000001192092896,
+      "y" : 748,
+      "w" : 98
+    }
+  ]
+}

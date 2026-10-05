@@ -1,0 +1,198 @@
+{
+  "width" : 1024,
+  "height" : 572,
+  "lines" : [
+    {
+      "text" : "El nombre de Dios: \"Yo soy el que soy\"",
+      "y" : 83,
+      "w" : 652,
+      "x" : 184,
+      "h" : 43,
+      "confidence" : 0.5
+    },
+    {
+      "confidence" : 1,
+      "text" : "Es Misterio",
+      "x" : 77,
+      "y" : 171,
+      "h" : 28,
+      "w" : 150
+    },
+    {
+      "w" : 196,
+      "h" : 26,
+      "text" : "Es Verdad y Amor",
+      "x" : 774,
+      "y" : 173,
+      "confidence" : 1
+    },
+    {
+      "y" : 207,
+      "h" : 121,
+      "x" : 264,
+      "text" : "YHWH",
+      "confidence" : 0.5,
+      "w" : 472
+    },
+    {
+      "x" : 141,
+      "w" : 94,
+      "text" : ", sin origen",
+      "h" : 21,
+      "confidence" : 1,
+      "y" : 214
+    },
+    {
+      "y" : 215,
+      "text" : "Dios es la Verdad",
+      "w" : 156,
+      "x" : 774,
+      "h" : 17,
+      "confidence" : 1
+    },
+    {
+      "y" : 216,
+      "w" : 94,
+      "h" : 17,
+      "confidence" : 0.5,
+      "text" : "\"El que es\"",
+      "x" : 51
+    },
+    {
+      "confidence" : 1,
+      "text" : "y sin fin, desde siempre",
+      "x" : 49,
+      "y" : 237,
+      "w" : 200,
+      "h" : 22
+    },
+    {
+      "text" : "misma, ni se engaña",
+      "y" : 239,
+      "w" : 180,
+      "h" : 21,
+      "x" : 774,
+      "confidence" : 1
+    },
+    {
+      "x" : 49,
+      "text" : "y por siempre. Él",
+      "w" : 147,
+      "confidence" : 0.5,
+      "y" : 254,
+      "h" : 31
+    },
+    {
+      "h" : 22,
+      "x" : 774,
+      "w" : 158,
+      "y" : 260,
+      "confidence" : 1,
+      "text" : "ni puede engañar."
+    },
+    {
+      "x" : 50,
+      "w" : 198,
+      "y" : 281,
+      "h" : 19,
+      "text" : "transciende el mundo y",
+      "confidence" : 1
+    },
+    {
+      "y" : 283,
+      "text" : "\"Dios es Luz, en él no",
+      "confidence" : 1,
+      "x" : 772,
+      "w" : 192,
+      "h" : 24
+    },
+    {
+      "w" : 158,
+      "h" : 19,
+      "confidence" : 1,
+      "y" : 304,
+      "text" : "la historia. Dios es",
+      "x" : 48
+    },
+    {
+      "confidence" : 1,
+      "text" : "hay tiniebla alguna\".",
+      "x" : 774,
+      "w" : 178,
+      "y" : 307,
+      "h" : 21
+    },
+    {
+      "y" : 325,
+      "text" : "misterio. Infinitamente",
+      "x" : 49,
+      "w" : 186,
+      "h" : 20,
+      "confidence" : 1
+    },
+    {
+      "x" : 771,
+      "confidence" : 0.30000001192092896,
+      "y" : 330,
+      "text" : "(1 Jn 1, 5.)",
+      "w" : 98,
+      "h" : 23
+    },
+    {
+      "w" : 180,
+      "y" : 348,
+      "h" : 17,
+      "text" : "por encima de todo lo",
+      "x" : 53,
+      "confidence" : 1
+    },
+    {
+      "x" : 772,
+      "text" : "\"Dios es amor\".",
+      "w" : 138,
+      "h" : 22,
+      "y" : 351,
+      "confidence" : 0.5
+    },
+    {
+      "w" : 116,
+      "text" : "que podemos",
+      "h" : 16,
+      "confidence" : 1,
+      "y" : 370,
+      "x" : 52
+    },
+    {
+      "y" : 378,
+      "w" : 122,
+      "text" : "(1 Jn 4, 8.16).",
+      "x" : 772,
+      "confidence" : 0.5,
+      "h" : 21
+    },
+    {
+      "h" : 20,
+      "y" : 390,
+      "text" : "comprender o decir.",
+      "x" : 50,
+      "confidence" : 1,
+      "w" : 170
+    },
+    {
+      "h" : 27,
+      "text" : "\"Él es Rico en amor y",
+      "confidence" : 0.5,
+      "w" : 191,
+      "x" : 771,
+      "y" : 396
+    },
+    {
+      "text" : "fidelidad\" (Ex 34,6).",
+      "w" : 174,
+      "h" : 24,
+      "confidence" : 1,
+      "x" : 774,
+      "y" : 421
+    }
+  ]
+}

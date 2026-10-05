@@ -1,0 +1,86 @@
+{
+  "width" : 1376,
+  "lines" : [
+    {
+      "x" : 709,
+      "w" : 596,
+      "h" : 58,
+      "text" : "El Escándalo del Mal",
+      "confidence" : 1,
+      "y" : 54
+    },
+    {
+      "x" : 722,
+      "w" : 586,
+      "h" : 50,
+      "confidence" : 1,
+      "y" : 147,
+      "text" : "Si Dios es Todopoderoso y Bueno,"
+    },
+    {
+      "text" : "¿por qué existe el mal?",
+      "y" : 192,
+      "x" : 908,
+      "w" : 397,
+      "confidence" : 1,
+      "h" : 46
+    },
+    {
+      "x" : 75,
+      "text" : "1. Dios no creó un mundo estático y",
+      "y" : 447,
+      "h" : 38,
+      "w" : 532,
+      "confidence" : 1
+    },
+    {
+      "x" : 111,
+      "text" : "perfectamente cerrado; lo creó en",
+      "w" : 487,
+      "y" : 487,
+      "confidence" : 1,
+      "h" : 40
+    },
+    {
+      "h" : 36,
+      "confidence" : 1,
+      "x" : 105,
+      "y" : 521,
+      "text" : "\"estado de vía\"",
+      "w" : 216
+    },
+    {
+      "h" : 37,
+      "text" : "2. Al darnos el don de la libertad real (ser causas",
+      "x" : 76,
+      "w" : 702,
+      "confidence" : 1,
+      "y" : 603
+    },
+    {
+      "y" : 643,
+      "x" : 73,
+      "h" : 42,
+      "confidence" : 1,
+      "w" : 727,
+      "text" : "segundas), existe inherentemente la posibilidad de"
+    },
+    {
+      "w" : 635,
+      "h" : 42,
+      "text" : "desviarse, y por tanto, la posibilidad del mal.",
+      "y" : 680,
+      "confidence" : 1,
+      "x" : 76
+    },
+    {
+      "x" : 1267,
+      "confidence" : 0.5,
+      "y" : 747,
+      "text" : "A NotebookLM",
+      "w" : 105,
+      "h" : 20
+    }
+  ],
+  "height" : 768
+}

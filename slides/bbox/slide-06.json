@@ -1,0 +1,46 @@
+{
+  "width" : 1024,
+  "height" : 572,
+  "lines" : [
+    {
+      "text" : "La Omnipotencia de Dios",
+      "x" : 293,
+      "h" : 40,
+      "y" : 39,
+      "w" : 434,
+      "confidence" : 1
+    },
+    {
+      "h" : 28,
+      "text" : "Universal",
+      "x" : 168,
+      "confidence" : 1,
+      "y" : 300,
+      "w" : 135
+    },
+    {
+      "confidence" : 0.5,
+      "h" : 24,
+      "text" : "Dios creó todo,",
+      "w" : 128,
+      "x" : 167,
+      "y" : 347
+    },
+    {
+      "confidence" : 0.5,
+      "h" : 24,
+      "text" : "rige todo,",
+      "x" : 192,
+      "y" : 369,
+      "w" : 84
+    },
+    {
+      "y" : 390,
+      "w" : 124,
+      "h" : 23,
+      "confidence" : 1,
+      "x" : 169,
+      "text" : "lo puede todo."
+    }
+  ]
+}

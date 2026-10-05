@@ -1,0 +1,22 @@
+{
+  "lines" : [
+    {
+      "confidence" : 1,
+      "w" : 511,
+      "text" : "DIOS PADRE",
+      "x" : 426,
+      "y" : 435,
+      "h" : 69
+    },
+    {
+      "confidence" : 1,
+      "w" : 861,
+      "h" : 53,
+      "text" : "El Misterio, la Creación y la Providencia",
+      "x" : 255,
+      "y" : 535
+    }
+  ],
+  "width" : 1370,
+  "height" : 765
+}

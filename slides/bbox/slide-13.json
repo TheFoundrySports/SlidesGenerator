@@ -1,0 +1,94 @@
+{
+  "width" : 1376,
+  "lines" : [
+    {
+      "text" : "La Divina Providencia",
+      "y" : 59,
+      "h" : 45,
+      "w" : 548,
+      "confidence" : 1,
+      "x" : 74
+    },
+    {
+      "y" : 148,
+      "h" : 40,
+      "text" : "Llamamos providencia a las",
+      "confidence" : 1,
+      "x" : 78,
+      "w" : 420
+    },
+    {
+      "w" : 462,
+      "x" : 76,
+      "y" : 188,
+      "h" : 42,
+      "confidence" : 1,
+      "text" : "disposiciones por las que Dios"
+    },
+    {
+      "confidence" : 1,
+      "y" : 228,
+      "h" : 46,
+      "text" : "conduce con sabiduría y amor",
+      "w" : 460,
+      "x" : 75
+    },
+    {
+      "y" : 275,
+      "h" : 36,
+      "w" : 470,
+      "text" : "la obra de su creación hacia su",
+      "confidence" : 1,
+      "x" : 73
+    },
+    {
+      "w" : 274,
+      "x" : 78,
+      "confidence" : 1,
+      "y" : 318,
+      "h" : 39,
+      "text" : "perfección última."
+    },
+    {
+      "confidence" : 1,
+      "y" : 535,
+      "w" : 388,
+      "text" : "Dios no solo da la existencia;",
+      "x" : 896,
+      "h" : 37
+    },
+    {
+      "confidence" : 1,
+      "text" : "Él mantiene y sostiene a sus",
+      "x" : 903,
+      "y" : 566,
+      "w" : 375,
+      "h" : 49
+    },
+    {
+      "text" : "criaturas a cada instante por",
+      "x" : 891,
+      "y" : 606,
+      "h" : 41,
+      "confidence" : 1,
+      "w" : 390
+    },
+    {
+      "text" : "medio de su Verbo.",
+      "x" : 961,
+      "confidence" : 1,
+      "h" : 38,
+      "w" : 260,
+      "y" : 645
+    },
+    {
+      "h" : 12,
+      "confidence" : 0.5,
+      "w" : 98,
+      "text" : "A) NotebookLM",
+      "x" : 1270,
+      "y" : 748
+    }
+  ],
+  "height" : 768
+}

@@ -1,0 +1,126 @@
+{
+  "height" : 768,
+  "width" : 1376,
+  "lines" : [
+    {
+      "text" : "La Divina Providencia",
+      "confidence" : 1,
+      "y" : 76,
+      "x" : 76,
+      "w" : 572,
+      "h" : 48
+    },
+    {
+      "y" : 142,
+      "confidence" : 1,
+      "w" : 466,
+      "h" : 66,
+      "text" : "y el Estado de Vía",
+      "x" : 74
+    },
+    {
+      "y" : 179,
+      "w" : 124,
+      "text" : "Punto B:",
+      "confidence" : 1,
+      "h" : 28,
+      "x" : 1069
+    },
+    {
+      "h" : 33,
+      "confidence" : 1,
+      "x" : 1069,
+      "text" : "Perfección Última",
+      "y" : 210,
+      "w" : 254
+    },
+    {
+      "y" : 259,
+      "text" : "El destino final en Dios",
+      "h" : 21,
+      "x" : 1072,
+      "confidence" : 1,
+      "w" : 233
+    },
+    {
+      "h" : 30,
+      "y" : 284,
+      "w" : 122,
+      "x" : 1067,
+      "confidence" : 1,
+      "text" : "(La Gloria)."
+    },
+    {
+      "h" : 27,
+      "confidence" : 1,
+      "y" : 405,
+      "text" : "Estado de Vía",
+      "x" : 674,
+      "w" : 175
+    },
+    {
+      "y" : 441,
+      "text" : "La creación está en camino, guiada",
+      "x" : 665,
+      "w" : 372,
+      "h" : 35,
+      "confidence" : 1
+    },
+    {
+      "x" : 670,
+      "h" : 29,
+      "text" : "por la Divina Providencia (las",
+      "w" : 303,
+      "confidence" : 1,
+      "y" : 471
+    },
+    {
+      "y" : 500,
+      "h" : 28,
+      "confidence" : 1,
+      "x" : 665,
+      "w" : 321,
+      "text" : "disposiciones por las que Dios"
+    },
+    {
+      "text" : "conduce su obra).",
+      "w" : 188,
+      "y" : 533,
+      "h" : 24,
+      "x" : 671,
+      "confidence" : 1
+    },
+    {
+      "text" : "Punto A: Creación Original",
+      "y" : 629,
+      "x" : 158,
+      "w" : 348,
+      "h" : 32,
+      "confidence" : 1
+    },
+    {
+      "text" : "El mundo salió de las manos de Dios bueno,",
+      "x" : 158,
+      "confidence" : 1,
+      "y" : 671,
+      "w" : 456,
+      "h" : 28
+    },
+    {
+      "w" : 332,
+      "h" : 29,
+      "text" : "pero no perfectamente acabado.",
+      "x" : 154,
+      "confidence" : 1,
+      "y" : 694
+    },
+    {
+      "w" : 139,
+      "y" : 734,
+      "text" : "A NotebookLM",
+      "confidence" : 0.5,
+      "x" : 1218,
+      "h" : 18
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "width" : 1376,
+  "lines" : [
+    {
+      "x" : 78,
+      "y" : 85,
+      "h" : 53,
+      "w" : 388,
+      "confidence" : 1,
+      "text" : "Dios Creador"
+    },
+    {
+      "y" : 233,
+      "text" : "Ex Nihilo",
+      "w" : 174,
+      "h" : 38,
+      "confidence" : 1,
+      "x" : 575
+    },
+    {
+      "text" : "La Nada",
+      "x" : 151,
+      "y" : 407,
+      "w" : 142,
+      "h" : 32,
+      "confidence" : 1
+    },
+    {
+      "h" : 32,
+      "text" : "El Cosmos",
+      "y" : 407,
+      "x" : 1035,
+      "w" : 182,
+      "confidence" : 1
+    },
+    {
+      "y" : 492,
+      "x" : 503,
+      "h" : 37,
+      "confidence" : 0.5,
+      "text" : "De la nada",
+      "w" : 200
+    },
+    {
+      "w" : 286,
+      "confidence" : 1,
+      "text" : "Obra Trinitaria",
+      "h" : 37,
+      "x" : 76,
+      "y" : 494
+    },
+    {
+      "h" : 37,
+      "text" : "Libre Voluntad",
+      "y" : 494,
+      "x" : 925,
+      "w" : 282,
+      "confidence" : 1
+    },
+    {
+      "y" : 548,
+      "confidence" : 1,
+      "w" : 363,
+      "h" : 36,
+      "text" : "Dios no creó por necesidad",
+      "x" : 927
+    },
+    {
+      "x" : 78,
+      "y" : 550,
+      "confidence" : 1,
+      "text" : "La creación es obra",
+      "h" : 28,
+      "w" : 261
+    },
+    {
+      "text" : "Dios crea a partir de la",
+      "h" : 34,
+      "w" : 302,
+      "x" : 504,
+      "y" : 551,
+      "confidence" : 1
+    },
+    {
+      "confidence" : 1,
+      "w" : 352,
+      "text" : "conjunta del Padre (por su",
+      "x" : 78,
+      "h" : 33,
+      "y" : 585
+    },
+    {
+      "h" : 34,
+      "confidence" : 1,
+      "w" : 361,
+      "x" : 504,
+      "text" : "nada absoluta. No requiere",
+      "y" : 585
+    },
+    {
+      "h" : 36,
+      "confidence" : 1,
+      "y" : 585,
+      "text" : "ni por soledad. La Trinidad",
+      "w" : 356,
+      "x" : 927
+    },
+    {
+      "y" : 617,
+      "h" : 37,
+      "text" : "materia preexistente.",
+      "confidence" : 1,
+      "x" : 503,
+      "w" : 286
+    },
+    {
+      "w" : 362,
+      "h" : 36,
+      "y" : 618,
+      "confidence" : 1,
+      "x" : 925,
+      "text" : "ya era perfectamente feliz."
+    },
+    {
+      "x" : 77,
+      "confidence" : 1,
+      "h" : 34,
+      "w" : 252,
+      "text" : "Palabra\/Hijo) en el",
+      "y" : 621
+    },
+    {
+      "text" : "Espíritu (Dador de vida).",
+      "x" : 77,
+      "confidence" : 1,
+      "w" : 326,
+      "y" : 655,
+      "h" : 36
+    },
+    {
+      "w" : 334,
+      "text" : "Crea por pura sabiduría y",
+      "y" : 655,
+      "h" : 36,
+      "x" : 927,
+      "confidence" : 1
+    },
+    {
+      "h" : 35,
+      "x" : 927,
+      "confidence" : 1,
+      "w" : 256,
+      "text" : "amor desbordante.",
+      "y" : 688
+    },
+    {
+      "x" : 1217,
+      "w" : 140,
+      "confidence" : 0.5,
+      "h" : 18,
+      "text" : "A NotebookLM",
+      "y" : 735
+    }
+  ],
+  "height" : 768
+}

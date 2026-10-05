@@ -1,0 +1,81 @@
+# Slides + Notes Presenter — feature plan
+
+> Feature slug: `presenter`
+> Goal: a single-page app that loads any existing HTML catechism deck and lets the presenter see slide notes while presenting. Three viewing modes, read-only notes, sidecar JSON storage.
+> Decisions (locked by user 2025-10-05):
+> 1. Notes live in `*.notes.json` sidecar files, paired by slide index. No edits to deck HTML.
+> 2. Three note UX modes, all shipped: presenter window (second monitor), in-page side panel, toggle overlay (`N`).
+> 3. Read-only inside the app. Notes edited in the user's editor of choice.
+
+## Non-goals
+
+- No editing of notes inside the app (read-only per user decision).
+- No auth, no upload, no remote hosting.
+- No modifications to existing decks.
+- No fullscreen presentation quirks like kezels — keep first cut simple.
+
+## Architecture
+
+- `presenter.html` — main shell + popup shell (differentiated by `?popup=1` URL param).
+- `presenter.js` — main app logic (deck loader, nav, hotkeys, modes).
+- `presenter-shared.js` — pure helpers (slide parsing, scaling math, sidecar parsing, BroadcastChannel protocol). Dual-exported for Node `node --test` and the browser.
+- `serve.sh` — launcher using `python3 -m http.server` (browser can't `fetch()` JSON over `file://`).
+- `tests/presenter-shared.test.js` — Node `node --test` suite for pure helpers.
+- `README.md` — usage, keyboard cheatsheet, sidecar format.
+
+## Deck loading strategy
+
+- `fetch()` the deck HTML as text.
+- Parse with `DOMParser`.
+- Extract all `<style>` blocks → re-inject as `<style>` elements into a scoped `<div id="deck-styles">` (so multiple decks could be cached without CSS bleed).
+- Drop every `<script>` (we own it).
+- Extract every `<section class="slide">` from inside the deck's `.stage` → clone into my own `.stage`.
+- Add `.is-active` to slide 0.
+- Scale-to-fit the stage at 1920×1080 with the same math the original decks used.
+
+## Sidecar format
+
+```json
+{
+  "deck": "catechism-deck-dios-padre-creador-3",
+  "slides": [
+    "Notes for slide 1. Plain text or light markdown.",
+    "Notes for slide 2..."
+  ]
+}
+```
+
+- Looked up at `<deck>.notes.json` in the same directory as the HTML.
+- If `slides.length < total`, pad with empty strings.
+- If file missing, show a copyable empty template and an "Open in editor" hint pointing at the path.
+
+## Notes UX
+
+- **Overlay drawer (default toggle)**: press `N`. Right-side drawer slides in, ~360px wide, slide reflows. Press `N` or click outside to close.
+- **In-page side panel**: toggle from menu. Persistent split. Stage left, notes right, with a draggable splitter.
+- **Presenter window**: press `W`. Opens `presenter.html?popup=1&deck=...&index=...` in a popup. Popup shows current notes, current slide thumbnail, next slide thumbnail, total time + per-slide time. Sync via `BroadcastChannel('slideschurch')` with messages `{type:'goto', index, notes, slides, deck}`.
+
+## Hotkeys
+
+| Key | Action |
+|-----|--------|
+| `→` `Space` `PageDown` | Next slide |
+| `←` `PageUp` | Previous slide |
+| `Home` | First slide |
+| `End` | Last slide |
+| `N` | Toggle notes drawer |
+| `W` | Open presenter window |
+| `F` | Toggle browser fullscreen |
+| `?` | Toggle help overlay |
+| `Esc` | Close drawer / help / exit fullscreen |
+
+## Tasks
+
+1. **presenter-shared.js** — pure helpers + dual export.
+2. **tests/presenter-shared.test.js** — `node --test` suite.
+3. **presenter.html + presenter.js + CSS** — app shell, deck loader, side panel, drawer, presenter popup.
+4. **serve.sh** — `python3 -m http.server` from project root.
+5. **README.md** — usage, hotkeys, sidecar format.
+6. **Verification** — run `node --test` and a Node-side parsing smoke-test for every deck in the repo.
+
+Each task closes with a Conventional Commit work-unit on the feature branch. Feature branch `feat/presenter` off main.

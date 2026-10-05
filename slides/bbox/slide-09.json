@@ -1,0 +1,126 @@
+{
+  "lines" : [
+    {
+      "y" : 58,
+      "text" : "¿Por qué y cómo creó Dios?",
+      "h" : 63,
+      "w" : 636,
+      "confidence" : 0.5,
+      "x" : 366
+    },
+    {
+      "h" : 39,
+      "text" : "La Creación",
+      "x" : 579,
+      "confidence" : 1,
+      "w" : 216,
+      "y" : 266
+    },
+    {
+      "h" : 53,
+      "confidence" : 0.5,
+      "w" : 197,
+      "x" : 995,
+      "text" : "Lo que SÍ es",
+      "y" : 470
+    },
+    {
+      "w" : 218,
+      "confidence" : 1,
+      "text" : "Lo que NO es",
+      "y" : 477,
+      "x" : 171,
+      "h" : 47
+    },
+    {
+      "x" : 971,
+      "y" : 532,
+      "w" : 258,
+      "h" : 35,
+      "confidence" : 1,
+      "text" : "Creado libremente por"
+    },
+    {
+      "x" : 166,
+      "confidence" : 0.5,
+      "text" : "Fruto del azar, de un",
+      "y" : 535,
+      "w" : 231,
+      "h" : 34
+    },
+    {
+      "text" : "sabiduría y puro amor.",
+      "x" : 971,
+      "w" : 260,
+      "h" : 33,
+      "confidence" : 1,
+      "y" : 563
+    },
+    {
+      "confidence" : 1,
+      "x" : 148,
+      "w" : 267,
+      "y" : 565,
+      "h" : 31,
+      "text" : "destino ciego, o de una"
+    },
+    {
+      "text" : "Creado Ex Nihilo (de la",
+      "w" : 262,
+      "confidence" : 1,
+      "y" : 594,
+      "x" : 970,
+      "h" : 30
+    },
+    {
+      "y" : 595,
+      "w" : 219,
+      "text" : "necesidad (Dios no",
+      "confidence" : 1,
+      "x" : 172,
+      "h" : 30
+    },
+    {
+      "confidence" : 1,
+      "x" : 960,
+      "text" : "absolutamente nada, sin",
+      "w" : 282,
+      "y" : 624,
+      "h" : 32
+    },
+    {
+      "h" : 25,
+      "y" : 630,
+      "confidence" : 1,
+      "x" : 157,
+      "w" : 246,
+      "text" : "necesitaba crear para"
+    },
+    {
+      "h" : 32,
+      "x" : 976,
+      "y" : 657,
+      "w" : 252,
+      "text" : "materia preexistente).",
+      "confidence" : 1
+    },
+    {
+      "h" : 31,
+      "y" : 658,
+      "text" : "ser plenamente feliz).",
+      "w" : 248,
+      "x" : 157,
+      "confidence" : 1
+    },
+    {
+      "y" : 748,
+      "w" : 98,
+      "confidence" : 0.5,
+      "h" : 12,
+      "text" : "A NotebookLM",
+      "x" : 1270
+    }
+  ],
+  "width" : 1376,
+  "height" : 768
+}

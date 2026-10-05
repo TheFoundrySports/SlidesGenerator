@@ -1,0 +1,134 @@
+{
+  "height" : 768,
+  "width" : 1376,
+  "lines" : [
+    {
+      "text" : "Una Creación en Camino",
+      "y" : 56,
+      "w" : 596,
+      "h" : 48,
+      "x" : 77,
+      "confidence" : 1
+    },
+    {
+      "h" : 42,
+      "text" : "Perfección Última",
+      "x" : 952,
+      "confidence" : 1,
+      "y" : 85,
+      "w" : 294
+    },
+    {
+      "confidence" : 1,
+      "text" : "El destino final hacia el",
+      "w" : 258,
+      "h" : 25,
+      "x" : 972,
+      "y" : 151
+    },
+    {
+      "y" : 180,
+      "confidence" : 1,
+      "h" : 30,
+      "text" : "que Dios guía y destina a",
+      "w" : 280,
+      "x" : 959
+    },
+    {
+      "h" : 30,
+      "text" : "toda la obra creada.",
+      "x" : 986,
+      "confidence" : 1,
+      "y" : 211,
+      "w" : 227
+    },
+    {
+      "text" : "Estado de Vía",
+      "h" : 34,
+      "w" : 224,
+      "confidence" : 1,
+      "x" : 576,
+      "y" : 234
+    },
+    {
+      "w" : 272,
+      "h" : 26,
+      "confidence" : 1,
+      "text" : "La creación se encuentra",
+      "x" : 551,
+      "y" : 294
+    },
+    {
+      "text" : "en camino, en un estado",
+      "x" : 553,
+      "confidence" : 1,
+      "y" : 325,
+      "h" : 31,
+      "w" : 268
+    },
+    {
+      "y" : 349,
+      "h" : 33,
+      "confidence" : 1,
+      "text" : "Creación Buena",
+      "x" : 151,
+      "w" : 256
+    },
+    {
+      "confidence" : 1,
+      "text" : "de progresión temporal.",
+      "w" : 268,
+      "x" : 556,
+      "y" : 351,
+      "h" : 32
+    },
+    {
+      "y" : 388,
+      "w" : 260,
+      "confidence" : 1,
+      "h" : 28,
+      "x" : 150,
+      "text" : "(Pero no terminada)"
+    },
+    {
+      "w" : 276,
+      "text" : "El mundo es maravillosa-",
+      "h" : 26,
+      "y" : 440,
+      "x" : 141,
+      "confidence" : 1
+    },
+    {
+      "y" : 469,
+      "confidence" : 1,
+      "h" : 34,
+      "text" : "mente bueno, pero no",
+      "x" : 161,
+      "w" : 239
+    },
+    {
+      "confidence" : 1,
+      "h" : 32,
+      "text" : "salió plenamente acabado",
+      "x" : 135,
+      "y" : 497,
+      "w" : 286
+    },
+    {
+      "text" : "de las manos de Dios.",
+      "x" : 157,
+      "confidence" : 1,
+      "w" : 244,
+      "h" : 31,
+      "y" : 526
+    },
+    {
+      "y" : 748,
+      "confidence" : 0.5,
+      "text" : "A) NotebookLM",
+      "x" : 1270,
+      "w" : 98,
+      "h" : 12
+    }
+  ]
+}
