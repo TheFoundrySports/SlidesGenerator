@@ -19,5 +19,6 @@ package-lock.json
 # Source binaries (regenerable from the originals)
 Dios_Padre.pptx
 slides/img/slide-*.png
+slides/img/imported/
 
 # Keep: slides/img/cleaned/*.png (actual deck content)

@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "node --test",
-    "lint": "node scripts/lint-deck.js"
+    "lint": "node scripts/lint-deck.js",
+    "pptx-to-deck": "node scripts/pptx-to-deck.js"
   },
   "keywords": [
     "catechism",
@@ -24,6 +25,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "jszip": "^3.10.1",
     "pptxgenjs": "^4.0.1"
   }
 }

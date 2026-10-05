@@ -163,6 +163,75 @@ node scripts/lint-deck.js catechism-deck-dios-padre-creador*.html index.html
 
 Current results: v1 + index clean; v2 + v3 each show one P1 (`<img>` without `loading="lazy"`). These are pre-existing deviations in the older decks, not from slide-craft.
 
+## PPTX Importer (v0.2.0)
+
+Bring any PowerPoint file into SlidesChurch as a properly styled catechetical deck. The importer extracts only text, position, and images from the source PPTX; the style comes from `DESIGN.md` and the slide-craft system.
+
+### What gets extracted
+
+| From PPTX | To HTML | Why |
+|-----------|---------|-----|
+| Text content, position, font size, bold, italic | Positioned text in catechism typography | Substance + layout intent |
+| Images | Extracted to `slides/img/imported/<deck>/` and `<img>`-referenced | Visual content preserved |
+| Color, theme, layout, fonts, animations | **Discarded** | The catechism system is single-ink, single-archetype, single-font |
+
+### Three modes
+
+```bash
+# Interactive: asks the user for the archetype per slide
+node scripts/pptx-to-deck.js input.pptx my-deck
+
+# Non-interactive with explicit map (for subagents or CI)
+node scripts/pptx-to-deck.js input.pptx my-deck \
+  --map "1:cover,2:scripture,3:doctrine,4:summary,5:closing"
+
+# Non-interactive using the heuristic only
+node scripts/pptx-to-deck.js input.pptx my-deck --auto
+```
+
+Or via npm: `npm run pptx-to-deck -- input.pptx my-deck`.
+
+### Heuristic archetype mapping
+
+The CLI picks an archetype per slide using:
+
+| Pista | Arquetipo |
+|-------|-----------|
+| First slide | `cover` |
+| Last slide | `closing` |
+| Mostly image, < 30 chars text | `cover` |
+| 1 text block 5–200 chars | `reflection` |
+| ≥ 3 text shapes | `doctrine` |
+| Long text (≥ 200 chars) | `prayer` |
+| Other | `prayer` (default) |
+
+In interactive mode the user confirms or overrides each guess. `--map` and `--auto` skip the prompts.
+
+### Output files
+
+- `<deck-name>.html` in the project root — the deck, ready for the presenter.
+- `<deck-name>.notes.json` — empty sidecar (one slot per slide).
+- `slides/img/imported/<deck-name>/...` — extracted images (local sidecar, **not in the repo**; see `.gitignore`).
+
+After the import, add the deck to `DECKS` in `presenter.js`:
+
+```js
+{ file: 'my-deck.html', title: 'My Deck', label: '01 Cover' }
+```
+
+### What it doesn't do (be honest with the user)
+
+- **Tables, charts, SmartArt, embedded video**: rasterized as the underlying image and pasted at the source position. Re-author in the catechism system if you want semantic HTML.
+- **Animations and transitions**: completely dropped.
+- **Mixed shapes per deck**: the imported deck defaults to `landscape-16-9` (1920×1080).
+
+### Where the agent lives
+
+The importer is also a Pi skill + subagent for end-to-end use:
+
+- Skill: `agent/slide-pptx-importer/SKILL.md` (mirrored to `~/.pi/agent/skills/slide-pptx-importer/SKILL.md`).
+- Subagent: `agent/gentle-ai-pptx-importer.md` (mirrored to `~/.pi/agent/agents/gentle-ai-pptx-importer.md`) — runs the CLI in non-interactive mode, fixes lint P0s, registers the deck.
+
 ## Visual styles & shapes (v0.1.1)
 
 Two new axes complement the content archetypes. Both are declared on `<html>` and detected automatically by the presenter and the lint.

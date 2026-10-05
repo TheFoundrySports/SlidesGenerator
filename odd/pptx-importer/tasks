@@ -1,0 +1,16 @@
+# PPTX Importer — feature plan
+
+> Feature slug: `pptx-importer`
+> Goal: convert PPTX to catechetical HTML (text + position + images only, style from DESIGN.md).
+> Decisions: 3 layers (CLI + skill + subagent), interactive mode default, images in sidecar local.
+
+## Tasks
+
+1. Pure extraction helpers + tests
+2. CLI end-to-end (extract + interactive + generate)
+3. Lint accepts imported decks
+4. .gitignore update
+5. SKILL.md (project + user-global)
+6. Subagent (project + user-global)
+7. README + CHANGELOG
+8. Tag v0.2.0
