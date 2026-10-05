@@ -1,0 +1,16 @@
+# Slide Styles & Shapes — feature plan
+
+> Feature slug: `slide-styles-shapes`
+> Goal: extend slide-craft with two new axes — **visual style** (how the slide looks) and **shape** (canvas dimensions).
+> Decisions: 3 styles for v0.1.1 (monastic + festive + typographic), 4 shapes (16:9, 3:4, 1:1, 21:9), one shape per deck, v0.1.1 patch.
+
+## Tasks
+
+1. CSS libraries (`_looks/`, `_shapes/`).
+2. Scaffold updates (8 archetypes).
+3. Lint extension (data-shape, data-look, combinations, budget).
+4. Lint tests + fixtures.
+5. Presenter update (detect shape, scale).
+6. Skill/agent docs.
+7. Project docs (README + CHANGELOG).
+8. Tag v0.1.1.
