@@ -1,6 +1,31 @@
-# SlidesChurch Presenter
+# SlidesChurch
 
-A single-page app that loads any HTML catechism deck in this repo and lets you view presenter notes side-by-side. Slides stay on the projector; notes land in whichever mode you pick.
+A two-piece system for catechetical HTML slide decks. **Presenter** loads any deck in the repo and shows presenter notes side-by-side on a second monitor. **Slide-Craft** is a deterministic generator that produces new decks honoring the Catechism Design System (`DESIGN.md`) with stable, repeatable rules.
+
+- **Status**: v0.1.1 — see [CHANGELOG.md](CHANGELOG.md).
+- **Design contract**: [DESIGN.md](DESIGN.md) (canonical, 850 lines).
+- **Tests**: 49 cases, all green — `node --test`.
+
+## Contents
+
+- [What you need](#what-you-need)
+- [Quick start](#quick-start)
+- [The Presenter](#the-presenter) — load and present a deck with notes
+- [The Slide-Craft](#the-slide-craft) — generate new catechetical decks
+- [Visual styles & shapes (v0.1.1)](#visual-styles--shapes-v011) — compose the look of a deck
+- [How to extend](#how-to-extend) — add a style, shape, or archetype
+- [Architecture](#architecture) — file map
+- [Tests](#tests) — how to run them
+- [Versioning](#versioning) — version policy and changelog
+
+## What you need
+
+- **Python 3** (for the dev server)
+- **Node.js 18+** (for the tests and the lint; `node --test` is built-in)
+- A modern browser (Chrome, Firefox, Safari, Edge)
+- A terminal
+
+No `npm install` step. No build. Plain HTML/JS/CSS.
 
 ## Quick start
 
@@ -9,9 +34,44 @@ A single-page app that loads any HTML catechism deck in this repo and lets you v
 # → open http://127.0.0.1:8000/presenter.html
 ```
 
-The launcher uses `python3 -m http.server` because browsers block `fetch()` of local JSON under `file://`. Pick a custom port with `./serve.sh 8080` or `PORT=3000 ./serve.sh`.
+The launcher uses `python3 -m http.server` because browsers block `fetch()` of local JSON under the `file://` scheme. Custom port: `./serve.sh 8080` or `PORT=3000 ./serve.sh`.
 
-## Three ways to view notes
+If the launcher isn't executable: `chmod +x serve.sh`.
+
+To use the slide-craft skill and agent with Pi, install them once per machine:
+
+```bash
+# SKILL.md (condensed rules + archetype index + image/animation rules)
+mkdir -p ~/.pi/agent/skills/slide-craft
+cp agent/slide-craft/SKILL.md ~/.pi/agent/skills/slide-craft/SKILL.md
+
+# Subagent for end-to-end deck generation
+cp agent/gentle-ai-slide-builder.md ~/.pi/agent/agents/
+```
+
+The `agent/` directory in this repo is the source of truth; re-run the `cp` commands after pulling new versions.
+
+## The Presenter
+
+`presenter.html` is the main app. It loads any HTML deck in the repo, parses its `<section class="slide">` elements, and shows them one at a time scaled to fit your viewport. Presenter notes (in a sibling `.notes.json`) appear in a side panel and in a separate popup window.
+
+### Load a deck
+
+Use the dropdown in the topbar. The 3 existing catechetical decks and `index.html` ship pre-listed in the `DECKS` array at the top of `presenter.js`. To add a new deck:
+
+1. Drop the HTML in the project root (or in `slides/`).
+2. Edit `DECKS` in `presenter.js`:
+
+   ```js
+   { file: 'my-new-deck.html', title: 'My New Deck', label: '01 Cover' }
+   ```
+
+3. (Optional) Create `my-new-deck.notes.json` next to it (format below).
+4. Reload `presenter.html`.
+
+The presenter extracts the deck's `<style>` blocks and re-injects them; the deck's `<script>` blocks are dropped (the presenter owns navigation, scaling, and hotkeys).
+
+### Three ways to view notes
 
 | Mode | How to open | Best for |
 |------|-------------|----------|
@@ -21,7 +81,7 @@ The launcher uses `python3 -m http.server` because browsers block `fetch()` of l
 
 The popup syncs over `BroadcastChannel('slideschurch')` — no server glue, just same-origin windows.
 
-## Keyboard shortcuts
+### Keyboard shortcuts
 
 | Key | Action |
 |-----|--------|
@@ -34,7 +94,7 @@ The popup syncs over `BroadcastChannel('slideschurch')` — no server glue, just
 | `?` | Help overlay |
 | `Esc` | Close drawer / help / exit fullscreen |
 
-## Notes sidecar format
+### Notes sidecar format
 
 Each deck `<name>.html` may have a sibling `<name>.notes.json`:
 
@@ -53,54 +113,9 @@ Each deck `<name>.html` may have a sibling `<name>.notes.json`:
 - A bare array is also accepted: `["a", "b", "c"]`.
 - Missing or short arrays are padded with empty strings; the UI shows "Sin notas para esta slide."
 - If the sidecar is missing entirely, the notes pane shows the expected filename so you can create it.
+- Notes are **read-only** inside the presenter. Edit the JSON in your editor.
 
-Edit the sidecar in your editor of choice — the presenter never writes to disk.
-
-## Adding a new deck
-
-1. Drop the deck HTML in the project root (or in `slides/`).
-2. Add an entry to the `DECKS` array in `presenter.js`:
-
-   ```js
-   { file: 'my-new-deck.html', title: 'My New Deck', label: '01 Cover' }
-   ```
-
-3. (Optional) Create `my-new-deck.notes.json` next to it.
-4. Reload `presenter.html`.
-
-The deck's `<style>` blocks are extracted and re-injected. The deck's `<script>` blocks are dropped — the presenter owns navigation, scaling, and hotkeys.
-
-## Architecture
-
-```
-presenter.html           # main app + presenter-window popup shell (?popup=1)
-presenter.js             # main app logic: deck loader, nav, hotkeys, popup sync
-presenter-shared.js      # pure helpers (parseDeckHtml, parseSidecar, …)
-                         #   dual-environment: window + CommonJS
-tests/presenter-shared.test.js   # node --test suite (23 cases, all green)
-tests/fixtures/mini-deck.html   # hand-written fixture
-serve.sh                 # python3 -m http.server launcher
-```
-
-`presenter-shared.js` is deliberately free of DOM access so it can run under `node --test` without jsdom. Browser-only code lives in `presenter.js`.
-
-## Tests
-
-```bash
-node --test
-```
-
-Auto-discovers every `*.test.js` inside `tests/`.
-
-36 cases covering:
-
-- `parseDeckHtml`: regex pulls `<style>` and `<section class="slide">`; ignores other sections.
-- `parseSidecar`: bare-array and `{slides: []}` shapes, padding, truncation, malformed JSON, type coercion.
-- `emptySidecar`: valid JSON template with N empty slots.
-- `computeStageScale`: 1920×1080 canvas fitted to arbitrary viewports.
-- `createBus`: pub-sub with `BroadcastChannel` when available, in-process fallback otherwise.
-
-## Slide-Craft — generate catechetical slides
+## The Slide-Craft
 
 A four-piece system that produces catechetical HTML slides honoring `DESIGN.md` with stable, repeatable rules.
 
@@ -108,10 +123,10 @@ A four-piece system that produces catechetical HTML slides honoring `DESIGN.md` 
 
 | Where | What |
 |-------|------|
-| `~/.pi/agent/skills/slide-craft/SKILL.md` | Condensed rules + archetype index + image/animation rules + self-check. Auto-loaded when the user invokes catechetical slide work. |
-| `~/.pi/agent/agents/gentle-ai-slide-builder.md` | Subagent for full deck generation. Loads the skill, copies scaffolds, fills placeholders, runs the lint, returns review-ready HTML. |
-| `slides/_scaffold/` | 8 working archetypes — paste-and-fill HTML for Cover, Scripture, Doctrine, Reflection, Prayer, Summary, Divider, Closing. |
-| `scripts/lint-deck.js` | Deterministic P0/P1/P2 checks: canvas, palette tokens, motif budget, sans-serif display, emoji, raw hex, image rules, animation budget. |
+| `agent/slide-craft/SKILL.md` (mirrored to `~/.pi/agent/skills/slide-craft/`) | Condensed rules + archetype index + image/animation rules + self-check. Auto-loaded when the model detects catechetical slide work. |
+| `agent/gentle-ai-slide-builder.md` (mirrored to `~/.pi/agent/agents/`) | Subagent for full deck generation. Loads the skill, copies scaffolds, fills placeholders, runs the lint, returns review-ready HTML. |
+| `slides/_scaffold/` | 8 working archetype scaffolds — paste-and-fill HTML for Cover, Scripture, Doctrine, Reflection, Prayer, Summary, Divider, Closing. Plus the `_looks/` and `_shapes/` CSS libraries. |
+| `scripts/lint-deck.js` | Deterministic P0/P1/P2 checks: canvas, palette tokens, motif budget, sans-serif display, emoji, raw hex, image rules, animation budget, look/shape axes (v0.1.1). |
 
 ### Two ways to use
 
@@ -122,7 +137,7 @@ node scripts/lint-deck.js my-new-deck.html
 # → exit 0 means no P0 blockers; P1/P2 are warnings
 ```
 
-**Delegated (with the agent):** ask the parent to delegate to `gentle-ai-slide-builder`. The agent reads `DESIGN.md`, plans the rhythm, copies scaffolds, runs the lint, and emits a review-ready deck.
+**Delegated (with the agent):** ask the Pi session to delegate to `gentle-ai-slide-builder` with a topic and a target slide count. The agent reads `DESIGN.md`, plans the rhythm (default sequence below), chooses a look and a shape (defaults: `monastic` + `landscape-16-9`), copies scaffolds, runs the lint, and emits a review-ready deck.
 
 ### Eight archetypes (default rhythm)
 
@@ -136,8 +151,8 @@ Insert Divider (G) between sub-chapters and Prayer (E) as connective tissue. Nev
 
 | Tier | Effect | Rules |
 |------|--------|-------|
-| **P0** | blocker — exit 1 | canvas 1920×1080, palette tokens (no raw hex), ≤2 SVG/slide, sans-serif display forbidden, emoji forbidden (only ✝ once), script count > 1 |
-| **P1** | warning — printed, exit 0 | counter HUD present, data-screen-label on every slide, slide count ≤40, single script shape (must toggle `is-active`), image lazy + decode |
+| **P0** | blocker — exit 1 | canvas 1920×1080 (or shape-matching), palette tokens (no raw hex), ≤2 SVG/slide, sans-serif display forbidden, emoji forbidden (only ✝ once), script count > 1, stage-dimensions mismatch |
+| **P1** | warning — printed, exit 0 | counter HUD, data-screen-label, slide count ≤40, single script shape, image lazy + decode, look-valid, shape-valid, combination, look-budget |
 | **P2** | info | transition duration ≠ 350ms |
 
 ### Run the lint on the existing decks
@@ -148,19 +163,23 @@ node scripts/lint-deck.js catechism-deck-dios-padre-creador*.html index.html
 
 Current results: v1 + index clean; v2 + v3 each show one P1 (`<img>` without `loading="lazy"`). These are pre-existing deviations in the older decks, not from slide-craft.
 
-### v0.1.1 — visual styles and shapes
+## Visual styles & shapes (v0.1.1)
 
-Two new axes complement the existing content archetypes:
+Two new axes complement the content archetypes. Both are declared on `<html>` and detected automatically by the presenter and the lint.
 
-**Visual styles** (`class="look-X"` on `<html>` or per-slide on `<section>`):
+### Visual styles (`class="look-X"`)
 
 | Style | When | Budget |
 |-------|------|--------|
 | `monastic` | default; Reflection, Prayer, Scripture | unlimited |
-| `festive` | solemnities, feast covers, Closing of celebrations | ≤ 2 per deck |
-| `typographic` | slides where text is the visual (large verse, memorable sentence) | ≤ 1 per deck |
+| `festive` | solemnities, feast covers, Closing of celebrations | ≤ 2 slides per deck |
+| `typographic` | slides where text is the visual (large verse, memorable sentence) | ≤ 1 slide per deck |
 
-**Shapes** (`class="shape-X"` on `<html>`, deck-wide only):
+**Per-slide override:** add `class="look-X"` to a `<section>` to override the deck default. Used for one-off festive or typographic moments in an otherwise monastic deck.
+
+CSS lives in `slides/_scaffold/_looks/`.
+
+### Shapes (`class="shape-X"`, deck-wide)
 
 | Shape | Dimensions | When |
 |-------|------------|------|
@@ -169,19 +188,125 @@ Two new axes complement the existing content archetypes:
 | `square-1-1` | 1440×1440 | Instagram, square card |
 | `ultrawide-21-9` | 2520×1080 | cinematic banner |
 
-The CSS libraries live at `slides/_scaffold/_looks/` and `slides/_scaffold/_shapes/`. Each scaffold loads one look and one shape by default; switch them by editing the two `<link>` tags and the `class` on `<html>`.
+**One deck = one shape.** Mixing shapes in a single deck is not supported — the presenter scales every slide to the deck's declared dimensions.
 
-**One deck = one shape.** Mixing shapes in a single deck is not supported (the presenter scales each slide to its deck's shape).
+CSS lives in `slides/_scaffold/_shapes/`.
 
-**Backwards compatible.** Existing decks without `data-shape` or `data-look` pass with the defaults (`landscape-16-9` + `monastic`). The 3 existing catechism decks work without changes.
+### Switching a scaffold's look + shape
 
-The lint enforces these rules with `node scripts/lint-deck.js`. See `docs/extending-slide-craft.md` for how to add a new style or shape.
+In the scaffold's `<head>`, change the two `<link>` tags and the `<html>` class:
 
-## What it doesn't do (yet)
+```html
+<!-- before: monastic + landscape-16-9 -->
+<link rel="stylesheet" href="_looks/monastic.css">
+<link rel="stylesheet" href="_shapes/landscape-16-9.css">
+<html lang="es" class="look-monastic shape-landscape-16-9">
 
-- No editing of notes inside the app — by design, edited in your editor.
-- No remote hosting, no auth, no upload.
-- No modifications to existing decks.
-- No draggable splitter, no markdown rendering in notes, no per-slide timer reset between modes.
+<!-- after: festive + portrait-3-4 -->
+<link rel="stylesheet" href="_looks/festive.css">
+<link rel="stylesheet" href="_shapes/portrait-3-4.css">
+<html lang="es" class="look-festive shape-portrait-3-4">
+```
 
-These are good follow-ups if you want them.
+### Backwards compatibility
+
+Existing decks without `data-shape` or `data-look` defaults to `landscape-16-9` + `monastic` and pass the lint unchanged. The 3 existing catechism decks work without any modification.
+
+## How to extend
+
+See [docs/extending-slide-craft.md](docs/extending-slide-craft.md) for the step-by-step process to add a new visual style, shape, or content archetype. The doc covers:
+
+- 10-step procedure for adding a new visual style.
+- 7-step procedure for adding a new shape.
+- 7-step procedure for adding a new archetype.
+- Testing checklist.
+- Version bump policy (patch for style/shape, minor for archetype).
+
+The source-of-truth files for the slide-craft are in `agent/slide-craft/SKILL.md` and `agent/gentle-ai-slide-builder.md`. The user-global installs at `~/.pi/agent/...` must be re-synced after each update.
+
+## Architecture
+
+```
+SlidesChurch/
+├── presenter.html              # main app + presenter-window popup shell (?popup=1)
+├── presenter.js                # main app logic: deck loader, nav, hotkeys, popup sync
+├── presenter-shared.js         # pure helpers: parseDeckHtml, parseSidecar, parseShape
+│                               #   dual-environment: window + CommonJS
+├── serve.sh                    # python3 -m http.server launcher
+│
+├── slides/
+│   ├── img/cleaned/            # cleaned slide images used by the v1 catechism deck
+│   ├── bbox/                   # OCR work artifacts (regenerable)
+│   ├── ocr/                    # OCR text output per slide
+│   └── _scaffold/              # 8 working archetype scaffolds
+│       ├── 00-divider.html
+│       ├── 01-cover.html
+│       ├── 02-scripture.html
+│       ├── 03-doctrine.html
+│       ├── 04-reflection.html
+│       ├── 05-prayer.html
+│       ├── 06-summary.html
+│       ├── 99-closing.html
+│       ├── _looks/             # CSS libraries: monastic, festive, typographic
+│       └── _shapes/            # CSS libraries: 16-9, 3-4, 1-1, 21-9
+│
+├── scripts/
+│   └── lint-deck.js            # P0/P1/P2 deterministic checks
+│
+├── agent/                      # source of truth for Pi integration
+│   ├── slide-craft/SKILL.md    # user-global install at ~/.pi/agent/skills/
+│   └── gentle-ai-slide-builder.md  # user-global install at ~/.pi/agent/agents/
+│
+├── tests/
+│   ├── presenter-shared.test.js   # 28 unit tests
+│   ├── lint-deck.test.js          # 21 unit tests
+│   ├── smoke-parse-decks.js       # CLI smoke test for all decks
+│   └── fixtures/                  # mini-deck, deck-clean, deck-bad
+│
+├── docs/
+│   └── extending-slide-craft.md   # how to add a new style/shape/archetype
+│
+├── DESIGN.md                   # canonical catechism design contract (850 lines)
+├── catechism-deck-dios-padre-creador*.html   # 3 example decks
+│   └── *.notes.json            # 18 notes per v1 deck (read-only sidecar)
+│
+├── package.json                # npm scripts: test, lint
+├── LICENSE                     # MIT
+├── CHANGELOG.md                # v0.1.0, v0.1.1
+└── README.md                   # this file
+```
+
+`presenter-shared.js` is deliberately free of DOM access so it can run under `node --test` without jsdom. Browser-only code lives in `presenter.js`.
+
+The two agent files in `agent/` are the source of truth for the slide-craft skill. Whenever you update them, mirror the change to `~/.pi/agent/skills/slide-craft/SKILL.md` and `~/.pi/agent/agents/gentle-ai-slide-builder.md` in the same commit.
+
+## Tests
+
+```bash
+node --test
+```
+
+Auto-discovers every `*.test.js` inside `tests/`. 49 cases, all green:
+
+- `parseDeckHtml`: regex pulls `<style>` and `<section class="slide">`; ignores other sections.
+- `parseSidecar`: bare-array and `{slides: []}` shapes, padding, truncation, malformed JSON, type coercion.
+- `emptySidecar`: valid JSON template with N empty slots.
+- `computeStageScale`: arbitrary canvas fitted to any viewport.
+- `createBus`: pub-sub with `BroadcastChannel` when available, in-process fallback otherwise.
+- `SHAPE_DIMENSIONS`, `extractShape`, `shapeDimensions` (v0.1.1).
+- Lint rules: canvas, counter, screen-label, slide-count, sans-serif-display, motif-budget, emoji, script-tags, script-shape, palette-tokens, image-lazy, image-decode, animation-duration, look-valid, shape-valid, shape-dimensions, combination, look-budget.
+
+Smoke test: `node tests/smoke-parse-decks.js` parses every HTML deck in the project root and asserts slide counts.
+
+## Versioning
+
+We use [Semantic Versioning](https://semver.org/):
+
+- **Patch** (v0.1.x): new visual style, new shape, new motif, new anti-pattern rule.
+- **Minor** (v0.x.0): new archetype, breaking change to existing scaffolds.
+
+See [CHANGELOG.md](CHANGELOG.md) for the release history.
+
+## License
+
+[MIT](LICENSE). Copyright (c) 2026 Francisco J. Seva.
