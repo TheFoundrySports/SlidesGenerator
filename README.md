@@ -293,6 +293,237 @@ See [docs/extending-slide-craft.md](docs/extending-slide-craft.md) for the step-
 
 The source-of-truth files for the slide-craft are in `agent/slide-craft/SKILL.md` and `agent/gentle-ai-slide-builder.md`. The user-global installs at `~/.pi/agent/...` must be re-synced after each update.
 
+## Recipes & Customization
+
+Concrete examples of how to put the system together and how to customize the output.
+
+### Folder layout
+
+```
+SlidesChurch/
+├── demo-deck.html             # deck de ejemplo (generado por el importer)
+├── demo-deck.notes.json       # sidecar vacío, listo para llenar
+├── index.html                 # cover corto (3 slides, deck histórico)
+├── presenter.html             # la app (no se mezcla con los decks)
+├── presenter.js               # lógica de la app
+├── presenter-shared.js        # helpers puros (parseDeckHtml, etc.)
+├── serve.sh                   # http server local
+│
+├── slides/                    # imágenes y scaffolds
+│   ├── _scaffold/             # 8 arquetipos + look/shape libraries
+│   │   ├── 00-divider.html
+│   │   ├── 01-cover.html
+│   │   ├── 02-scripture.html
+│   │   ├── 03-doctrine.html
+│   │   ├── 04-reflection.html
+│   │   ├── 05-prayer.html
+│   │   ├── 06-summary.html
+│   │   ├── 99-closing.html
+│   │   ├── _looks/             # monastic, festive, typographic
+│   │   └── _shapes/            # 16:9, 3:4, 1:1, 21:9
+│   ├── img/cleaned/           # raster content viejo (gitignored)
+│   └── img/imported/          # imágenes de PPTX importados (gitignored)
+│
+├── scripts/                   # tooling
+│   ├── lint-deck.js            # chequeos P0/P1/P2
+│   ├── pptx-to-deck.js         # CLI PPTX → HTML
+│   └── build-demo-pptx.js      # genera demo.pptx con pptxgenjs
+│
+├── agent/                     # fuente de verdad para Pi integration
+│   ├── slide-craft/SKILL.md        # mirrors to ~/.pi/agent/skills/
+│   ├── slide-pptx-importer/SKILL.md # mirrors to ~/.pi/agent/skills/
+│   ├── gentle-ai-slide-builder.md  # mirrors to ~/.pi/agent/agents/
+│   └── gentle-ai-pptx-importer.md   # mirrors to ~/.pi/agent/agents/
+│
+├── tests/                     # 72 casos node --test
+│   ├── presenter-shared.test.js    # 28 unit tests
+│   ├── lint-deck.test.js           # 21 unit tests
+│   ├── pptx-to-deck.test.js        # 23 unit tests
+│   ├── smoke-parse-decks.js        # CLI smoke (manual)
+│   └── fixtures/                   # mini-deck, deck-clean, deck-bad
+│
+├── docs/
+│   └── extending-slide-craft.md    # cómo extender el sistema
+│
+├── odd/                       # feature plans y Engram mirrors
+│   ├── tasks/                      # planes por feature
+│   ├── slide-craft/                # Engram mirror
+│   ├── slide-styles-shapes/        # Engram mirror
+│   └── pptx-importer/              # Engram mirror
+│
+├── DESIGN.md                  # contrato de diseño canónico
+├── package.json               # scripts npm: test, lint, pptx-to-deck
+├── LICENSE                     # MIT
+├── CHANGELOG.md                # v0.1.0 → v0.2.1
+└── README.md                  # este archivo
+```
+
+### Folder conventions
+
+| Carpeta | Qué va ahí | Versionado? |
+|---------|------------|--------------|
+| `slides/_scaffold/` | scaffolds fuente (8 arquetipos) + libraries look/shape | sí |
+| `slides/img/imported/` | imágenes extraídas de PPTX | **no** (gitignored) |
+| `slides/img/cleaned/` | raster viejo de las decks v1 | **no** (gitignored) |
+| `agent/` | definición fuente de skills y subagents para Pi | sí |
+| `~/.pi/agent/...` | instalación user-global (lo que el agente lee en runtime) | sí (en $HOME) |
+| `scripts/` | tooling de build/lint/import | sí |
+| `tests/` | unit tests + fixtures + smoke | sí |
+| `docs/` | documentación extendida (cómo extender, etc.) | sí |
+| `odd/tasks/` | planes por feature | sí |
+| `odd/<feature>/` | Engram mirror por feature | sí |
+
+### Recipes
+
+**A. Carta estándar catequética (12 slides)** — la mezcla más común:
+
+```
+cover        (monastic, landscape-16-9)   "Dios Padre Creador"
+scripture    (monastic, landscape-16-9)   "Génesis 1, 1"
+reflection   (monastic, landscape-16-9)   frase meditativa corta
+doctrine     (monastic, landscape-16-9)   3–5 puntos numerados
+prayer       (monastic, landscape-16-9)   "Creo en Dios..."
+summary      (monastic, landscape-16-9)   3 takeaways
+closing      (monastic, landscape-16-9)   bendición
+```
+
+Construcción: copiar los 6 scaffolds correspondientes, llenar los `[EDITAR: ...]`. Listo en 10 min.
+
+**B. Cover festivo + slides monasticas** — para una solemnidad:
+
+```
+slide 1   cover        .look-festive
+slide 2   scripture    (sin override, deck default = monastic)
+slide 3   doctrine     (sin override)
+slide 4   closing      .look-festive
+```
+
+```html
+<section class="slide slide--cover look-festive">  <!-- override per slide -->
+  ...
+</section>
+```
+
+El slide 1 y 4 tienen el marco `festive` (oro + acento), los del medio quedan `monastic`. Budget respetado: 2 festive por deck.
+
+**C. Carta vertical para mobile** — todo portrait-3:4:
+
+```html
+<html lang="es" class="look-monastic shape-portrait-3-4">
+```
+
+```css
+/* _shapes/portrait-3-4.css */
+.stage { width: 1440px; height: 1920px; }
+.stage .slide { padding: 96px 80px; }
+```
+
+El presenter detects el shape y escala a las dimensiones correctas.
+
+**D. Cuadrado para Instagram** — todo square-1:1:
+
+```html
+<html lang="es" class="look-monastic shape-square-1-1">
+```
+
+```css
+/* _shapes/square-1-1.css */
+.stage { width: 1440px; height: 1440px; }
+.stage .slide { padding: 96px 96px; }
+```
+
+**E. Typographic spot** — una sola slide grande:
+
+```
+slide 1   cover        (monastic)
+slide 2   scripture    .look-typographic      "«Antes de la luz, ya eras Tú.»"
+slide 3   reflection   (monastic, default)
+```
+
+Una slide con tipografía display a 144 px, las demás normal. Budget respetado: 1 typographic.
+
+### Customizing slide generation
+
+**1. Cambiar look o shape de un scaffold** — editá dos líneas:
+
+```html
+<!-- En el <head> del scaffold: -->
+<link rel="stylesheet" href="_looks/festive.css">     <!-- antes: monastic -->
+<link rel="stylesheet" href="_shapes/portrait-3-4.css"> <!-- antes: landscape-16-9 -->
+<link rel="stylesheet" href="_prints.css">
+
+<html lang="es" class="look-festive shape-portrait-3-4">  <!-- antes: monastic/16-9 -->
+```
+
+**2. Override de look por slide** — agregá `class="look-X"` al `<section>`:
+
+```html
+<section class="slide slide--cover look-festive">  <!-- este slide es festive -->
+  ...
+</section>
+<!-- los demás slides del deck usan el deck default -->
+```
+
+**3. Override de shape por slide** — no soportado por convención (un deck = un shape). Si querés mezclar, tendrías que forkear la lógica de scaling del popup. Mejor: dos decks separados.
+
+**4. Override de arquetipo en el importer PPTX**:
+
+```bash
+# Modo interactivo (default): pregunta slide por slide
+node scripts/pptx-to-deck.js input.pptx mi-deck
+
+# Mapa explícito (non-interactive, útil para scripts/CI):
+node scripts/pptx-to-deck.js input.pptx mi-deck \
+  --map "1:cover,2:scripture,3:doctrine,4:summary,5:closing"
+
+# Heurística sola (non-interactive):
+node scripts/pptx-to-deck.js input.pptx mi-deck --auto
+```
+
+**5. Cambiar el output del importer**:
+
+- **Agregar/quitar un arquetipo soportado**: editar `ARCHETYPES` en `scripts/pptx-to-deck.js` (constante arriba).
+- **Cambiar la heurística de mapeo**: editar `heuristicArchetype()` en `scripts/pptx-to-deck.js`.
+- **Cambiar el layout HTML de un arquetipo**: editar `renderSlideBody()` (8 switch cases por arquetipo).
+- **Agregar una nueva imagen al output**: el importer extrae imágenes automáticamente a `slides/img/imported/<deck>/`.
+
+**6. Generar un PPTX propio para testear** — usá `pptxgenjs`:
+
+```js
+// scripts/build-demo-pptx.js (referencia)
+const pptxgen = require('pptxgenjs');
+const pres = new pptxgen();
+pres.layout = 'LAYOUT_16x9';
+
+const slide = pres.addSlide();
+slide.addText('Title', { x: 1, y: 2.6, w: 8, h: 1.2, fontSize: 54, bold: true });
+slide.addText('Subtitle', { x: 1, y: 4.0, w: 8, h: 0.6, fontSize: 22 });
+// ... más slides ...
+
+pres.writeFile({ fileName: 'mi-test.pptx' });
+```
+
+**7. Regenerar la demo con tu propio contenido** — editá `scripts/build-demo-pptx.js`, regenerá, importá:
+
+```bash
+# 1. Editá scripts/build-demo-pptx.js con tu contenido
+# 2. Generá el PPTX:
+node scripts/build-demo-pptx.js
+# 3. Importá:
+node scripts/pptx-to-deck.js mi-test.pptx mi-test-deck \
+  --map "1:cover,2:scripture,3:doctrine,4:reflection,5:prayer,6:summary,7:closing"
+# 4. Listo. mi-test-deck.html es standalone.
+```
+
+**8. Crear un deck desde cero sin scaffold** — sí, podés. Los decks son HTML con un mínimo:
+- DOCTYPE + `<html class="look-X shape-Y">`
+- `<link>` a `_looks/<X>.css`, `_shapes/<Y>.css`, `_prints.css`
+- Inline `<style>` con los tokens + el framework
+- `.stage > .slide.is-active` para las slides
+- `<script>` con el nav (← →, Home/End)
+
+Mirá `01-cover.html` o `demo-deck.html` como referencia. No hay nada sagrado — son HTML.
+
 ## Architecture
 
 ```
