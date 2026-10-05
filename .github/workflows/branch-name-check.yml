@@ -1,0 +1,42 @@
+name: Branch name convention
+
+# Enforces that every PR into this repo comes from a branch whose name
+# contains an issue number in the form #NNN (e.g. feat/#123-add-foo).
+# Pattern: /^.*#\d+.*$/  (RE2; same shape as the repo ruleset)
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check-branch-name:
+    name: Head branch must contain #NNN
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify head branch name
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${HEAD_REF}" ]]; then
+            err="::error::Could not determine head_ref (expected on pull_request events)."
+            echo "${err}"
+            exit 1
+          fi
+
+          # Mirror of the ruleset pattern: ^.*#\d+.*$
+          if [[ ! "${HEAD_REF}" =~ ^.*#[0-9]+.*$ ]]; then
+            err1="::error::Branch name '${HEAD_REF}' must contain an issue number like #123 (pattern: ^.*#\d+.*$)."
+            err2a="::error::Rename the branch (e.g. 'feat/#42-short-desc'),"
+            err2b="::error::then update the PR."
+            echo "${err1}"
+            echo "${err2a}"
+            echo "${err2b}"
+            exit 1
+          fi
+
+          echo "Branch '${HEAD_REF}' matches the convention."
