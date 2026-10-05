@@ -10,7 +10,10 @@
     parseSidecar,
     emptySidecar,
     computeStageScale,
-    createBus
+    createBus,
+    SHAPE_DIMENSIONS,
+    extractShape,
+    shapeDimensions
   } = window;
 
   // ── Deck manifest ──────────────────────────────────────────────────
@@ -116,6 +119,7 @@
       slides: [],          // Array<HTMLElement>
       notes: [],           // Array<string>
       index: 0,
+      shape: 'landscape-16-9', // v0.1.1: deck-declared shape
       loaded: false
     };
 
@@ -131,6 +135,10 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const html = await res.text();
         const { styles, slides: rawSlides } = parseDeckHtml(html);
+
+        // v0.1.1: read the deck's declared shape from its <html> class.
+        // Defaults to landscape-16-9 if absent (backwards compat).
+        state.shape = extractShape(html);
 
         // Inject styles (deck-local) into a hidden host.
         els.deckStyles.innerHTML = '';
@@ -227,7 +235,8 @@
       const wrap = els.stageWrap;
       const w = wrap.clientWidth;
       const h = wrap.clientHeight;
-      els.stage.style.setProperty('--scale', String(computeStageScale(w, h)));
+      const [cw, ch] = shapeDimensions(state.shape);
+      els.stage.style.setProperty('--scale', String(computeStageScale(w, h, cw, ch)));
     }
     window.addEventListener('resize', fitStage);
 
@@ -356,6 +365,7 @@
     let notes = [];
     let total = 0;
     let index = 0;
+    let shape = 'landscape-16-9'; // v0.1.1: deck-declared shape
     let startedAt = Date.now();
     let slideStart = Date.now();
 
@@ -376,6 +386,9 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const html = await res.text();
         const { styles, slides: rawSlides } = parseDeckHtml(html);
+
+        // v0.1.1: read the deck's declared shape from its <html> class.
+        shape = extractShape(html);
 
         els.deckStyles.innerHTML = '';
         for (const css of styles) {
@@ -424,7 +437,8 @@
 
     function fitPreview(stageEl, previewEl) {
       const r = previewEl.getBoundingClientRect();
-      stageEl.style.setProperty('--scale', String(computeStageScale(r.width, r.height)));
+      const [cw, ch] = shapeDimensions(shape);
+      stageEl.style.setProperty('--scale', String(computeStageScale(r.width, r.height, cw, ch)));
     }
 
     function render() {
