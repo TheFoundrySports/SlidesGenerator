@@ -28,8 +28,8 @@ test('bad deck: flags every P0 violation', () => {
   const byRule = Object.fromEntries(result.issues.map((i) => [i.rule, i]));
 
   // P0 issues that must be flagged
-  assert.ok(byRule['canvas'],                'canvas P0 should fire (1280×720)');
-  assert.equal(byRule['canvas'].severity, 'P0');
+  assert.ok(byRule['shape-dimensions'],     'shape-dimensions P0 should fire (1280x720 vs landscape-16-9 default)');
+  assert.equal(byRule['shape-dimensions'].severity, 'P0');
 
   assert.ok(byRule['sans-serif-display'],    'sans-serif display P0 should fire (Inter)');
   assert.equal(byRule['sans-serif-display'].severity, 'P0');
@@ -56,10 +56,14 @@ test('bad deck: flags every P0 violation', () => {
 });
 
 // ── Canonical rules ─────────────────────────────────────────────────
-test('canvas: 1920×1080 passes, anything else fails', () => {
-  const bad = `<style>.stage { width: 1024px; height: 768px; }</style><div class="stage"><section class="slide" data-screen-label="x"></section></div><div class="counter"></div>`;
-  const result = lintHtml('bad.html', bad);
-  assert.ok(result.issues.some((i) => i.rule === 'canvas'));
+test('shape-dimensions: stage matches declared shape; mismatch fires P0', () => {
+  const ok1920 = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  const okPortrait = `<style>.stage{width:1440px;height:1920px}</style><html class="look-monastic shape-portrait-3-4"><div class="stage"><section class="slide" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  const bad = `<style>.stage{width:1024px;height:768px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  assert.equal(lintHtml('ok.html', ok1920).issues.filter((i) => i.rule === 'shape-dimensions').length, 0);
+  assert.equal(lintHtml('ok.html', okPortrait).issues.filter((i) => i.rule === 'shape-dimensions').length, 0);
+  const badResult = lintHtml('bad.html', bad);
+  assert.ok(badResult.issues.some((i) => i.rule === 'shape-dimensions'));
 });
 
 test('counter: presence is checked', () => {
@@ -131,4 +135,68 @@ test('image: lazy + decode required', () => {
   const r = lintHtml('bad.html', bad);
   assert.ok(r.issues.some((i) => i.rule === 'image-lazy'));
   assert.ok(r.issues.some((i) => i.rule === 'image-decode'));
+});
+
+// ── v0.1.1 rules: look + shape axes ─────────────────────────────────
+test('look-valid: invalid look name fires P1', () => {
+  const bad = `<style>.stage{width:1920px;height:1080px}</style><html class="look-neon shape-landscape-16-9"><div class="stage"><section class="slide" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  const result = lintHtml('bad.html', bad);
+  const issue = result.issues.find((i) => i.rule === 'look-valid');
+  assert.ok(issue);
+  assert.equal(issue.severity, 'P1');
+});
+
+test('shape-valid: invalid shape name fires P1', () => {
+  const bad = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-widescreen"><div class="stage"><section class="slide" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  const result = lintHtml('bad.html', bad);
+  const issue = result.issues.find((i) => i.rule === 'shape-valid');
+  assert.ok(issue);
+  assert.equal(issue.severity, 'P1');
+});
+
+test('look + shape: missing defaults to monastic + landscape-16-9', () => {
+  const html = `<style>.stage{width:1920px;height:1080px}</style><div class="stage"><section class="slide" data-screen-label="x"></section></div><div class="counter"></div>`;
+  const result = lintHtml('x.html', html);
+  assert.equal(result.issues.filter((i) => i.rule === 'look-valid' || i.rule === 'shape-valid' || i.rule === 'shape-dimensions').length, 0);
+});
+
+test('combination: invalid (archetype × look) fires P1', () => {
+  // Summary + festive is not in the matrix.
+  const bad = `<style>.stage{width:1920px;height:1080px}</style><html class="look-festive shape-landscape-16-9"><div class="stage"><section class="slide slide--summary" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  const result = lintHtml('bad.html', bad);
+  const issue = result.issues.find((i) => i.rule === 'combination');
+  assert.ok(issue);
+  assert.equal(issue.severity, 'P1');
+  assert.match(issue.message, /summary.*festive/);
+});
+
+test('combination: valid pair passes', () => {
+  const ok = `<style>.stage{width:1920px;height:1080px}</style><html class="look-festive shape-landscape-16-9"><div class="stage"><section class="slide slide--cover" data-screen-label="x"></section></div></html><div class="counter"></div>`;
+  const result = lintHtml('ok.html', ok);
+  assert.equal(result.issues.filter((i) => i.rule === 'combination').length, 0);
+});
+
+test('look-budget: festive max 2 per deck', () => {
+  const ok = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide slide--cover" data-screen-label="a"></section><section class="slide slide--prayer" data-screen-label="b"></section></div></html><div class="counter"></div>`;
+  // 2 festive slides, budget = 2: OK (per-slide override).
+  const ok2 = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide slide--cover look-festive" data-screen-label="a"></section><section class="slide slide--prayer look-festive" data-screen-label="b"></section></div></html><div class="counter"></div>`;
+  const bad = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide slide--cover look-festive" data-screen-label="a"></section><section class="slide slide--prayer look-festive" data-screen-label="b"></section><section class="slide slide--closing look-festive" data-screen-label="c"></section></div></html><div class="counter"></div>`;
+  assert.equal(lintHtml('ok.html', ok).issues.filter((i) => i.rule === 'look-budget').length, 0);
+  assert.equal(lintHtml('ok.html', ok2).issues.filter((i) => i.rule === 'look-budget').length, 0);
+  const r = lintHtml('bad.html', bad);
+  assert.ok(r.issues.some((i) => i.rule === 'look-budget'));
+});
+
+test('look-budget: typographic max 1 per deck', () => {
+  const bad = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide slide--scripture look-typographic" data-screen-label="a"></section><section class="slide slide--reflection look-typographic" data-screen-label="b"></section></div></html><div class="counter"></div>`;
+  const r = lintHtml('bad.html', bad);
+  assert.ok(r.issues.some((i) => i.rule === 'look-budget'));
+});
+
+test('per-slide look override: deck default applies when slide has no class', () => {
+  // Deck default monastic, all slides count as monastic. Festive slides override.
+  const html = `<style>.stage{width:1920px;height:1080px}</style><html class="look-monastic shape-landscape-16-9"><div class="stage"><section class="slide slide--cover" data-screen-label="a"></section><section class="slide slide--prayer" data-screen-label="b"></section><section class="slide slide--closing look-festive" data-screen-label="c"></section></div></html><div class="counter"></div>`;
+  const result = lintHtml('x.html', html);
+  // No budget issue (1 festive ≤ 2). No combination issue.
+  assert.equal(result.issues.filter((i) => i.rule === 'look-budget' || i.rule === 'combination').length, 0);
 });

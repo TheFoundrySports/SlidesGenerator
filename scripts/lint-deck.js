@@ -10,8 +10,8 @@
 //   2 = invocation error
 //
 // Severity model:
-//   P0 = blocker, must fix before ship (canvas, motif budget, sans-serif display, emoji, raw hex outside tokens)
-//   P1 = warning, fix when convenient   (counter, screen-label, script count, image rules on decorative content)
+//   P0 = blocker, must fix before ship (canvas, motif budget, sans-serif display, emoji, raw hex outside tokens, shape-dimensions)
+//   P1 = warning, fix when convenient   (counter HUD, screen-label, script count, image rules, look/shape validity, combinations, budgets)
 //   P2 = info, optional polish          (transition duration outside canonical)
 
 'use strict';
@@ -27,6 +27,30 @@ const ALLOWED_SVG_PER_SLIDE = 2;
 const MAX_SLIDES = 40;
 const CANONICAL_TRANSITION_MS = 350;
 const ALLOWED_EMOJI = new Set(['✝']);
+
+// ── v0.1.1 axes: look + shape ────────────────────────────────────────
+const VALID_LOOKS = new Set(['monastic', 'festive', 'typographic']);
+const VALID_SHAPES = new Set(['landscape-16-9', 'portrait-3-4', 'square-1-1', 'ultrawide-21-9']);
+const SHAPE_DIMENSIONS = {
+  'landscape-16-9': [1920, 1080],
+  'portrait-3-4':   [1440, 1920],
+  'square-1-1':     [1440, 1440],
+  'ultrawide-21-9': [2520, 1080]
+};
+const LOOK_BUDGETS = {
+  'festive':      2,
+  'typographic':  1
+};
+const VALID_COMBINATIONS = {
+  cover:       ['monastic', 'festive'],
+  scripture:   ['monastic', 'typographic'],
+  doctrine:    ['monastic'],
+  reflection:  ['monastic', 'typographic'],
+  prayer:      ['monastic', 'festive'],
+  summary:     ['monastic'],
+  divider:     ['monastic', 'festive'],
+  closing:     ['monastic', 'festive']
+};
 
 // ── Helpers ─────────────────────────────────────────────────────────
 function listHtmlFiles(target) {
@@ -44,30 +68,41 @@ function listHtmlFiles(target) {
   return out;
 }
 
-// Split a deck HTML into per-slide chunks so per-slide checks work
-// without a real DOM parser.
 function splitSections(html) {
   return html.match(/<section\b[^>]*>[\s\S]*?<\/section>/g) || [];
 }
 
-function countMotifsPerSection(html) {
-  const sections = splitSections(html);
-  return sections.map((s, i) => ({
-    index: i + 1,
-    svg: (s.match(/<svg\b/g) || []).length
-  }));
+function extractDeclared(html) {
+  const htmlTagMatch = html.match(/<html\b([^>]*)>/);
+  const attrs = htmlTagMatch ? htmlTagMatch[1] : '';
+  const look = (attrs.match(/\blook-([\w-]+)\b/) || [])[1] || 'monastic';
+  const shape = (attrs.match(/\bshape-([\w-]+)\b/) || [])[1] || 'landscape-16-9';
+  return { look, shape };
+}
+
+function effectiveLook(slideHTML, defaultLook) {
+  const m = slideHTML.match(/\blook-([\w-]+)\b/);
+  return m ? m[1] : defaultLook;
+}
+
+function archetypeOf(slideHTML) {
+  const m = slideHTML.match(/\bslide--(\w+)/);
+  return m ? m[1] : null;
 }
 
 // ── Lint checks ─────────────────────────────────────────────────────
 function lintHtml(file, html) {
   const issues = [];
+  const slides = splitSections(html);
+  const declared = extractDeclared(html);
 
-  // 1. Canvas — .stage with 1920×1080 px.
+  // 1. Canvas — .stage with explicit dimensions (any valid shape).
   const stageMatch = html.match(/\.stage\s*\{[^}]*width:\s*(\d+)px[^}]*height:\s*(\d+)px/);
   if (!stageMatch) {
-    issues.push({ rule: 'canvas', severity: 'P0', message: '.stage with explicit 1920×1080 dimensions not found' });
+    issues.push({ rule: 'canvas', severity: 'P0', message: '.stage with explicit pixel dimensions not found' });
   } else if (stageMatch[1] !== '1920' || stageMatch[2] !== '1080') {
-    issues.push({ rule: 'canvas', severity: 'P0', message: `Stage is ${stageMatch[1]}×${stageMatch[2]}; must be 1920×1080` });
+    // OK if matches one of the declared shapes (caught by shape-dimensions below).
+    // Otherwise P0.
   }
 
   // 2. Counter HUD present.
@@ -76,7 +111,6 @@ function lintHtml(file, html) {
   }
 
   // 3. data-screen-label on every slide.
-  const slides = splitSections(html);
   for (let i = 0; i < slides.length; i++) {
     if (!/\bdata-screen-label=/.test(slides[i])) {
       issues.push({ rule: 'screen-label', severity: 'P1', message: `Slide #${i + 1} is missing data-screen-label` });
@@ -89,9 +123,6 @@ function lintHtml(file, html) {
   }
 
   // 5. Sans-serif display fonts forbidden as primary.
-  // The first token in the comma-separated font-family list is the primary.
-  // If it's a banned font, the rule fires. Banned fonts as fallbacks (after a
-  // non-banned primary) are tolerated.
   const fontDecls = [...html.matchAll(/font-family\s*:\s*([^;}]+)/g)].map((m) => m[1]);
   for (const decl of fontDecls) {
     const firstToken = decl.split(',')[0].trim().replace(/^["']|["']$/g, '').trim();
@@ -104,9 +135,10 @@ function lintHtml(file, html) {
   }
 
   // 6. ≤ALLOWED_SVG_PER_SLIDE motifs per slide.
-  for (const { index, svg } of countMotifsPerSection(html)) {
+  for (const [i, s] of slides.entries()) {
+    const svg = (s.match(/<svg\b/g) || []).length;
     if (svg > ALLOWED_SVG_PER_SLIDE) {
-      issues.push({ rule: 'motif-budget', severity: 'P0', message: `Slide #${index} has ${svg} SVG motifs; max ${ALLOWED_SVG_PER_SLIDE}` });
+      issues.push({ rule: 'motif-budget', severity: 'P0', message: `Slide #${i + 1} has ${svg} SVG motifs; max ${ALLOWED_SVG_PER_SLIDE}` });
     }
   }
 
@@ -154,6 +186,46 @@ function lintHtml(file, html) {
     const dur = decl.match(/(\d+)ms/);
     if (dur && dur[1] !== String(CANONICAL_TRANSITION_MS)) {
       issues.push({ rule: 'animation-duration', severity: 'P2', message: `Transition duration ${dur[1]}ms; canonical is ${CANONICAL_TRANSITION_MS}ms` });
+    }
+  }
+
+  // 12. v0.1.1 — declared look + shape are valid names.
+  if (!VALID_LOOKS.has(declared.look)) {
+    issues.push({ rule: 'look-valid', severity: 'P1', message: `look "${declared.look}" is not in the valid set: ${[...VALID_LOOKS].join(', ')}` });
+  }
+  if (!VALID_SHAPES.has(declared.shape)) {
+    issues.push({ rule: 'shape-valid', severity: 'P1', message: `shape "${declared.shape}" is not in the valid set: ${[...VALID_SHAPES].join(', ')}` });
+  }
+
+  // 13. Stage dimensions match declared shape (P0).
+  const expected = SHAPE_DIMENSIONS[declared.shape];
+  if (stageMatch && expected) {
+    const w = parseInt(stageMatch[1], 10);
+    const h = parseInt(stageMatch[2], 10);
+    if (w !== expected[0] || h !== expected[1]) {
+      issues.push({ rule: 'shape-dimensions', severity: 'P0', message: `stage is ${w}×${h}; declared shape "${declared.shape}" requires ${expected[0]}×${expected[1]}` });
+    }
+  }
+
+  // 14. v0.1.1 — combination valid per slide (archetype × look).
+  for (let i = 0; i < slides.length; i++) {
+    const look = effectiveLook(slides[i], declared.look);
+    const arch = archetypeOf(slides[i]);
+    if (arch && VALID_COMBINATIONS[arch] && !VALID_COMBINATIONS[arch].includes(look)) {
+      issues.push({ rule: 'combination', severity: 'P1', message: `Slide #${i + 1} (${arch}) does not pair with look "${look}"; valid: ${VALID_COMBINATIONS[arch].join(', ')}` });
+    }
+  }
+
+  // 15. v0.1.1 — look budget per deck (effective look per slide).
+  const lookCounts = {};
+  for (let i = 0; i < slides.length; i++) {
+    const look = effectiveLook(slides[i], declared.look);
+    lookCounts[look] = (lookCounts[look] || 0) + 1;
+  }
+  for (const [look, count] of Object.entries(lookCounts)) {
+    const budget = LOOK_BUDGETS[look];
+    if (budget && count > budget) {
+      issues.push({ rule: 'look-budget', severity: 'P1', message: `look "${look}" allows max ${budget} per deck; this deck has ${count}` });
     }
   }
 
