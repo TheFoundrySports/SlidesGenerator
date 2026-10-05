@@ -21,4 +21,8 @@ Dios_Padre.pptx
 slides/img/slide-*.png
 slides/img/imported/
 
+# User-created decks. Anything you import via the PPTX importer (or
+# hand-write) goes in user-decks/. Never pushed to the remote.
+user-decks/
+
 # Keep: slides/img/cleaned/*.png (actual deck content)
