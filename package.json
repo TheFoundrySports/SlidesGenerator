@@ -1,31 +1,44 @@
 {
   "name": "slideschurch",
-  "version": "0.1.0",
-  "description": "Catechetical HTML slide decks with a presenter app and a deterministic slide-generation system. See DESIGN.md and the Presenter + Slide-Craft sections of README.md.",
-  "main": "presenter-shared.js",
-  "directories": {
-    "test": "tests"
-  },
+  "version": "0.3.0",
+  "private": true,
+  "description": "Deck-as-data slide engine. Decks are deck.json + brief.md; HTML is generated from pluggable design packs (designs/*).",
+  "type": "module",
+  "engines": { "node": ">=20" },
   "scripts": {
-    "test": "node --test",
-    "lint": "node scripts/lint-deck.js",
-    "pptx-to-deck": "node scripts/pptx-to-deck.js"
+    "dev": "vite",
+    "designs": "tsx cli/designs.ts",
+    "new": "tsx cli/new.ts",
+    "new:design": "tsx cli/new-design.ts",
+    "validate": "tsx cli/validate.ts",
+    "build": "tsx cli/build.ts",
+    "lint": "tsx cli/validate.ts --all",
+    "schemas": "tsx cli/schemas.ts",
+    "export:pptx": "tsx cli/export-pptx.ts",
+    "import:pptx": "tsx cli/import-pptx.ts",
+    "build:presenter": "vite build",
+    "serve": "tsx cli/serve.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "catechism",
-    "slides",
-    "liturgical",
-    "presenter",
-    "html"
-  ],
+  "keywords": ["slides", "presentation", "deck", "design-system"],
   "author": "Francisco J. Seva",
   "license": "MIT",
-  "type": "commonjs",
-  "engines": {
-    "node": ">=18"
-  },
   "dependencies": {
     "jszip": "^3.10.1",
-    "pptxgenjs": "^4.0.1"
+    "pptxgenjs": "^4.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vite": "^7.0.0",
+    "vitest": "^3.0.0"
   }
 }

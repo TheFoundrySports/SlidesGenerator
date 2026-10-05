@@ -1,0 +1,429 @@
+/* ── Catechism palette — aligned with DESIGN.md ─────────────────── */
+  :root {
+    --p-bg: #f2e8d5;
+    --p-surface: oklch(96% 0.018 80);
+    --p-fg: oklch(28% 0.085 25);
+    --p-muted: oklch(48% 0.045 35);
+    --p-border: oklch(82% 0.035 75);
+    --p-accent: oklch(34% 0.095 25);
+    --p-gold: oklch(60% 0.062 75);
+
+    --p-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --p-font-body: "EB Garamond", Georgia, serif;
+    --p-font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+    --p-chrome-h: 56px;
+    --p-notes-w: clamp(260px, 30vw, 380px);
+    --shape-ratio: 16 / 9;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+  @supports (height: 100dvh) { html, body { height: 100dvh; } }
+  body {
+    background: var(--p-bg);
+    color: var(--p-fg);
+    font-family: var(--p-font-body);
+    font-size: 15px;
+    line-height: 1.45;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(var(--p-chrome-h), auto) minmax(0, 1fr) auto;
+  }
+  button, select {
+    font: inherit;
+    color: var(--p-fg);
+    background: transparent;
+    border: 1px solid var(--p-border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-family: var(--p-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  button:hover, select:hover { border-color: var(--p-accent); }
+  kbd {
+    font-family: var(--p-font-mono);
+    font-size: 11px;
+    padding: 1px 6px;
+    border: 1px solid var(--p-border);
+    border-radius: 3px;
+    background: var(--p-surface);
+    color: var(--p-muted);
+  }
+
+  /* ── Top bar ──────────────────────────────────────────────────── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    background: var(--p-surface);
+    border-bottom: 1px solid var(--p-border);
+    z-index: 50;
+  }
+  .topbar .title {
+    min-width: 0;
+    font-family: var(--p-font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar .title small {
+    font-family: var(--p-font-mono);
+    font-size: 11px;
+    color: var(--p-muted);
+    margin-left: 8px;
+    letter-spacing: 0.10em;
+  }
+  .topbar select { min-width: 0; width: clamp(140px, 24vw, 280px); }
+  .topbar .spacer { flex: 0 0 auto; }
+  .topbar .badge {
+    font-family: var(--p-font-mono);
+    font-size: 11px;
+    color: var(--p-muted);
+    letter-spacing: 0.10em;
+  }
+  .topbar .actions { display: flex; gap: 8px; align-items: center; }
+
+  /* ── Main area ─────────────────────────────────────────────────── */
+  main {
+    position: relative;
+    overflow: hidden;
+    background: var(--p-bg);
+    background-image: radial-gradient(ellipse at center, var(--p-bg) 0%, color-mix(in oklab, var(--p-bg), var(--p-fg) 12%) 100%);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* When notes panel is open (split or drawer), compress the stage column. */
+  body.notes-open main {
+    grid-template-columns: minmax(0, 1fr) var(--p-notes-w);
+  }
+
+  /* ── Stage: scaled 1920×1080 canvas ───────────────────────────── */
+  .stage-wrap {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+  }
+  /* Centered with translate (not grid alignment): an oversized stage would otherwise align to the start. */
+  .stage {
+    width: var(--stage-w, 1920px);
+    height: var(--stage-h, 1080px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(var(--scale, 1));
+    transform-origin: center center;
+    background: var(--p-bg);
+  }
+
+  /* Slide primitive — only what's needed by the wrapper. Each deck
+     re-injects its own CSS for typography and layout. */
+  .stage { overflow: hidden; }
+  .stage .slide:not(.is-active) { display: none; }
+
+  /* ── Notes pane ─────────────────────────────────────────────────── */
+  .notes {
+    background: var(--p-surface);
+    border-left: 1px solid var(--p-border);
+    display: none;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+  }
+  body.notes-open .notes { display: flex; }
+  .notes header { gap: 12px; letter-spacing: 0.1em; }
+  .notes header > span:first-child { white-space: nowrap; }
+  .notes header .badge { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .notes header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--p-border);
+    font-family: var(--p-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--p-muted);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .notes .body {
+    padding: 16px 18px;
+    overflow: auto;
+    font-family: var(--p-font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--p-fg);
+  }
+  .notes .body.empty {
+    color: var(--p-muted);
+    font-style: italic;
+  }
+  .notes [hidden] { display: none !important; }
+  /* Rendered markdown: block elements carry their own spacing, so plain-text wrapping is off. */
+  .notes .body.rendered, body.popup .notes-popup.rendered { white-space: normal; }
+  .notes .body p, .notes .body ul, .notes .body ol, .notes .body blockquote,
+  body.popup .notes-popup p, body.popup .notes-popup ul, body.popup .notes-popup ol, body.popup .notes-popup blockquote { margin: 0 0 0.7em; }
+  .notes .body > :last-child, body.popup .notes-popup > :last-child { margin-bottom: 0; }
+  .notes .body ul, .notes .body ol, body.popup .notes-popup ul, body.popup .notes-popup ol { padding-left: 1.3em; }
+  .notes .body blockquote, body.popup .notes-popup blockquote {
+    padding-left: 12px;
+    border-left: 2px solid var(--p-gold);
+    color: var(--p-muted);
+    font-style: italic;
+  }
+  .notes .body a, body.popup .notes-popup a { color: var(--p-accent); }
+
+  .notes-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--p-border);
+  }
+  .notes-toolbar button { padding: 4px 10px; font-size: 11px; }
+  .notes-status { margin-left: auto; border-color: transparent; background: transparent; color: var(--p-muted); }
+  .notes-status[data-state="error"] { color: var(--p-accent); border-color: var(--p-accent); }
+  .notes-editor {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    resize: none;
+    padding: 16px 18px;
+    border: 0;
+    outline: none;
+    background: color-mix(in oklab, var(--p-surface), var(--p-bg) 35%);
+    color: var(--p-fg);
+    font-family: var(--p-font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .notes-editor:focus-visible { box-shadow: inset 0 0 0 2px var(--p-gold); }
+
+  .notes .body code,
+  .notes .body pre {
+    font-family: var(--p-font-mono);
+    background: color-mix(in oklab, var(--p-bg), var(--p-fg) 6%);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
+  /* ── Help overlay ──────────────────────────────────────────────── */
+  .help-overlay {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklab, var(--p-bg), transparent 12%);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  body.help-open .help-overlay { display: flex; }
+  .help-card {
+    background: var(--p-surface);
+    border: 1px solid var(--p-border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    max-width: 480px;
+    box-shadow: 0 18px 60px color-mix(in oklab, var(--p-fg), transparent 80%);
+  }
+  .help-card h2 {
+    margin: 0 0 12px;
+    font-family: var(--p-font-display);
+    font-weight: 600;
+    font-size: 22px;
+  }
+  .help-card dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    margin: 0;
+    font-size: 14px;
+  }
+  .help-card dt { font-family: var(--p-font-mono); color: var(--p-muted); }
+
+  /* ── Popup mode (presenter window) ─────────────────────────────── */
+  body.popup {
+    grid-template-rows: 1fr;
+    background: var(--p-bg);
+  }
+  body.popup .topbar,
+  body.popup .stage-wrap,
+  body.popup .notes,
+  body.popup .touch-nav { display: none; }
+  body.popup main {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 14px;
+    overflow: auto;
+  }
+  body.popup .popup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    height: 100%;
+  }
+  body.popup .col {
+    background: var(--p-surface);
+    border: 1px solid var(--p-border);
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  body.popup .col h3 {
+    margin: 0;
+    font-family: var(--p-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--p-muted);
+    text-transform: uppercase;
+  }
+  body.popup .preview {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background: var(--p-bg);
+    border-radius: 3px;
+  }
+  body.popup .preview .stage {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(var(--scale, 1));
+  }
+  body.popup .notes-popup {
+    grid-column: 1 / -1;
+    background: var(--p-surface);
+    border: 1px solid var(--p-border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    white-space: pre-wrap;
+    max-height: 40vh;
+    overflow: auto;
+    font-family: var(--p-font-body);
+    font-size: 15px;
+  }
+  body.popup .notes-popup.empty { color: var(--p-muted); font-style: italic; }
+  body.popup .timer {
+    font-family: var(--p-font-mono);
+    font-size: 12px;
+    color: var(--p-muted);
+    text-align: right;
+    letter-spacing: 0.10em;
+  }
+
+  /* Hidden container that holds the deck's own <style> blocks. We keep
+     them inline so the deck renders as authored. The presenter never
+     executes the deck's <script>. */
+  #deck-styles { display: none; }
+
+  .preview-end {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--p-muted);
+    font-family: var(--p-font-mono);
+    font-size: 48px;
+  }
+
+  button { white-space: nowrap; }
+
+  /* Touch navigation bar: hidden on desktop. */
+  .touch-nav { display: none; }
+
+  /* ── Responsive ─────────────────────────────────────────────────── */
+
+  /* Touch devices: comfortable hit targets. */
+  @media (pointer: coarse) {
+    button, select { min-height: 40px; }
+    #popup-open { display: none; } /* a second window makes no sense on touch devices */
+  }
+
+  /* Phones and narrow windows: compact one-row toolbar. */
+  @media (max-width: 760px) {
+    body { font-size: 14px; }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: "deck actions";
+      gap: 8px;
+      padding: 8px 12px;
+    }
+    .topbar select { grid-area: deck; width: 100%; max-width: none; }
+    .topbar .title { display: none; }
+    .topbar .actions { grid-area: actions; }
+    #popup-open { display: none; }
+
+    .help-card { width: calc(100% - 32px); max-height: 90dvh; overflow: auto; padding: 18px 18px; }
+    .help-card dl { grid-template-columns: 1fr; gap: 2px 0; }
+    .help-card dd { margin: 0 0 8px; }
+  }
+
+  /* Phones and portrait tablets: stage on top, notes below, big prev/next bar. */
+  @media (max-width: 760px), (max-width: 1024px) and (orientation: portrait) {
+    /* Stage keeps the deck's aspect ratio at full width; notes use the remaining height. */
+    body:not(.popup) main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .stage-wrap {
+      flex: 0 0 auto;
+      width: 100%;
+      aspect-ratio: var(--shape-ratio);
+      max-height: 58dvh;
+    }
+    .notes {
+      flex: 1 1 0;
+      min-height: 0;
+      border-left: 0;
+      border-top: 1px solid var(--p-border);
+    }
+    .notes .body { font-size: 16px; }
+
+    body:not(.popup) .touch-nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      background: var(--p-surface);
+      border-top: 1px solid var(--p-border);
+    }
+    .touch-nav button { min-height: 44px; font-size: 14px; }
+    .touch-nav__counter {
+      font-family: var(--p-font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--p-muted);
+    }
+  }
+
+  /* Landscape phones: little vertical room, keep the chrome slim. */
+  @media (max-height: 480px) and (min-width: 761px) {
+    :root { --p-chrome-h: 44px; }
+    .topbar { padding: 0 10px; gap: 8px; }
+    .topbar .title small { display: none; }
+  }
+
+  /* Presenter window (also used when it is opened narrow): stack the two previews. */
+  @media (max-width: 640px) {
+    body.popup main { padding: 10px; overflow: auto; }
+    body.popup .popup-grid { grid-template-columns: 1fr; height: auto; }
+    body.popup .preview { flex: none; aspect-ratio: var(--shape-ratio); }
+  }

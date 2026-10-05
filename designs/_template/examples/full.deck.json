@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../schemas/__ID__.schema.json",
+  "id": "full",
+  "title": "Every layout",
+  "lang": "en",
+  "design": "__ID__",
+  "slides": [
+    { "id": "intro", "layout": "title", "label": "Title", "eyebrow": "EYEBROW", "title": "A title", "subtitle": "A subtitle" },
+    { "id": "idea", "layout": "statement", "label": "Statement", "text": "One idea, said plainly.", "source": "Source" }
+  ]
+}

@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`render > layout markup (snapshots) > closing 1`] = `
+"<section class="slide slide--closing" data-layout="closing" data-slide-id="closing" data-screen-label="11 Closing" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift">
+<div class="closing"><div class="ornament ornament--lg" aria-hidden="true" data-motif="cross"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M50 16 L50 84 M28 38 L72 38"/></svg></div><p class="kicker">BENDICIÓN</p><p class="blessing">«El Señor os bendiga y os guarde;<br/>haga resplandecer su rostro sobre vosotros<br/>y os conceda su paz.»</p><p class="amen">Amén.</p></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > cover 1`] = `
+"<section class="slide slide--cover" data-layout="cover" data-slide-id="cover" data-screen-label="01 Cover" data-variant="festive" data-palette="ordinary" data-enter="fade-lift">
+<div class="cover"><p class="kicker">CURSO DE CATEQUESIS</p><p class="lead">Confirmación de Adultos</p><div class="ornament ornament--lg" aria-hidden="true" data-motif="cross"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M50 16 L50 84 M28 38 L72 38"/></svg></div><h1 class="title title--hero">Creo en Dios</h1><p class="subtitle">Padre todopoderoso</p><p class="citation">CEC 198-421</p><p class="invocation">En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > divider 1`] = `
+"<section class="slide slide--divider" data-layout="divider" data-slide-id="divider" data-screen-label="09 Divider" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift">
+<div class="divider"><div class="ornament ornament--lg" aria-hidden="true" data-motif="compass"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="50" cy="50" r="32" stroke-width="0.8"/><circle cx="50" cy="50" r="22" stroke-width="0.6"/><path d="M50 18 L55 50 L50 82 L45 50 Z"/><path d="M18 50 L50 45 L82 50 L50 55 Z"/><path d="M50 18 L50 82 M18 50 L82 50"/></svg></div><p class="kicker">SEGUNDA PARTE</p><h2 class="title title--medium">La Providencia</h2><hr class="rule"/><p class="subtitle">Dios sostiene y guía su creación</p></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > doctrine 1`] = `
+"<section class="slide slide--doctrine" data-layout="doctrine" data-slide-id="doctrine-points" data-screen-label="03 Doctrine · points" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift" data-steps>
+<div class="frame"><p class="kicker">LA CREACIÓN</p><h2 class="title">Dios Padre, Creador</h2><hr class="rule"/><div class="lead-text"><p>Profesamos un solo Dios porque se ha revelado como el único.</p></div><ol class="points points--roman"><li data-step=""><span class="points__marker">I.</span><span class="points__text">Creemos en un solo Dios, Padre, Hijo y Espíritu Santo.</span></li><li data-step=""><span class="points__marker">II.</span><span class="points__text">Este Dios único crea todas las cosas por su Verbo.</span></li><li data-step=""><span class="points__marker">III.</span><span class="points__text">La creación es obra de su amor y de su providencia.</span></li></ol><p class="citation">CEC 279 · SC 38</p></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > image-overlay 1`] = `
+"<section class="slide slide--image-overlay" data-layout="image-overlay" data-slide-id="plate-overlay" data-screen-label="10 Image overlay (core layout)" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift">
+<figure class="figure figure--background"><img src="assets/plate.svg" alt="Abstract circular plate with a cross" loading="lazy" decoding="async" style="object-fit:cover"/></figure><div class="overlay-panel stack"><h2 class="title">Image overlay</h2><div class="body"><p>A translucent panel over a full-bleed plate.</p></div></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > prayer 1`] = `
+"<section class="slide slide--prayer" data-layout="prayer" data-slide-id="prayer" data-screen-label="07 Padre Nuestro" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift">
+<div class="prayer-wrap"><h2 class="title">Padre Nuestro</h2><p class="prayer">Padre nuestro, que estás en el cielo,<br/>santificado sea tu Nombre;<br/>venga a nosotros tu reino;<br/>hágase tu voluntad en la tierra como en el cielo.<br/><br/>Danos hoy nuestro pan de cada día;<br/>perdona nuestras ofensas,<br/>como también nosotros perdonamos a los que nos ofenden;<br/>no nos dejes caer en tentación,<br/>y líbranos del mal.</p><p class="amen">Amén.</p></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > reflection 1`] = `
+"<section class="slide slide--reflection" data-layout="reflection" data-slide-id="reflection" data-screen-label="06 Reflection" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift">
+<div class="reflection-wrap"><div class="ornament ornament--sm" aria-hidden="true" data-motif="ichthys"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 50 Q40 22 72 50 L92 72"/><path d="M8 50 Q40 78 72 50 L92 28"/></svg></div><p class="kicker">REFLEXIÓN</p><hr class="rule"/><blockquote class="reflection">«Antes de que la luz fuera luz, ya eras Tú.»</blockquote><p class="citation">— Adaptado de una homilía de San Agustín</p></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > scripture 1`] = `
+"<section class="slide slide--scripture" data-layout="scripture" data-slide-id="scripture" data-screen-label="02 Scripture with image" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift">
+<div class="split split--right"><div class="frame frame--panel"><p class="reference">Génesis 1, 1</p><blockquote class="scripture">«En el principio creó Dios el cielo y la tierra.»</blockquote><p class="commentary">Dios crea por amor y sin necesidad.</p><p class="citation">Gn 1, 1 · CEC 279</p></div><figure class="figure figure--right plate" data-anim="slow-zoom"><img src="assets/plate.svg" alt="Abstract circular plate with a cross" loading="lazy" decoding="async" style="object-fit:cover"/></figure></div>
+</section>"
+`;
+
+exports[`render > layout markup (snapshots) > summary 1`] = `
+"<section class="slide slide--summary" data-layout="summary" data-slide-id="summary" data-screen-label="08 Summary" data-variant="monastic" data-palette="ordinary" data-enter="fade-lift" data-steps>
+<div class="frame"><p class="kicker">EN RESUMEN</p><h2 class="title">Lo que confesamos</h2><hr class="rule"/><ol class="points points--arabic"><li data-step=""><span class="points__marker">1.</span><span class="points__text">Dios Padre es el principio sin principio de todas las cosas.</span></li><li data-step=""><span class="points__marker">2.</span><span class="points__text">Crea por amor, no por necesidad.</span></li><li data-step=""><span class="points__marker">3.</span><span class="points__text">Su providencia sostiene lo creado hacia su plenitud.</span></li></ol><p class="citation">CEC 279-324</p></div>
+</section>"
+`;

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SlidesChurch Presenter</title>
+<link rel="stylesheet" href="./presenter.css">
+</head>
+<body>
+  <!-- MAIN MODE -->
+  <header class="topbar" id="topbar">
+    <select id="deck-select" aria-label="Deck"></select>
+    <div class="title">
+      <span id="deck-title">Cargando…</span>
+      <small id="slide-counter">— / —</small>
+    </div>
+    <div class="actions">
+      <button id="panel-toggle" type="button" aria-pressed="false" title="Alternar panel de notas (N)">Notas</button>
+      <button id="popup-open" type="button" title="Abrir ventana de presentador (W)">Presentador</button>
+      <button id="help-toggle" type="button" title="Ayuda (?)">?</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="stage-wrap">
+      <div class="stage" id="stage" aria-live="polite"></div>
+    </div>
+    <aside class="notes" id="notes" aria-label="Notas del presentador">
+      <header>
+        <span>Notas · slide <span id="notes-idx">—</span></span>
+        <span id="notes-label" class="badge">—</span>
+      </header>
+      <div class="notes-toolbar" id="notes-toolbar">
+        <button id="notes-edit" type="button" aria-pressed="false" title="Editar las notas de esta slide (E)" hidden>Editar</button>
+        <button id="notes-export" type="button" title="Descargar todas las notas como markdown">Exportar</button>
+        <button id="notes-status" type="button" class="notes-status" aria-live="polite" title="Estado del guardado" hidden></button>
+      </div>
+      <div class="body empty" id="notes-body">Sin notas todavía.</div>
+      <textarea class="notes-editor" id="notes-editor" aria-label="Notas de esta slide (markdown)" placeholder="Escribí las notas en markdown: **negrita**, *cursiva*, - listas, &gt; citas" spellcheck="true" hidden></textarea>
+    </aside>
+
+    <div class="help-overlay" id="help" role="dialog" aria-label="Atajos de teclado">
+      <div class="help-card">
+        <h2>Atajos</h2>
+        <dl>
+          <dt><kbd>→</kbd> <kbd>PgDn</kbd> <kbd>Espacio</kbd></dt><dd>Siguiente (o revela el siguiente punto)</dd>
+          <dt><kbd>←</kbd> <kbd>PgUp</kbd></dt><dd>Anterior</dd>
+          <dt><kbd>Inicio</kbd> <kbd>Fin</kbd></dt><dd>Primera / última</dd>
+          <dt><kbd>N</kbd></dt><dd>Alternar notas</dd>
+          <dt><kbd>E</kbd></dt><dd>Editar las notas (requiere <code>npm run serve</code>); <kbd>Esc</kbd> termina</dd>
+          <dt><kbd>W</kbd></dt><dd>Ventana presentador</dd>
+          <dt><kbd>F</kbd></dt><dd>Pantalla completa</dd>
+          <dt><kbd>?</kbd></dt><dd>Esta ayuda</dd>
+          <dt><kbd>Esc</kbd></dt><dd>Cerrar</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Popup-mode structure (used by the presenter window) -->
+    <div class="popup-grid" id="popup-grid" hidden>
+      <div class="col">
+        <h3>Actual · <span id="popup-cur-idx">—</span></h3>
+        <div class="preview" id="popup-cur-preview"><div class="stage" id="popup-cur-stage"></div></div>
+      </div>
+      <div class="col">
+        <h3>Siguiente · <span id="popup-next-idx">—</span></h3>
+        <div class="preview" id="popup-next-preview"><div class="stage" id="popup-next-stage"></div></div>
+      </div>
+      <div class="notes-popup empty" id="popup-notes">Sin notas todavía.</div>
+      <div class="timer" id="popup-timer">⏱ 00:00 · slide 00:00</div>
+    </div>
+  </main>
+
+  <!-- Touch navigation (visible on narrow screens only) -->
+  <nav class="touch-nav" id="touch-nav" aria-label="Navegación de diapositivas">
+    <button id="nav-prev" type="button" aria-label="Anterior">‹ Anterior</button>
+    <span id="nav-counter" class="touch-nav__counter" aria-live="polite">— / —</span>
+    <button id="nav-next" type="button" aria-label="Siguiente">Siguiente ›</button>
+  </nav>
+
+  <!-- Holds the loaded deck's slide-scope <style> blocks -->
+  <div id="deck-styles"></div>
+
+  <script type="module" src="./presenter.ts"></script>
+</body>
+</html>

@@ -8,21 +8,22 @@ Thumbs.db
 *.swp
 *.swo
 *~
+~$*
 
-# Node (defensive — project is plain HTML/JS)
+# Node
 node_modules/
 package-lock.json
+
+# Build output (regenerable: `npm run build -- --all`)
+dist/
 
 # Work artifacts (not part of the source tree)
 *.artifact.json
 
-# Source binaries (regenerable from the originals)
-Dios_Padre.pptx
-slides/img/slide-*.png
-slides/img/imported/
+# Source binaries and legacy raster work (regenerable from the originals)
+legacy/source-pptx/
+legacy/slides/img/slide-*.png
+legacy/slides/img/imported/
 
-# User-created decks. Anything you import via the PPTX importer (or
-# hand-write) goes in user-decks/. Never pushed to the remote.
+# Imported scratch decks (PPTX importer writes to decks/ by default; use --out-dir for scratch)
 user-decks/
-
-# Keep: slides/img/cleaned/*.png (actual deck content)

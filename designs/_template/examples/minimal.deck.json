@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../schemas/__ID__.schema.json",
+  "id": "minimal",
+  "title": "Minimal example",
+  "lang": "en",
+  "design": "__ID__",
+  "slides": [
+    { "id": "intro", "layout": "title", "label": "Intro", "title": "A title", "subtitle": "A subtitle" },
+    { "id": "idea", "layout": "statement", "label": "Idea", "text": "One idea, said plainly.", "source": "Source" }
+  ]
+}

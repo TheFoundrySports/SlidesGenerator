@@ -1,0 +1,12 @@
+/* Variant: typographic — the text is the visual. Budget: max 1 slide per deck.
+   Valid layouts: scripture, reflection. */
+.slide[data-variant="typographic"] .scripture,
+.slide[data-variant="typographic"] .reflection {
+  font-size: var(--text-3xl);
+  line-height: 1.15;
+}
+.slide[data-variant="typographic"] .title { font-size: var(--text-3xl); }
+.slide[data-variant="typographic"] .reference,
+.slide[data-variant="typographic"] .citation,
+.slide[data-variant="typographic"] .commentary { font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: var(--tracking-display); text-transform: none; }
+.slide[data-variant="typographic"] .ornament { color: var(--fg); }

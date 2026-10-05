@@ -1,0 +1,2681 @@
+{
+  "$id": "catechism-liturgical.schema.json",
+  "title": "Catechism Liturgical deck",
+  "description": "Parchment, single oxblood ink, serif throughout, sacred geometry. Catechesis, RCIA, retreats.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lang": {
+      "default": "es",
+      "type": "string",
+      "enum": [
+        "es"
+      ]
+    },
+    "design": {
+      "type": "string",
+      "const": "catechism-liturgical"
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "monastic",
+        "festive",
+        "typographic"
+      ]
+    },
+    "palette": {
+      "type": "string",
+      "enum": [
+        "ordinary",
+        "advent-lent",
+        "christmas-easter",
+        "pentecost",
+        "marian"
+      ]
+    },
+    "shape": {
+      "default": "landscape-16-9",
+      "type": "string",
+      "enum": [
+        "landscape-16-9",
+        "portrait-3-4",
+        "square-1-1",
+        "ultrawide-21-9"
+      ]
+    },
+    "meta": {
+      "default": {
+        "sources": []
+      },
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "sources": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "slides": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "text-image"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "minItems": 1,
+                "maxItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "Small uppercase line above the title",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "citation": {
+                "description": "Source line, e.g. a reference",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "images",
+              "body"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "image-text"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "minItems": 1,
+                "maxItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "Small uppercase line above the title",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "citation": {
+                "description": "Source line, e.g. a reference",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "images",
+              "body"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "image-overlay"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "minItems": 1,
+                "maxItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "Small uppercase line above the title",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "citation": {
+                "description": "Source line, e.g. a reference",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "images",
+              "title"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "image-full"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "minItems": 1,
+                "maxItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "caption": {
+                "type": "string"
+              },
+              "citation": {
+                "description": "Source line, e.g. a reference",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "images"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "free"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "blocks": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "text"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "box": {
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "size": {
+                      "default": 28,
+                      "description": "Font size in canvas pixels",
+                      "type": "number",
+                      "minimum": 10,
+                      "maximum": 240
+                    },
+                    "weight": {
+                      "type": "number",
+                      "minimum": 300,
+                      "maximum": 900
+                    },
+                    "italic": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "align": {
+                      "default": "left",
+                      "type": "string",
+                      "enum": [
+                        "left",
+                        "center",
+                        "right"
+                      ]
+                    },
+                    "family": {
+                      "default": "body",
+                      "type": "string",
+                      "enum": [
+                        "display",
+                        "body",
+                        "mono"
+                      ]
+                    },
+                    "color": {
+                      "default": "fg",
+                      "type": "string",
+                      "enum": [
+                        "fg",
+                        "muted",
+                        "accent"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "text",
+                    "box"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "cover"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "eyebrow": {
+                "description": "Mono line above (course name)",
+                "type": "string"
+              },
+              "lead": {
+                "description": "Italic line under the eyebrow (audience or series)",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "subtitle": {
+                "type": "string"
+              },
+              "reference": {
+                "description": "Mono source line, e.g. «CEC 422-682»",
+                "type": "string"
+              },
+              "invocation": {
+                "description": "Italic closing line at the foot, e.g. the Trinitarian formula",
+                "type": "string"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "title"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "scripture"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "reference": {
+                "type": "string",
+                "description": "Spanish citation, «Libro cap, vv» (e.g. «Mateo 16, 16»)"
+              },
+              "text": {
+                "type": "string",
+                "description": "The passage wrapped in «» quotes; \\n for verse breaks"
+              },
+              "commentary": {
+                "description": "One italic sentence of context",
+                "type": "string"
+              },
+              "citation": {
+                "description": "Footer reference line in mono, e.g. «CEC 422-424 · YOUCAT 72»",
+                "type": "string"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "reference",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "doctrine"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "Uppercase mono topic line",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "subtitle": {
+                "type": "string"
+              },
+              "lead": {
+                "description": "Short explanatory paragraph under the title",
+                "type": "string"
+              },
+              "quote": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "description": "Mono attribution line under the quote, e.g. «Ga 4, 4-5»",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "points": {
+                "description": "Up to 5 recommended (P1 above)",
+                "minItems": 1,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "term": {
+                      "description": "Bold lead-in label (e.g. «Sacerdote»). If any point has a term, the list renders as terms.",
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              },
+              "numbering": {
+                "default": "roman",
+                "type": "string",
+                "enum": [
+                  "roman",
+                  "arabic"
+                ]
+              },
+              "columns": {
+                "minItems": 2,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "heading": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              },
+              "closing": {
+                "description": "Italic closing statement under the points/columns",
+                "type": "string"
+              },
+              "citation": {
+                "description": "Footer reference line in mono, e.g. «CEC 422-424 · YOUCAT 72»",
+                "type": "string"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "title"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "reflection"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string",
+                "description": "The meditative sentence; wrap quotations in «»"
+              },
+              "attribution": {
+                "description": "Mono line under the text, e.g. «— San Agustín»",
+                "type": "string"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "prayer"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": {
+                "type": "string",
+                "description": "Name of the prayer"
+              },
+              "text": {
+                "type": "string",
+                "description": "Prayer body; \\n for line breaks, blank line for a stanza break"
+              },
+              "amen": {
+                "default": true,
+                "type": "boolean"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "title",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "summary"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "Usually «EN RESUMEN»",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "items": {
+                "minItems": 2,
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "term": {
+                      "description": "Bold lead-in label (e.g. «Sacerdote»). If any point has a term, the list renders as terms.",
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              },
+              "numbering": {
+                "default": "arabic",
+                "type": "string",
+                "enum": [
+                  "arabic",
+                  "roman"
+                ]
+              },
+              "citation": {
+                "description": "Footer reference line in mono, e.g. «CEC 422-424 · YOUCAT 72»",
+                "type": "string"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "title",
+              "items"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "divider"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "e.g. «PRIMERA PARTE»",
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "subtitle": {
+                "type": "string"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "title"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
+                "const": "closing"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string",
+                "description": "Blessing / exhortation; \\n for line breaks"
+              },
+              "reference": {
+                "description": "Mono source line, e.g. «1 Juan 1, 3»",
+                "type": "string"
+              },
+              "amen": {
+                "default": true,
+                "type": "boolean"
+              },
+              "motif": {
+                "description": "Optional ornament drawn from the design's motif library",
+                "type": "string",
+                "enum": [
+                  "cross",
+                  "compass",
+                  "trinity",
+                  "ichthys",
+                  "alpha-omega",
+                  "rule-and-dot",
+                  "dove",
+                  "chi-rho",
+                  "heart",
+                  "crown",
+                  "rays-up",
+                  "rays-down",
+                  "flame"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "design",
+    "slides"
+  ],
+  "additionalProperties": false
+}

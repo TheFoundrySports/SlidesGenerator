@@ -1,0 +1,98 @@
+/* Catechism Liturgical · base. Single ink on parchment, serif throughout. */
+.slide {
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  isolation: isolate; /* keeps the page frame (z-index: -1) behind the content but above the parchment */
+  --frame-inset: 32px;
+}
+/* Page frame: a hairline border on every slide. The festive variant replaces it with its double gold frame. */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: var(--frame-inset);
+  border: 1px solid var(--border);
+  z-index: -1;
+  pointer-events: none;
+}
+.slide:has(> .split) { --slide-pad-x: 96px; }
+
+/* Centered single-column wrappers used by every design layout. */
+.frame, .cover, .divider, .closing, .reflection-wrap, .prayer-wrap {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 20px; width: 100%; margin: auto; text-align: center;
+}
+.cover, .divider, .closing { gap: 28px; }
+.frame--panel { margin: 0; height: 100%; }
+
+/* Type */
+.title { font-family: var(--font-display); font-weight: 600; font-size: var(--text-2xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-display); color: var(--fg); text-align: center; margin: 0; }
+.title--long { font-size: var(--text-xl); }
+.title--medium { font-size: var(--text-xl); }
+.title--hero { font-size: var(--text-3xl); max-width: 20ch; }
+.kicker { font-family: var(--font-mono); font-size: var(--text-meta); font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); text-align: center; margin: 0; }
+.subtitle { font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); line-height: 1.3; color: var(--muted); text-align: center; margin: 0; max-width: 56ch; }
+.lead { font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--muted); margin: 0; }
+.citation, .reference { font-family: var(--font-mono); font-size: var(--text-meta); letter-spacing: 0.06em; color: var(--muted); text-align: center; margin: 0; font-variant-numeric: tabular-nums; }
+.reference { font-size: var(--text-sm); letter-spacing: 0.18em; text-transform: uppercase; }
+.rule { width: 160px; height: 0; border: 0; border-top: 1px solid var(--border); margin: 4px auto; }
+.invocation { position: absolute; left: 0; right: 0; bottom: 72px; margin: 0; text-align: center; font-family: var(--font-display); font-style: italic; font-size: var(--text-sm); color: var(--muted); }
+
+/* Ornaments (ink-gold strokes) */
+.ornament { color: var(--gold); flex: none; }
+.ornament--lg { width: 160px; height: 160px; }
+.ornament--sm { width: 64px; height: 64px; }
+.divider .ornament--lg { width: 200px; height: 200px; }
+
+/* Scripture / reflection / prayer / closing */
+.scripture, .reflection, .blessing { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 500; line-height: 1.25; letter-spacing: var(--tracking-display); max-width: 1500px; }
+.scripture { font-size: var(--text-xl); }
+.scripture--long { font-size: 44px; }
+.reflection { font-size: 64px; }
+.reflection--long { font-size: 48px; }
+.blessing { font-size: var(--text-xl); }
+.commentary { margin: 0; max-width: 1200px; font-style: italic; font-size: 30px; color: var(--muted); }
+.prayer { margin: 0; max-width: 46ch; font-size: var(--text-lg); line-height: 1.6; }
+.amen { margin: 0; font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--fg); }
+
+/* Doctrine / summary */
+.lead-text p { margin: 0 0 8px; font-size: 32px; line-height: 1.4; max-width: 1400px; }
+.quote-block { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 1400px; }
+.quote-block__text { margin: 0; font-style: italic; font-size: var(--text-lg); line-height: 1.35; }
+.closing-statement { margin: 0; font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); max-width: 1400px; }
+
+.points { list-style: none; padding: 0; margin: 0; width: 100%; max-width: 1480px; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.points li { display: grid; grid-template-columns: 96px 1fr; column-gap: 16px; align-items: baseline; }
+.points__marker { font-family: var(--font-mono); font-weight: 500; color: var(--gold); font-size: var(--text-sm); }
+.points__text { font-size: var(--text-base); line-height: 1.35; }
+.points--term li { grid-template-columns: 300px 1fr; }
+.points--term .points__marker { font-family: var(--font-display); font-weight: 600; font-size: 38px; color: var(--fg); line-height: 1.1; }
+.points--arabic .points__marker { font-family: var(--font-display); font-weight: 600; font-size: var(--text-xl); line-height: 1; }
+.points--arabic li { grid-template-columns: 90px 1fr; }
+.points--arabic .points__text { font-size: var(--text-lg); }
+
+.cols { display: grid; gap: 56px; width: 100%; max-width: 1560px; text-align: center; }
+.cols--2 { grid-template-columns: 1fr 1fr; }
+.cols--3 { grid-template-columns: 1fr 1fr 1fr; }
+.col__heading { margin: 0 0 12px; font-family: var(--font-display); font-weight: 600; font-size: 40px; color: var(--fg); }
+.col p { margin: 0; font-size: var(--text-base); line-height: 1.4; }
+
+/* Image plates (framed sacred art) */
+.split { display: grid; gap: 40px; width: 100%; height: 100%; align-items: center; }
+.split--right { grid-template-columns: 1.15fr 1fr; }
+.split--left { grid-template-columns: 1fr 1.15fr; }
+.split--top { display: flex; flex-direction: column; gap: 28px; align-items: stretch; }
+.plate { border: 1px solid var(--border); background: var(--surface); }
+.split--right .plate, .split--left .plate { width: 100%; aspect-ratio: 4 / 3; }
+.split--top .plate { width: 100%; height: 340px; flex: none; }
+.split .title { font-size: var(--text-xl); }
+.split .title--long { font-size: 46px; }
+.split .scripture { font-size: 44px; }
+.split .scripture--long { font-size: 36px; }
+.split .quote-block__text, .split .lead-text p { font-size: 30px; }
+.split .cols { gap: 28px; }
+.split .col__heading { font-size: 34px; }
+.split .col p, .split .points__text { font-size: var(--text-base); }
+.split .points li { grid-template-columns: 72px 1fr; }
+.split .points--term li { grid-template-columns: 240px 1fr; }
+.split .points--term .points__marker { font-size: 34px; }
+.split .points--arabic li { grid-template-columns: 72px 1fr; }

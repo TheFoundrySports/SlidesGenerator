@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../schemas/catechism-liturgical.schema.json",
+  "id": "minimal",
+  "title": "Dios Padre Creador",
+  "lang": "es",
+  "design": "catechism-liturgical",
+  "slides": [
+    {
+      "id": "portada",
+      "layout": "cover",
+      "label": "Portada",
+      "eyebrow": "CURSO DE CATEQUESIS",
+      "title": "Dios Padre Creador",
+      "subtitle": "Creo en Dios, Padre todopoderoso",
+      "motif": "cross"
+    },
+    {
+      "id": "genesis-1-1",
+      "layout": "scripture",
+      "label": "Génesis 1, 1",
+      "reference": "Génesis 1, 1",
+      "text": "«En el principio creó Dios el cielo y la tierra.»",
+      "citation": "Gn 1, 1 · CEC 279"
+    },
+    {
+      "id": "creador",
+      "layout": "doctrine",
+      "label": "Dios, Creador",
+      "kicker": "LA CREACIÓN",
+      "title": "Dios Padre, Creador",
+      "points": [
+        { "text": "Creemos en un solo Dios, Padre, Hijo y Espíritu Santo." },
+        { "text": "Este Dios único crea todas las cosas por su Verbo." },
+        { "text": "La creación es obra de su amor y de su providencia." }
+      ],
+      "citation": "CEC 279"
+    },
+    {
+      "id": "cierre",
+      "layout": "closing",
+      "label": "Cierre",
+      "text": "«El Señor os bendiga y os guarde;\nhaga resplandecer su rostro sobre vosotros\ny os conceda su paz.»",
+      "motif": "cross"
+    }
+  ]
+}

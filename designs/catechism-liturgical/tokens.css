@@ -1,0 +1,17 @@
+/* Catechism Liturgical · type scale, spacing, rhythm. Colors and font stacks are generated
+   from design.config.ts (see DESIGN.md §2-3). */
+:root {
+  --text-meta: 18px;
+  --text-sm: 22px;
+  --text-base: 28px;
+  --text-lg: 36px;
+  --text-xl: 56px;
+  --text-2xl: 80px;
+  --text-3xl: 112px;
+  --leading-tight: 1.15;
+  --leading-body: 1.45;
+  --tracking-display: -0.01em;
+  --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px;
+  --space-5: 48px; --space-6: 64px; --space-8: 96px;
+  --enter-ms: 350ms;
+}
