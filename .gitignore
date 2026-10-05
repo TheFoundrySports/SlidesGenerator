@@ -1,0 +1,23 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (defensive — project is plain HTML/JS)
+node_modules/
+package-lock.json
+
+# Work artifacts (not part of the source tree)
+*.artifact.json
+
+# Source binaries (regenerable from the originals)
+Dios_Padre.pptx
+slides/img/slide-*.png
+
+# Keep: slides/img/cleaned/*.png (actual deck content)

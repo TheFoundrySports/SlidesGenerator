@@ -1,0 +1,29 @@
+{
+  "name": "slideschurch",
+  "version": "0.1.0",
+  "description": "Catechetical HTML slide decks with a presenter app and a deterministic slide-generation system. See DESIGN.md and the Presenter + Slide-Craft sections of README.md.",
+  "main": "presenter-shared.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "node scripts/lint-deck.js"
+  },
+  "keywords": [
+    "catechism",
+    "slides",
+    "liturgical",
+    "presenter",
+    "html"
+  ],
+  "author": "Francisco J. Seva",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}
