@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es" class="look-monastic shape-landscape-16-9">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>demo-deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="slides/_looks/monastic.css">
+<link rel="stylesheet" href="slides/_shapes/landscape-16-9.css">
+<style>
+:root {
+  --bg: #F5EBD9; --surface: #EFE3CC; --fg: #5C1A1B; --muted: #8A7560;
+  --border: #B5A285; --accent: #73201D; --gold: #A8915C;
+  --font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --text-meta: 18px; --text-sm: 22px; --text-base: 28px; --text-lg: 36px;
+  --text-xl: 56px; --text-2xl: 80px; --text-3xl: 112px;
+  --leading-tight: 1.15; --leading-body: 1.45;
+  --tracking-display: -0.01em;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+body {
+  width: 100vw; height: 100vh; display: grid; place-items: center;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  color: var(--fg); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body);
+}
+.stage {
+  width: 1920px; height: 1080px;
+  transform: scale(var(--scale, 1)); transform-origin: center center;
+  position: relative; background: var(--bg);
+  background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+  flex-shrink: 0;
+}
+.slide {
+  position: absolute; inset: 0; display: none; padding: 96px 140px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 350ms cubic-bezier(.2,.7,.3,1), transform 350ms cubic-bezier(.2,.7,.3,1);
+}
+.slide.is-active { display: flex; flex-direction: column; justify-content: center; opacity: 1; transform: translateY(0); }
+.slide h1 { font-family: var(--font-display); font-weight: 600; font-size: var(--text-2xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-display); color: var(--fg); margin: 0 0 var(--space-3); text-align: center; }
+.slide h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--text-xl); line-height: var(--leading-tight); color: var(--fg); }
+.slide p { font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg); }
+.scripture { font-family: var(--font-body); font-style: italic; font-size: var(--text-lg); line-height: 1.55; text-align: center; max-width: 32ch; margin: auto; }
+.scripture-ref { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--muted); text-align: center; display: block; letter-spacing: 0.02em; }
+.ccc-ref { font-family: var(--font-mono); font-size: var(--text-meta); color: var(--muted); }
+.doctrine-list { list-style: none; padding: 0; margin: auto; max-width: 56ch; counter-reset: doctrine; }
+.doctrine-list li { counter-increment: doctrine; margin-bottom: var(--space-3); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body); padding-left: 4ch; position: relative; }
+.doctrine-list li::before { content: counter(doctrine, upper-roman) "."; position: absolute; left: 0; font-family: var(--font-mono); color: var(--gold); font-weight: 500; }
+.reflection { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: var(--text-xl); line-height: 1.4; text-align: center; max-width: 28ch; margin: auto; }
+.summary-list { list-style: none; padding: 0; margin: 0 auto; max-width: 56ch; counter-reset: r; }
+.summary-list li { counter-increment: r; margin-bottom: var(--space-4); font-family: var(--font-body); font-size: var(--text-lg); line-height: 1.4; display: grid; grid-template-columns: 48px 1fr; gap: var(--space-2); align-items: baseline; }
+.summary-list li::before { content: counter(r); font-family: var(--font-display); font-weight: 600; font-size: var(--text-xl); color: var(--gold); }
+.prayer { font-family: var(--font-body); font-size: var(--text-lg); line-height: 1.6; text-align: center; max-width: 46ch; margin: auto; }
+.amen { position: absolute; bottom: 96px; left: 0; right: 0; text-align: center; font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--fg); }
+.blessing { margin: auto; max-width: 32ch; font-family: var(--font-display); font-style: italic; font-size: var(--text-xl); line-height: 1.45; text-align: center; }
+.ornament { display: grid; place-items: center; color: var(--gold); margin: auto; }
+.ornament svg { width: 200px; height: 200px; display: block; }
+.counter { position: absolute; bottom: 32px; right: 48px; font-family: var(--font-mono); font-size: var(--text-meta); letter-spacing: 0.18em; color: var(--muted); z-index: 100; }
+.help { position: absolute; bottom: 32px; left: 48px; font-family: var(--font-mono); font-size: var(--text-meta); letter-spacing: 0.10em; color: var(--muted); z-index: 100; }
+.help kbd { display: inline-block; font-family: var(--font-mono); font-size: 16px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); color: var(--muted); margin: 0 1px; }
+.subtitle { text-align: center; font-family: var(--font-body); font-size: var(--text-lg); color: var(--muted); margin: 0 auto; max-width: 56ch; }
+</style>
+</head>
+<body>
+
+<div class="stage">
+<section class="slide is-active" data-screen-label="01 Cover">
+  
+  <header style="margin:auto;text-align:center;">
+        <h1>Dios Padre Creador</h1>
+        <p class="subtitle">Curso de Catequesis · Lección Demo</p>
+      </header>
+</section>
+
+<section class="slide" data-screen-label="02 Scripture">
+  
+  <blockquote class="scripture">Génesis 1, 1</blockquote>
+        <p class="scripture-ref">«En el principio creó Dios el cielo y la tierra.»</p>
+</section>
+
+<section class="slide" data-screen-label="03 Doctrine">
+  
+  <ol class="doctrine-list"><li>Dios Padre, Creador</li><li>Crea por amor, no por necesidad.</li><li>La obra creadora es obra de la Trinidad.</li><li>Crea desde la nada (ex nihilo).</li><li>El hombre es la cima de la creación.</li><li>CEC 279 · LG 2 · SC 38</li></ol>
+</section>
+
+<section class="slide" data-screen-label="04 Reflection">
+  
+  <p class="reflection">«Antes de que la luz fuera luz, ya eras Tú.»</p>
+</section>
+
+<section class="slide" data-screen-label="05 Prayer">
+  
+  <p class="prayer">Creo en Dios, Padre Todopoderoso, Creador del cielo y de la tierra.</p>
+        <p class="amen">Amén.</p>
+</section>
+
+<section class="slide" data-screen-label="06 Summary">
+  
+  <ol class="summary-list"><li>En resumen</li><li>Dios es principio sin principio.</li><li>Crea por amor y la sostiene por providencia.</li><li>Toda la creación lo alaba.</li></ol>
+</section>
+
+<section class="slide" data-screen-label="07 Closing">
+  
+  <p class="blessing">«El Señor os bendiga y os guarde; haga resplandecer su rostro sobre vosotros y os conceda su paz.»</p>
+        <p class="amen">Amén.</p>
+</section>
+</div>
+
+<div class="counter" aria-live="polite">
+  <span id="cNow">01</span><span class="counter-sep">/</span><span id="cTotal">7</span>
+</div>
+<div class="help" aria-hidden="true">
+  <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Inicio</kbd> <kbd>Fin</kbd> extremos
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const stage = document.querySelector('.stage');
+  const slides = Array.from(stage.querySelectorAll('.slide'));
+  const total = slides.length;
+  const cNow = document.getElementById('cNow');
+  const cTotal = document.getElementById('cTotal');
+  cTotal.textContent = String(total).padStart(2, '0');
+
+  function fit() {
+    const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.setProperty('--scale', s);
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  function show(i) {
+    const clamped = Math.max(0, Math.min(total - 1, i));
+    slides.forEach((s, j) => s.classList.toggle('is-active', j === clamped));
+    cNow.textContent = String(clamped + 1).padStart(2, '0');
+  }
+  document.addEventListener('keydown', (e) => {
+    const cur = slides.findIndex((s) => s.classList.contains('is-active'));
+    if (cur < 0) return;
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown': case ' ': show(cur + 1); e.preventDefault(); break;
+      case 'ArrowLeft':  case 'PageUp':     show(cur - 1); e.preventDefault(); break;
+      case 'Home': show(0); e.preventDefault(); break;
+      case 'End':  show(total - 1); e.preventDefault(); break;
+    }
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

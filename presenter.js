@@ -34,6 +34,11 @@
       file: 'catechism-deck-dios-padre-creador-3.html',
       title: 'Dios Padre Creador · v3',
       label: '01 Cover · v3'
+    },
+    {
+      file: 'demo-deck.html',
+      title: 'Demo · PPTX importada',
+      label: '01 Cover · demo'
     }
   ];
   const STORAGE_KEY = 'slideschurch-presenter-v1';
@@ -149,11 +154,13 @@
         }
 
         // Build slide nodes via DOMParser (browser only).
+        // text/html: lenient about HTML5 void elements (<img>, <br>) that
+        // the deck HTML uses without self-closing.
         const parser = new DOMParser();
         state.slides = rawSlides.map((rs) => {
           const doc = parser.parseFromString(
             `<div xmlns="http://www.w3.org/1999/xhtml">${rs.outerHtml}</div>`,
-            'application/xhtml+xml'
+            'text/html'
           );
           return doc.documentElement.firstElementChild;
         });
@@ -401,7 +408,7 @@
         slides = rawSlides.map((rs) => {
           const doc = parser.parseFromString(
             `<div xmlns="http://www.w3.org/1999/xhtml">${rs.outerHtml}</div>`,
-            'application/xhtml+xml'
+            'text/html'
           );
           return doc.documentElement.firstElementChild;
         });
