@@ -11,7 +11,7 @@
 
   Reglas: la bendición cierra deck O capítulo; nunca se usa como body slide.
 -->
-<html lang="es">
+<html lang="es" class="look-monastic shape-landscape-16-9">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,6 +19,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ── Style + shape ────────────────────────────────────────────
+     Default: monastic + landscape-16-9.
+     To switch: edit the class on <html> above, and swap the two
+     <link> tags below. Available looks: monastic, festive, typographic.
+     Available shapes: landscape-16-9, portrait-3-4, square-1-1,
+     ultrawide-21-9. See docs/extending-slide-craft.md. -->
+<link rel="stylesheet" href="_looks/monastic.css">
+<link rel="stylesheet" href="_shapes/landscape-16-9.css">
+
 <style>
 :root {
   --bg: #F5EBD9; --surface: #EFE3CC; --fg: #5C1A1B; --muted: #8A7560;

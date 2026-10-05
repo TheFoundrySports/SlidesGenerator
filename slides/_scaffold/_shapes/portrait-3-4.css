@@ -1,0 +1,14 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Shape: portrait-3:4 — 1440 × 1920
+ * Mobile, vertical feed. Side padding tightens to keep the safe
+ * area proportional.
+ * ───────────────────────────────────────────────────────────────── */
+
+.stage {
+  width: 1440px;
+  height: 1920px;
+}
+
+.stage .slide {
+  padding: 96px 80px;
+}

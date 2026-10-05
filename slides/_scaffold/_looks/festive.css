@@ -1,0 +1,47 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Look: festive
+ * Purpose: solemnities, feast days, and celebrations.
+ * Budget: max 2 slides per deck, separated by ≥3 other slides.
+ * Valid archetypes: Cover, Prayer, Divider, Closing.
+ *
+ * Apply per-slide with:  <section class="slide slide--X look-festive">
+ * Apply deck-wide with:  <html class="look-festive">
+ *
+ * The CSS supports both via two selectors per rule.
+ * ───────────────────────────────────────────────────────────────── */
+
+/* Decorative double inner frame in ornament gold. Drawn as a
+   pseudo-element so it does not affect layout. */
+html.look-festive .slide::before,
+.slide.look-festive::before {
+  content: '';
+  position: absolute;
+  inset: 32px;
+  border: 2px double var(--gold);
+  pointer-events: none;
+}
+
+/* Stronger ink: titles read in the reserved accent. */
+html.look-festive h1,
+html.look-festive h2,
+.slide.look-festive h1,
+.slide.look-festive h2 {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Ornament strokes shift from gold to accent for the deck. */
+html.look-festive .ornament,
+.slide.look-festive .ornament,
+html.look-festive .ornament svg,
+.slide.look-festive .ornament svg {
+  color: var(--accent);
+}
+
+/* Festive footers (Amén., Closing blessing) keep the deeper accent. */
+html.look-festive .prayer .amen,
+html.look-festive .blessing,
+.slide.look-festive .amen,
+.slide.look-festive .blessing {
+  color: var(--accent);
+}

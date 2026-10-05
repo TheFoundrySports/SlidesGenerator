@@ -1,0 +1,63 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Look: typographic
+ * Purpose: slides where text is the visual — large display quotes,
+ *          single verse features, memorable sentence reveals.
+ * Budget: max 1 per deck.
+ * Valid archetypes: Scripture, Reflection.
+ *
+ * Apply per-slide with:  <section class="slide slide--X look-typographic">
+ * Apply deck-wide with:  <html class="look-typographic">
+ * ───────────────────────────────────────────────────────────────── */
+
+/* Body text: pull up to display serif and a larger tier. */
+html.look-typographic .slide p,
+.slide.look-typographic p {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-display);
+}
+
+/* The named prose blocks become very large display, italic, display-led. */
+html.look-typographic .slide .scripture,
+html.look-typographic .slide .reflection,
+.slide.look-typographic .scripture,
+.slide.look-typographic .reflection {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--text-3xl);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Titles also at the top tier. */
+html.look-typographic .slide h1,
+html.look-typographic .slide h2,
+.slide.look-typographic h1,
+.slide.look-typographic h2 {
+  font-size: var(--text-3xl);
+}
+
+/* Footnotes and citations also pull up to display serif and a larger tier. */
+html.look-typographic .scripture-ref,
+html.look-typographic .ccc-ref,
+.slide.look-typographic .scripture-ref,
+.slide.look-typographic .ccc-ref,
+html.look-typographic .prayer .amen,
+.slide.look-typographic .amen,
+html.look-typographic .blessing,
+.slide.look-typographic .blessing {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-display);
+}
+
+/* In typographic mode the ornament reads in ink, not gold — the text
+   is the only highlight. */
+html.look-typographic .ornament,
+.slide.look-typographic .ornament,
+html.look-typographic .ornament svg,
+.slide.look-typographic .ornament svg {
+  color: var(--fg);
+}

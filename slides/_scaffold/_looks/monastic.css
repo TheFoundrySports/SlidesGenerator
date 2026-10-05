@@ -1,0 +1,13 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Look: monastic (default)
+ * The original SlidesChurch style — minimal, lots of air, single ink.
+ * Loaded when no `data-look` is set, or when `data-look="monastic"`.
+ *
+ * No overrides: every rule already lives in the framework CSS at the
+ * top of each scaffold (Cormorant Garamond display, EB Garamond body,
+ * parchment radial vignette, oxblood ink). This file exists so the
+ * system has a concrete marker for the default look.
+ * ───────────────────────────────────────────────────────────────── */
+
+/* Intentionally empty. Do not add rules here unless you are creating a
+   new default. New overrides belong in their own _looks/<name>.css. */

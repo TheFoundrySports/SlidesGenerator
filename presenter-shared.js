@@ -106,6 +106,35 @@
     return Math.min(viewportW / canvasW, viewportH / canvasH);
   }
 
+  // ── v0.1.1 shape registry ─────────────────────────────────────────
+  // Maps the declared `shape-*` class on <html> to the canvas
+  // dimensions the presenter should use when scaling. The deck's
+  // <html class="... shape-<name> ..."> declares the shape; default
+  // is `landscape-16-9` (1920x1080).
+  const SHAPE_DIMENSIONS = {
+    'landscape-16-9': [1920, 1080],
+    'portrait-3-4':   [1440, 1920],
+    'square-1-1':     [1440, 1440],
+    'ultrawide-21-9': [2520, 1080]
+  };
+
+  // ── extractShape ───────────────────────────────────────────────────
+  // Reads the deck's declared shape from the <html> tag's class
+  // attribute. Falls back to `landscape-16-9` if absent.
+  function extractShape(html) {
+    const m = (html || '').match(/<html\b([^>]*)>/);
+    const attrs = m ? m[1] : '';
+    const shapeMatch = attrs.match(/\bshape-([\w-]+)\b/);
+    return shapeMatch ? shapeMatch[1] : 'landscape-16-9';
+  }
+
+  // ── shapeDimensions ────────────────────────────────────────────────
+  // Returns [width, height] for a given shape name. Defaults to
+  // landscape-16-9 dimensions if the name is unknown.
+  function shapeDimensions(shapeName) {
+    return SHAPE_DIMENSIONS[shapeName] || SHAPE_DIMENSIONS['landscape-16-9'];
+  }
+
   // ── createBus ──────────────────────────────────────────────────────
   // Cross-environment message bus. Uses BroadcastChannel when available
   // (browsers, modern Node). Falls back to a local pub-sub that does not
@@ -136,6 +165,9 @@
     parseSidecar,
     emptySidecar,
     computeStageScale,
-    createBus
+    createBus,
+    SHAPE_DIMENSIONS,
+    extractShape,
+    shapeDimensions
   };
 });

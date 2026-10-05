@@ -14,7 +14,10 @@ const {
   parseSidecar,
   emptySidecar,
   computeStageScale,
-  createBus
+  createBus,
+  SHAPE_DIMENSIONS,
+  extractShape,
+  shapeDimensions
 } = require('../presenter-shared');
 
 const FIXTURES = path.join(__dirname, 'fixtures');
@@ -173,4 +176,37 @@ test('createBus: in Node fallback, send is a safe no-op', () => {
   const bus = createBus('test-fallback-' + Date.now());
   assert.doesNotThrow(() => bus.send({ hello: 'there' }));
   bus.close();
+});
+
+// ── v0.1.1 shape registry ──────────────────────────────────────────────
+test('SHAPE_DIMENSIONS: contains the four canonical shapes', () => {
+  assert.deepEqual(SHAPE_DIMENSIONS['landscape-16-9'], [1920, 1080]);
+  assert.deepEqual(SHAPE_DIMENSIONS['portrait-3-4'],   [1440, 1920]);
+  assert.deepEqual(SHAPE_DIMENSIONS['square-1-1'],     [1440, 1440]);
+  assert.deepEqual(SHAPE_DIMENSIONS['ultrawide-21-9'], [2520, 1080]);
+});
+
+test('extractShape: reads `shape-X` class on <html>', () => {
+  assert.equal(extractShape('<html lang="es" class="look-monastic shape-portrait-3-4">'), 'portrait-3-4');
+  assert.equal(extractShape('<html lang="es" class="shape-square-1-1 look-monastic">'), 'square-1-1');
+  assert.equal(extractShape('<html class="shape-ultrawide-21-9">'), 'ultrawide-21-9');
+});
+
+test('extractShape: defaults to landscape-16-9 when absent', () => {
+  assert.equal(extractShape('<html lang="es">'), 'landscape-16-9');
+  assert.equal(extractShape('<html class="look-monastic">'), 'landscape-16-9');
+  assert.equal(extractShape(''), 'landscape-16-9');
+  assert.equal(extractShape(undefined), 'landscape-16-9');
+});
+
+test('shapeDimensions: returns [width, height] for valid shape names', () => {
+  assert.deepEqual(shapeDimensions('landscape-16-9'), [1920, 1080]);
+  assert.deepEqual(shapeDimensions('portrait-3-4'),   [1440, 1920]);
+  assert.deepEqual(shapeDimensions('square-1-1'),     [1440, 1440]);
+  assert.deepEqual(shapeDimensions('ultrawide-21-9'), [2520, 1080]);
+});
+
+test('shapeDimensions: defaults to landscape-16-9 for unknown names', () => {
+  assert.deepEqual(shapeDimensions('unknown-shape'), [1920, 1080]);
+  assert.deepEqual(shapeDimensions(''),                [1920, 1080]);
 });

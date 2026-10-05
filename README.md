@@ -148,6 +148,35 @@ node scripts/lint-deck.js catechism-deck-dios-padre-creador*.html index.html
 
 Current results: v1 + index clean; v2 + v3 each show one P1 (`<img>` without `loading="lazy"`). These are pre-existing deviations in the older decks, not from slide-craft.
 
+### v0.1.1 — visual styles and shapes
+
+Two new axes complement the existing content archetypes:
+
+**Visual styles** (`class="look-X"` on `<html>` or per-slide on `<section>`):
+
+| Style | When | Budget |
+|-------|------|--------|
+| `monastic` | default; Reflection, Prayer, Scripture | unlimited |
+| `festive` | solemnities, feast covers, Closing of celebrations | ≤ 2 per deck |
+| `typographic` | slides where text is the visual (large verse, memorable sentence) | ≤ 1 per deck |
+
+**Shapes** (`class="shape-X"` on `<html>`, deck-wide only):
+
+| Shape | Dimensions | When |
+|-------|------------|------|
+| `landscape-16-9` | 1920×1080 | default; projector, screen |
+| `portrait-3-4` | 1440×1920 | mobile, vertical feed |
+| `square-1-1` | 1440×1440 | Instagram, square card |
+| `ultrawide-21-9` | 2520×1080 | cinematic banner |
+
+The CSS libraries live at `slides/_scaffold/_looks/` and `slides/_scaffold/_shapes/`. Each scaffold loads one look and one shape by default; switch them by editing the two `<link>` tags and the `class` on `<html>`.
+
+**One deck = one shape.** Mixing shapes in a single deck is not supported (the presenter scales each slide to its deck's shape).
+
+**Backwards compatible.** Existing decks without `data-shape` or `data-look` pass with the defaults (`landscape-16-9` + `monastic`). The 3 existing catechism decks work without changes.
+
+The lint enforces these rules with `node scripts/lint-deck.js`. See `docs/extending-slide-craft.md` for how to add a new style or shape.
+
 ## What it doesn't do (yet)
 
 - No editing of notes inside the app — by design, edited in your editor.

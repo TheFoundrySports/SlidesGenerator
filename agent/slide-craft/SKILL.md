@@ -65,6 +65,80 @@ Pick one per slide. Mix rhythm: never three same-archetype in a row.
 
 Default rhythm for a 12-lesson deck: `Cover · Scripture · Reflection · Doctrine · Summary · Closing`, with dividers between sub-chapters and prayers as connective tissue.
 
+## Visual styles & shapes (v0.1.1)
+
+A slide is a triple `(content archetype, visual style, shape)`. Content archetype comes from the eight archetypes above; the other two axes are declared per-deck and may be overridden per-slide.
+
+### Visual styles (3, defaults to `monastic`)
+
+| Style | Use | Budget |
+|-------|-----|--------|
+| `monastic` | default; Reflection, Prayer, Scripture | none (default) |
+| `festive` | solemnities, feast days, Cover/Closing of celebrations | ≤ 2 per deck |
+| `typographic` | slides where text is the visual (large verse, memorable sentence) | ≤ 1 per deck |
+
+`dense`, `iconographic`, `liturgical-dark` are deferred to v0.3 — see `docs/extending-slide-craft.md` to add your own.
+
+### Shapes (4, defaults to `landscape-16-9`)
+
+| Shape | Dimensions | Use |
+|-------|------------|-----|
+| `landscape-16-9` | 1920×1080 | default; projector, screen |
+| `portrait-3-4` | 1440×1920 | mobile, vertical feed |
+| `square-1-1` | 1440×1440 | Instagram, square card |
+| `ultrawide-21-9` | 2520×1080 | cinematic banner |
+
+One deck = one shape. Mixing shapes in a single deck is not supported.
+
+### How to declare
+
+In a scaffold's `<head>` (load the CSS libraries):
+
+```html
+<link rel="stylesheet" href="_looks/monastic.css">
+<link rel="stylesheet" href="_shapes/landscape-16-9.css">
+```
+
+On `<html>` (deck-wide):
+
+```html
+<html lang="es" class="look-monastic shape-landscape-16-9">
+```
+
+Or per-slide override on `<section>`:
+
+```html
+<section class="slide slide--cover look-festive">
+```
+
+### Valid combinations (archetype × look)
+
+```
+                            monastic  festive  typographic
+Cover                       ✓         ✓        —
+Scripture                   ✓         —        ✓
+Doctrine                    ✓         —        —
+Reflection                  ✓         —        ✓
+Prayer                      ✓         ✓        —
+Summary                     ✓         —        —
+Divider                     ✓         ✓        —
+Closing                     ✓         ✓        —
+```
+
+`—` means "not recommended" (lint P1), not forbidden.
+
+### Validation
+
+`scripts/lint-deck.js` enforces:
+- `data-shape` declared on `<html>` (defaults to `landscape-16-9`); stage CSS must match.
+- `data-look` is one of the valid names (defaults to `monastic`).
+- Per-slide combination is in the matrix above.
+- Per-week budgets: festive ≤ 2, typography ≤ 1.
+
+Existing decks without `class="look-... shape-..."` pass with the defaults — backwards compatible.
+
+See `docs/extending-slide-craft.md` for how to add a new style or shape.
+
 ## Image rules (extended, beyond DESIGN.md)
 
 - **Default**: no raster images. SVG ornaments only (monogram, compass, trinity, ichthys, alpha-omega, rule-and-dot — see `DESIGN.md §7`).
