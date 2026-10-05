@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mini Deck (test fixture)</title>
+<style>
+  body { color: black; }
+  .slide { display: none; }
+  .slide.is-active { display: flex; }
+</style>
+<style>
+  /* second style block — parseDeckHtml must capture both */
+  .slide h1 { font-family: serif; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <section class="slide slide--cover">
+    <h1>Cover</h1>
+    <p>Welcome.</p>
+  </section>
+
+  <section class="slide slide--doctrine">
+    <h2>Doctrine</h2>
+    <p>Body text.</p>
+  </section>
+
+  <section class="slide slide--prayer" data-screen-label="03 Oración">
+    <p>Oración</p>
+    <p class="amen">Amén.</p>
+  </section>
+</div>
+
+<script>
+  // Must NOT be executed by the presenter app — this is here only to make
+  // sure parseDeckHtml leaves scripts alone. The presenter strips them
+  // on its own. The fixture exercises a regex-safe deck with one script
+  // tag containing a comment-looking string.
+  console.log('ignore me');
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+[
+  {
+    "index": 1,
+    "label": "slide-01",
+    "images": [
+      {
+        "file": "slide-01.png",
+        "w": 1370,
+        "h": 765,
+        "bytes": 568756
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "label": "slide-02",
+    "images": [
+      {
+        "file": "slide-02.png",
+        "w": 1024,
+        "h": 572,
+        "bytes": 585698
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "label": "slide-03",
+    "images": [
+      {
+        "file": "slide-03.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1694098
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "label": "slide-04",
+    "images": [
+      {
+        "file": "slide-04.png",
+        "w": 1024,
+        "h": 572,
+        "bytes": 788443
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "label": "slide-05",
+    "images": []
+  },
+  {
+    "index": 6,
+    "label": "slide-06",
+    "images": [
+      {
+        "file": "slide-06.png",
+        "w": 1024,
+        "h": 572,
+        "bytes": 804301
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "label": "slide-07",
+    "images": [
+      {
+        "file": "slide-07.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1070487
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "label": "slide-08",
+    "images": [
+      {
+        "file": "slide-08.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1625773
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "label": "slide-09",
+    "images": [
+      {
+        "file": "slide-09.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1745818
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "label": "slide-10",
+    "images": [
+      {
+        "file": "slide-10.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1049928
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "label": "slide-11",
+    "images": [
+      {
+        "file": "slide-11.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 757623
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "label": "slide-12",
+    "images": [
+      {
+        "file": "slide-12.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1672548
+      }
+    ]
+  },
+  {
+    "index": 13,
+    "label": "slide-13",
+    "images": [
+      {
+        "file": "slide-13.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1792112
+      }
+    ]
+  },
+  {
+    "index": 14,
+    "label": "slide-14",
+    "images": [
+      {
+        "file": "slide-14.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1684894
+      }
+    ]
+  },
+  {
+    "index": 15,
+    "label": "slide-15",
+    "images": [
+      {
+        "file": "slide-15.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1523822
+      }
+    ]
+  },
+  {
+    "index": 16,
+    "label": "slide-16",
+    "images": [
+      {
+        "file": "slide-16.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1831116
+      }
+    ]
+  },
+  {
+    "index": 17,
+    "label": "slide-17",
+    "images": [
+      {
+        "file": "slide-17.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1730839
+      }
+    ]
+  },
+  {
+    "index": 18,
+    "label": "slide-18",
+    "images": [
+      {
+        "file": "slide-18.png",
+        "w": 1376,
+        "h": 768,
+        "bytes": 1778870
+      }
+    ]
+  }
+]

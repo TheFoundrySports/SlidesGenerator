@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SlidesChurch Presenter</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Catechism palette — aligned with DESIGN.md ─────────────────── */
+  :root {
+    --bg: oklch(94% 0.022 80);
+    --surface: oklch(96% 0.018 80);
+    --fg: oklch(28% 0.085 25);
+    --muted: oklch(48% 0.045 35);
+    --border: oklch(82% 0.035 75);
+    --accent: oklch(34% 0.095 25);
+    --gold: oklch(60% 0.062 75);
+
+    --font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --font-body: "EB Garamond", Georgia, serif;
+    --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+    --chrome-h: 56px;
+    --notes-w: 380px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.45;
+    display: grid;
+    grid-template-rows: var(--chrome-h) 1fr;
+  }
+  button, select {
+    font: inherit;
+    color: var(--fg);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  button:hover, select:hover { border-color: var(--accent); }
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 1px 6px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--surface);
+    color: var(--muted);
+  }
+
+  /* ── Top bar ──────────────────────────────────────────────────── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 50;
+  }
+  .topbar .title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar .title small {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 8px;
+    letter-spacing: 0.10em;
+  }
+  .topbar select { min-width: 220px; }
+  .topbar .spacer { flex: 0 0 auto; }
+  .topbar .badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.10em;
+  }
+  .topbar .actions { display: flex; gap: 8px; align-items: center; }
+
+  /* ── Main area ─────────────────────────────────────────────────── */
+  main {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    background-image: radial-gradient(ellipse at center, var(--bg) 0%, color-mix(in oklab, var(--bg), var(--fg) 12%) 100%);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  /* When notes panel is open (split or drawer), compress the stage column. */
+  body.notes-open main {
+    grid-template-columns: 1fr var(--notes-w);
+  }
+
+  /* ── Stage: scaled 1920×1080 canvas ───────────────────────────── */
+  .stage-wrap {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+  }
+  .stage {
+    width: 1920px;
+    height: 1080px;
+    transform: scale(var(--scale, 1));
+    transform-origin: center center;
+    position: relative;
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+
+  /* Slide primitive — only what's needed by the wrapper. Each deck
+     re-injects its own CSS for typography and layout. */
+  .stage .slide { position: absolute; inset: 0; display: none; }
+  .stage .slide.is-active { display: flex; }
+
+  /* ── Notes pane ─────────────────────────────────────────────────── */
+  .notes {
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    display: none;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+  }
+  body.notes-open .notes { display: flex; }
+  .notes header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .notes .body {
+    padding: 16px 18px;
+    overflow: auto;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--fg);
+  }
+  .notes .body.empty {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .notes .body code,
+  .notes .body pre {
+    font-family: var(--font-mono);
+    background: color-mix(in oklab, var(--bg), var(--fg) 6%);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
+  /* ── Help overlay ──────────────────────────────────────────────── */
+  .help-overlay {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklab, var(--bg), transparent 12%);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  body.help-open .help-overlay { display: flex; }
+  .help-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    max-width: 480px;
+    box-shadow: 0 18px 60px color-mix(in oklab, var(--fg), transparent 80%);
+  }
+  .help-card h2 {
+    margin: 0 0 12px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+  }
+  .help-card dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    margin: 0;
+    font-size: 14px;
+  }
+  .help-card dt { font-family: var(--font-mono); color: var(--muted); }
+
+  /* ── Popup mode (presenter window) ─────────────────────────────── */
+  body.popup {
+    grid-template-rows: 1fr;
+    background: var(--bg);
+  }
+  body.popup .topbar { display: none; }
+  body.popup main {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 14px;
+    overflow: auto;
+  }
+  body.popup .popup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    height: 100%;
+  }
+  body.popup .col {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  body.popup .col h3 {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  body.popup .preview {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background: var(--bg);
+    border-radius: 3px;
+  }
+  body.popup .preview .stage {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(var(--scale, 1));
+  }
+  body.popup .notes-popup {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    white-space: pre-wrap;
+    max-height: 40vh;
+    overflow: auto;
+    font-family: var(--font-body);
+    font-size: 15px;
+  }
+  body.popup .notes-popup.empty { color: var(--muted); font-style: italic; }
+  body.popup .timer {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+    letter-spacing: 0.10em;
+  }
+
+  /* Hidden container that holds the deck's own <style> blocks. We keep
+     them inline so the deck renders as authored. The presenter never
+     executes the deck's <script>. */
+  #deck-styles { display: none; }
+</style>
+</head>
+<body>
+  <!-- MAIN MODE -->
+  <header class="topbar" id="topbar">
+    <select id="deck-select" aria-label="Deck"></select>
+    <div class="title">
+      <span id="deck-title">Cargando…</span>
+      <small id="slide-counter">— / —</small>
+    </div>
+    <div class="actions">
+      <button id="panel-toggle" type="button" aria-pressed="false" title="Alternar panel de notas (N)">Notas</button>
+      <button id="popup-open" type="button" title="Abrir ventana de presentador (W)">Presentador</button>
+      <button id="help-toggle" type="button" title="Ayuda (?)">?</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="stage-wrap">
+      <div class="stage" id="stage" aria-live="polite"></div>
+    </div>
+    <aside class="notes" id="notes" aria-label="Notas del presentador">
+      <header>
+        <span>Notas · slide <span id="notes-idx">—</span></span>
+        <span id="notes-label" class="badge">—</span>
+      </header>
+      <div class="body empty" id="notes-body">Sin notas todavía.</div>
+    </aside>
+
+    <div class="help-overlay" id="help" role="dialog" aria-label="Atajos de teclado">
+      <div class="help-card">
+        <h2>Atajos</h2>
+        <dl>
+          <dt><kbd>→</kbd> <kbd>PgDn</kbd> <kbd>Espacio</kbd></dt><dd>Siguiente</dd>
+          <dt><kbd>←</kbd> <kbd>PgUp</kbd></dt><dd>Anterior</dd>
+          <dt><kbd>Inicio</kbd> <kbd>Fin</kbd></dt><dd>Primera / última</dd>
+          <dt><kbd>N</kbd></dt><dd>Alternar notas</dd>
+          <dt><kbd>W</kbd></dt><dd>Ventana presentador</dd>
+          <dt><kbd>F</kbd></dt><dd>Pantalla completa</dd>
+          <dt><kbd>?</kbd></dt><dd>Esta ayuda</dd>
+          <dt><kbd>Esc</kbd></dt><dd>Cerrar</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Popup-mode structure (re-used by the presenter window) -->
+    <div class="popup-grid" id="popup-grid" hidden>
+      <div class="col">
+        <h3>Actual · <span id="popup-cur-idx">—</span></h3>
+        <div class="preview" id="popup-cur-preview"><div class="stage" id="popup-cur-stage"></div></div>
+      </div>
+      <div class="col">
+        <h3>Siguiente · <span id="popup-next-idx">—</span></h3>
+        <div class="preview" id="popup-next-preview"><div class="stage" id="popup-next-stage"></div></div>
+      </div>
+      <div class="notes-popup empty" id="popup-notes">Sin notas todavía.</div>
+      <div class="timer" id="popup-timer">⏱ 00:00 · slide 00:00</div>
+    </div>
+  </main>
+
+  <!-- Holds the currently loaded deck's <style> blocks -->
+  <div id="deck-styles"></div>
+
+  <script src="presenter-shared.js"></script>
+  <script src="presenter.js"></script>
+</body>
+</html>
