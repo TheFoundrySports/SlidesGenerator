@@ -190,9 +190,26 @@ node scripts/pptx-to-deck.js input.pptx my-deck \
 
 # Non-interactive using the heuristic only
 node scripts/pptx-to-deck.js input.pptx my-deck --auto
+
+# Custom output directory (default: user-decks/ — see "User decks" below)
+node scripts/pptx-to-deck.js input.pptx my-deck --out-dir ./my-decks
 ```
 
 Or via npm: `npm run pptx-to-deck -- input.pptx my-deck`.
+
+**Output structure** (relative to `--out-dir`):
+
+```
+<out-dir>/
+├── my-deck.html
+├── my-deck.notes.json
+└── img/
+    └── my-deck/
+        ├── image-2-1.jpg
+        └── ...
+```
+
+The deck's HTML references images as `img/<deck-name>/<filename>` (relative to the HTML file itself), so the whole deck is self-contained inside the output directory.
 
 ### Heuristic archetype mapping
 
