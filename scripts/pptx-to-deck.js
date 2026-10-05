@@ -6,6 +6,7 @@
 //   node scripts/pptx-to-deck.js <input.pptx> <output-deck-name>
 //     [--map "1:cover,2:scripture,3:doctrine,4:summary,5:closing"]
 //     [--auto]
+//     [--out-dir <path>]   (default: user-decks/)
 //
 // Modes:
 //   - Default (interactive): for each slide, prints the extracted
@@ -207,11 +208,12 @@ function parseMapArg(mapArg) {
 }
 
 function parseArgs(argv) {
-  const args = { input: null, deckName: null, map: {}, mode: 'interactive' };
+  const args = { input: null, deckName: null, map: {}, mode: 'interactive', outDir: 'user-decks' };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--map') args.map = parseMapArg(argv[++i]);
     else if (a === '--auto') args.mode = 'auto';
+    else if (a === '--out-dir') args.outDir = argv[++i];
     else if (!args.input) args.input = a;
     else if (!args.deckName) args.deckName = a.replace(/\.html?$/i, '');
   }
@@ -503,8 +505,8 @@ async function confirmArchetypesInteractive(extracted, suggested) {
   return final;
 }
 
-function writeImages(deckName, savedImages) {
-  const destDir = path.join('slides', 'img', 'imported', deckName);
+function writeImages(outDir, deckName, savedImages) {
+  const destDir = path.join(outDir, 'img', deckName);
   fs.mkdirSync(destDir, { recursive: true });
   for (const img of savedImages) {
     const dest = path.join(destDir, img.name);
@@ -517,7 +519,7 @@ function patchImageSrcs(extracted, deckName) {
   for (const slide of extracted) {
     for (const shape of slide.shapes) {
       if (shape.kind === 'image' && shape.imageName) {
-        shape.src = `slides/img/imported/${deckName}/${shape.imageName}`;
+        shape.src = `img/${deckName}/${shape.imageName}`;
       }
     }
   }
@@ -555,16 +557,17 @@ async function main(argv) {
   }
 
   console.error('Writing images...');
-  const imgDir = writeImages(args.deckName, savedImages);
+  fs.mkdirSync(args.outDir, { recursive: true });
+  const imgDir = writeImages(args.outDir, args.deckName, savedImages);
   patchImageSrcs(extracted, args.deckName);
 
   console.error('Generating HTML...');
   const html = renderDeck(extracted, archetypes, args.deckName);
-  const htmlPath = `${args.deckName}.html`;
+  const htmlPath = path.join(args.outDir, `${args.deckName}.html`);
   fs.writeFileSync(htmlPath, html);
 
   console.error('Writing empty notes sidecar...');
-  const notesPath = `${args.deckName}.notes.json`;
+  const notesPath = path.join(args.outDir, `${args.deckName}.notes.json`);
   fs.writeFileSync(notesPath, emptySidecar(extracted.length, args.deckName));
 
   console.error('Running lint...');
@@ -576,7 +579,7 @@ async function main(argv) {
   console.log(`  Images:     ${imgDir}/`);
   console.log(`  Lint:       ${lintResult.ok ? 'clean' : 'has issues (run with --auto to skip prompts and inspect)'}`);
   console.log(`\nNext: add to DECKS in presenter.js:`);
-  console.log(`  { file: '${htmlPath}', title: '${args.deckName}', label: '01 Cover' }`);
+  console.log(`  { file: '${path.relative(process.cwd(), htmlPath)}', title: '${args.deckName}', label: '01 Cover' }`);
 }
 
 if (require.main === module) {
