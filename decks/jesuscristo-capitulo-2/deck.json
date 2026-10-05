@@ -1,0 +1,544 @@
+{
+  "$schema": "../../schemas/catechism-liturgical.schema.json",
+  "id": "jesuscristo-capitulo-2",
+  "title": "Creo en Jesucristo, Hijo único de Dios · CEC 422-682",
+  "lang": "es",
+  "design": "catechism-liturgical",
+  "palette": "ordinary",
+  "meta": {
+    "author": "Curso de Catequesis · Confirmación de Adultos",
+    "sources": ["Catecismo de la Iglesia Católica 422-682", "YOUCAT 71-112", "Catechesi Tradendae 5"]
+  },
+  "slides": [
+    {
+      "id": "portada",
+      "layout": "cover",
+      "label": "Portada",
+      "eyebrow": "CURSO DE CATEQUESIS",
+      "lead": "Confirmación de Adultos",
+      "title": "Creo en Jesucristo",
+      "subtitle": "Hijo único de Dios",
+      "reference": "Capítulo II de La Profesión de la Fe Cristiana · CEC 422-682",
+      "invocation": "En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.",
+      "motif": "cross"
+    },
+    {
+      "id": "mt-16-16",
+      "layout": "scripture",
+      "label": "Mt 16, 16",
+      "reference": "Mateo 16, 16",
+      "text": "«Tú eres el Cristo, el Hijo de Dios vivo.»",
+      "commentary": "Sobre la roca de esta fe, confesada por Pedro, Cristo ha construido su Iglesia.",
+      "citation": "Mt 16, 16 · CEC 424",
+      "motif": "cross",
+      "images": [
+        {
+          "src": "assets/s02-peter-confession.jpg",
+          "alt": "Confesión de Pedro: el apóstol responde a Jesús «Tú eres el Cristo»",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "buena-nueva",
+      "layout": "doctrine",
+      "label": "La Buena Nueva",
+      "kicker": "LA BUENA NUEVA",
+      "title": "Dios ha enviado a su Hijo",
+      "quote": {
+        "text": "«Pero, al llegar la plenitud de los tiempos, envió Dios a su Hijo, nacido de mujer, nacido bajo la Ley, para rescatar a los que se hallaban bajo la Ley, y para que recibiéramos la filiación adoptiva.»",
+        "source": "Ga 4, 4-5"
+      },
+      "columns": [
+        {
+          "heading": "Lo que confesamos",
+          "text": "Jesús de Nazaret, judío, nacido en el tiempo del emperador Augusto, muerto crucificado en Jerusalén bajo Poncio Pilato, es el Hijo eterno de Dios hecho hombre."
+        },
+        {
+          "heading": "Lo que ha hecho",
+          "text": "«Ha bajado del cielo», «ha venido en carne», la Palabra se hizo carne. La Buena Nueva de un Dios que sale a nuestro encuentro en su Hijo."
+        }
+      ],
+      "citation": "CEC 422-424",
+      "motif": "dove"
+    },
+    {
+      "id": "centro-catequesis",
+      "layout": "doctrine",
+      "label": "Cristo, centro de la catequesis",
+      "kicker": "EL CENTRO DE LA CATEQUESIS",
+      "title": "Cristo, el corazón de la fe",
+      "quote": {
+        "text": "«En el centro de la catequesis encontramos esencialmente una persona, la de Jesús de Nazaret, Unigénito del Padre [...]; que ha sufrido y ha muerto por nosotros y que ahora, resucitado, vive para siempre con nosotros.»",
+        "source": "Juan Pablo II · Catechesi Tradendae 5"
+      },
+      "points": [
+        { "text": "Anunciar a Jesucristo: «No podemos dejar de hablar de lo que hemos visto y oído» (Hch 4, 20)." },
+        { "text": "Enseñar a Cristo: «Lo que se enseña es a Cristo, el Verbo encarnado e Hijo de Dios, y todo lo demás en referencia a Él»." },
+        { "text": "Conocerle a Él: «Aceptar perder todas las cosas para ganar a Cristo» (Flp 3, 8)." }
+      ],
+      "citation": "CEC 425-429",
+      "motif": "chi-rho"
+    },
+    {
+      "id": "jn-1-14",
+      "layout": "scripture",
+      "label": "Jn 1, 14",
+      "reference": "Juan 1, 14",
+      "text": "«Y la Palabra se hizo carne, y puso su morada entre nosotros, y hemos visto su gloria, gloria que recibe del Padre como Hijo único, lleno de gracia y de verdad.»",
+      "commentary": "Esta es la Buena Nueva de Jesucristo, Hijo de Dios (Mc 1, 1).",
+      "citation": "CEC 423, 463 · YOUCAT 74",
+      "motif": "cross"
+    },
+    {
+      "id": "jesus",
+      "layout": "doctrine",
+      "label": "Jesús",
+      "kicker": "EL NOMBRE QUE LO ES TODO",
+      "title": "Jesús",
+      "subtitle": "«Dios salva»",
+      "lead": "En hebreo: Yéhoshúa. En el momento de la Anunciación, el ángel Gabriel le dio como nombre propio el nombre de Jesús, que expresa a la vez su identidad y su misión.",
+      "points": [
+        { "text": "«Porque él salvará a su pueblo de sus pecados» (Mt 1, 21)." },
+        { "text": "«No hay bajo el cielo otro nombre dado a los hombres por el que nosotros debamos salvarnos» (Hch 4, 12)." },
+        { "text": "El Nombre de Jesús está en el corazón de la plegaria cristiana: «Señor Jesucristo, Hijo de Dios, ten piedad de mí pecador»." }
+      ],
+      "citation": "CEC 430-435 · YOUCAT 72"
+    },
+    {
+      "id": "cristo",
+      "layout": "doctrine",
+      "label": "Cristo",
+      "kicker": "EL NOMBRE DE LA UNCIÓN",
+      "title": "Cristo",
+      "subtitle": "«Ungido» · «Mesías»",
+      "lead": "Cristo viene de la traducción griega del término hebreo Mashîaj, «ungido». Es nombre propio de Jesús porque Él cumple perfectamente la misión divina que esa palabra significa.",
+      "points": [
+        { "term": "Sacerdote", "text": "ungido para ofrecer el sacrificio de la Alianza (Hb 4, 14)." },
+        { "term": "Profeta", "text": "ungido para anunciar la Palabra del Señor (Mt 13, 57)." },
+        { "term": "Rey", "text": "ungido para servir y dar su vida en rescate por muchos (Mc 10, 45)." }
+      ],
+      "citation": "CEC 436-440 · YOUCAT 73"
+    },
+    {
+      "id": "nombres-del-hijo",
+      "layout": "divider",
+      "label": "1. Los nombres del Hijo",
+      "kicker": "PRIMERA PARTE",
+      "title": "Los nombres del Hijo",
+      "subtitle": "Jesús · Cristo · Hijo único · Señor",
+      "motif": "trinity"
+    },
+    {
+      "id": "hijo-unico",
+      "layout": "doctrine",
+      "label": "Hijo único de Dios",
+      "kicker": "LA RELACIÓN ÚNICA Y ETERNA",
+      "title": "Hijo único de Dios",
+      "quote": {
+        "text": "«Los evangelios narran en dos momentos solemnes, el Bautismo y la Transfiguración de Cristo, que la voz del Padre lo designa como su \"Hijo amado\" (Mt 3, 17; 17, 5).»",
+        "source": "CEC 444"
+      },
+      "columns": [
+        {
+          "heading": "Lo que confiesa la Iglesia",
+          "text": "Jesucristo es el Hijo único del Padre (Jn 1, 14. 18; 3, 16. 18) y Él mismo es Dios (Jn 1, 1). Para ser cristiano es necesario creer que Jesucristo es el Hijo de Dios."
+        },
+        {
+          "heading": "Lo que implica para nosotros",
+          "text": "«Constituido Hijo de Dios con poder, según el Espíritu de santidad, por su Resurrección de entre los muertos» (Rm 1, 4). Su filiación divina se manifiesta en el poder de su humanidad glorificada."
+        }
+      ],
+      "citation": "CEC 441-445 · YOUCAT 74",
+      "motif": "heart"
+    },
+    {
+      "id": "senor",
+      "layout": "doctrine",
+      "label": "Señor",
+      "kicker": "LA SOBERANÍA DIVINA",
+      "title": "Señor",
+      "subtitle": "Kyrios",
+      "quote": {
+        "text": "«Nadie puede decir: \"¡Jesús es Señor!\" sino por influjo del Espíritu Santo» (1 Co 12, 3)."
+      },
+      "points": [
+        { "text": "En la traducción griega del Antiguo Testamento, el nombre inefable YHWH se traduce por Kyrios, «Señor»." },
+        { "text": "El Nuevo Testamento aplica a Jesús este título divino: el mismo Jesús se atribuye explícitamente el título ante los Apóstoles (Jn 13, 13)." },
+        { "text": "«El hombre no debe someter su libertad, de modo absoluto, a ningún poder terrenal sino sólo a Dios Padre y al Señor Jesucristo» (CEC 450)." }
+      ],
+      "citation": "CEC 446-451 · YOUCAT 75",
+      "motif": "crown"
+    },
+    {
+      "id": "resumen-nombres",
+      "layout": "summary",
+      "label": "Resumen · nombres de Cristo",
+      "kicker": "EN RESUMEN",
+      "title": "Los nombres de Cristo",
+      "items": [
+        { "term": "Jesús", "text": "«Dios salva». El niño nacido de la Virgen María se llama Jesús «porque él salvará a su pueblo de sus pecados» (Mt 1, 21)." },
+        { "term": "Cristo", "text": "«Ungido», «Mesías». Jesús es el Cristo porque «Dios le ungió con el Espíritu Santo y con poder» (Hch 10, 38)." },
+        { "term": "Hijo de Dios", "text": "El Hijo único del Padre y Él mismo es Dios. Para ser cristiano es necesario creer que Jesucristo es el Hijo de Dios." },
+        { "term": "Señor", "text": "«Señor» significa soberanía divina. Confesar o invocar a Jesús como Señor es creer en su divinidad." }
+      ],
+      "citation": "CEC 452-455"
+    },
+    {
+      "id": "encarnacion",
+      "layout": "divider",
+      "label": "2. La Encarnación",
+      "kicker": "SEGUNDA PARTE",
+      "title": "La Encarnación",
+      "subtitle": "«Y la Palabra se hizo carne» (Jn 1, 14)",
+      "motif": "alpha-omega"
+    },
+    {
+      "id": "por-que-hombre",
+      "layout": "doctrine",
+      "label": "¿Por qué se hizo hombre?",
+      "kicker": "EL POR QUÉ DE LA ENCARNACIÓN",
+      "title": "¿Por qué se hizo Dios hombre en Jesús?",
+      "quote": {
+        "text": "«Por nosotros, los hombres, y por nuestra salvación, bajó del cielo.»",
+        "source": "Credo de Nicea-Constantinopla"
+      },
+      "points": [
+        { "text": "«Para rescatar a los que se hallaban bajo la Ley, y para que recibiéramos la filiación adoptiva» (Ga 4, 4-5)." },
+        { "text": "«Para revelar el amor del Padre a los hombres» — el Verbo se hace visible al ojo y al oído humanos." },
+        { "text": "«Para ser nuestro modelo de santidad»: «sed perfectos como vuestro Padre celestial es perfecto» (Mt 5, 48)." }
+      ],
+      "citation": "CEC 456-460 · YOUCAT 76",
+      "images": [
+        {
+          "src": "assets/s13-annunciation.jpg",
+          "alt": "Anunciación: el ángel Gabriel anuncia a María que concebirá al Hijo de Dios",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "dios-y-hombre",
+      "layout": "doctrine",
+      "label": "Verdadero Dios y verdadero hombre",
+      "kicker": "LA UNIÓN HIPOSTÁTICA",
+      "title": "Verdadero Dios y verdadero hombre",
+      "columns": [
+        {
+          "heading": "Naturaleza divina",
+          "text": "Jesucristo es la Segunda Persona de la Trinidad. Igual al Padre en cuanto a la divinidad: «En el principio era el Verbo, y el Verbo estaba en Dios, y el Verbo era Dios» (Jn 1, 1)."
+        },
+        {
+          "heading": "Naturaleza humana",
+          "text": "Jesús «trabajó con manos de hombre, pensó con inteligencia de hombre, obró con voluntad de hombre» (YOUCAT 79). Alma, espíritu y cuerpo como los nuestros."
+        }
+      ],
+      "closing": "«Dos naturalezas, divina y humana, no confundidas, sino unidas en la única Persona del Hijo de Dios» — Concilio de Calcedonia, año 451.",
+      "citation": "CEC 461-469 · YOUCAT 77",
+      "motif": "chi-rho"
+    },
+    {
+      "id": "lc-1-38",
+      "layout": "scripture",
+      "label": "Lc 1, 38",
+      "reference": "Lucas 1, 38",
+      "text": "«He aquí la esclava del Señor; hágase en mí según tu palabra.»",
+      "commentary": "El «sí» de María hace posible la Encarnación: por su asentimiento activo se realizó la obra de la salvación.",
+      "citation": "Lc 1, 38 · CEC 494 · YOUCAT 84",
+      "motif": "cross",
+      "images": [
+        {
+          "src": "assets/s15-mary-yes.jpg",
+          "alt": "María pronuncia su «sí» ante el ángel de la Anunciación",
+          "slot": "left"
+        }
+      ]
+    },
+    {
+      "id": "concebido",
+      "layout": "doctrine",
+      "label": "Concebido por obra del Espíritu Santo",
+      "kicker": "LA CONCEPCIÓN VIRGINAL",
+      "title": "Concebido por obra del Espíritu Santo",
+      "quote": {
+        "text": "«El Espíritu Santo descenderá sobre ti, y el poder del Altísimo te cubrirá con su sombra; por eso el que ha de nacer será santo y será llamado Hijo de Dios» (Lc 1, 35).",
+        "source": "Lc 1, 35"
+      },
+      "points": [
+        { "text": "El Espíritu Santo es quien llamó a la vida humana a Jesús en el seno de la Virgen María." },
+        { "text": "No hay padre humano: «Dios quiso que Jesucristo tuviera una verdadera madre humana, pero sólo a Dios como Padre» (YOUCAT 80)." },
+        { "text": "La concepción virginal manifiesta que es obra trinitaria: el Padre envía, el Verbo se encarna, el Espíritu Santo consagra." }
+      ],
+      "citation": "CEC 484-486 · YOUCAT 80",
+      "motif": "dove"
+    },
+    {
+      "id": "madre-de-dios",
+      "layout": "doctrine",
+      "label": "María, Madre de Dios",
+      "kicker": "MARÍA, MADRE DE DIOS",
+      "title": "Nacido de Santa María Virgen",
+      "quote": {
+        "text": "«Quien llama a María Madre de Dios confiesa con ello que su hijo Jesús es Dios.»",
+        "source": "YOUCAT 82"
+      },
+      "columns": [
+        {
+          "heading": "María, la Madre",
+          "text": "«El Hijo del Altísimo será llamado santo, llamado Hijo de Dios» (Lc 1, 35). Por su maternidad divina, María es verdaderamente Madre de Dios."
+        },
+        {
+          "heading": "María, nuestra madre",
+          "text": "«Mujer, ahí tienes a tu hijo [...]. Ahí tienes a tu madre» (Jn 19, 26-27). Cristo nos la dio como madre."
+        }
+      ],
+      "citation": "CEC 487-511 · YOUCAT 80-85",
+      "images": [
+        {
+          "src": "assets/s17-theotokos.jpg",
+          "alt": "Theotokos: la Virgen María, Madre de Dios, con el Niño",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "treinta-anos",
+      "layout": "reflection",
+      "label": "Los treinta años ocultos",
+      "kicker": "REFLEXIÓN",
+      "title": "Los treinta años ocultos",
+      "text": "«Jesús quería compartir con nosotros su vida y santificar con ello nuestra vida cotidiana: el trabajo, la familia, el silencio de Nazaret, las comidas, las oraciones del sábado.»",
+      "attribution": "— YOUCAT 86",
+      "motif": "ichthys"
+    },
+    {
+      "id": "vida-publica",
+      "layout": "doctrine",
+      "label": "Bautismo, tentaciones y transfiguración",
+      "kicker": "LA VIDA PÚBLICA — EL COMIENZO",
+      "title": "Bautismo, tentaciones, transfiguración",
+      "points": [
+        { "term": "Bautismo", "text": "«Tú eres mi Hijo amado, en ti tengo mi complacencia» (Mc 1, 11). Jesús se sumerge en la historia de pecado de la humanidad para redimirla." },
+        { "term": "Tentaciones", "text": "«A la verdadera humanidad de Jesús pertenece la posibilidad de ser tentado» (YOUCAT 88). Permanece libre frente al mal." },
+        { "term": "Transfiguración", "text": "«El Padre quería manifestar ya en la vida terrena de Jesús la gloria divina de su Hijo» (YOUCAT 93). La nube y la luz anticipan la Pascua." }
+      ],
+      "citation": "CEC 535-556 · YOUCAT 87, 88, 93",
+      "motif": "rays-up"
+    },
+    {
+      "id": "pascua",
+      "layout": "divider",
+      "label": "3. La Pascua",
+      "kicker": "TERCERA PARTE",
+      "title": "La Pascua del Señor",
+      "subtitle": "Pasión · Cruz · Muerte · Sepultura · Resurrección · Ascensión",
+      "motif": "cross"
+    },
+    {
+      "id": "padecio",
+      "layout": "doctrine",
+      "label": "Padeció bajo Poncio Pilato",
+      "kicker": "LA PASIÓN — ARTÍCULO 4",
+      "title": "Padeció bajo Poncio Pilato",
+      "subtitle": "fue crucificado, muerto y sepultado",
+      "points": [
+        { "term": "Histórico", "text": "Condenado a muerte bajo el procurador Poncio Pilato, durante el emperador Tiberio." },
+        { "term": "Libre", "text": "«Nadie me quita la vida, sino que yo la doy de mí mismo» (Jn 10, 18)." },
+        { "term": "Redentor", "text": "«Dar su vida como rescate por muchos» (Mt 20, 28)." }
+      ],
+      "citation": "CEC 595-623 · YOUCAT 96",
+      "images": [
+        {
+          "src": "assets/s21-crown-thorns.jpg",
+          "alt": "Corona de espinas, signo de la Pasión de Cristo",
+          "slot": "top"
+        }
+      ]
+    },
+    {
+      "id": "cruz",
+      "layout": "doctrine",
+      "label": "La Cruz",
+      "kicker": "EL LUGAR DE LA MÁXIMA HUMILLACIÓN",
+      "title": "La Cruz",
+      "quote": {
+        "text": "«La Cruz, en la que Jesús inocente fue ajusticiado, es el lugar de la máxima humillación y abandono.»",
+        "source": "YOUCAT 101"
+      },
+      "points": [
+        { "term": "Muerte real", "text": "De su costado salió sangre y agua (Jn 19, 34)." },
+        { "term": "Sepultura", "text": "José de Arimatea lo puso en un sepulcro nuevo (Mt 27, 59-60)." },
+        { "term": "Memorial", "text": "En la Última Cena instituyó la Eucaristía, «memorial» (CEC 610-611)." }
+      ],
+      "citation": "CEC 619-623, 633 · YOUCAT 101-103",
+      "images": [
+        {
+          "src": "assets/s22-crucifixion.jpg",
+          "alt": "Crucifixión de Jesucristo en el Calvario",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "lc-23-46",
+      "layout": "scripture",
+      "label": "Lc 23, 46",
+      "reference": "Lucas 23, 46",
+      "text": "«Padre, en tus manos encomiendo mi espíritu.»",
+      "commentary": "Jesús muere orando. Su última palabra no es un grito de abandono, sino un acto de confianza filial: pone su vida en las manos del Padre.",
+      "citation": "Lc 23, 46 · CEC 624, 2605",
+      "motif": "cross"
+    },
+    {
+      "id": "infiernos",
+      "layout": "doctrine",
+      "label": "Descendió a los infiernos",
+      "kicker": "EL DESCENSO A LOS INFIERNOS",
+      "title": "Descendió a los infiernos",
+      "quote": {
+        "text": "«El evangelio es predicado también a los muertos [...], para que sean juzgados según los hombres en la carne, pero vivan según Dios en el espíritu» (1 P 4, 6).",
+        "source": "1 P 4, 6"
+      },
+      "columns": [
+        {
+          "heading": "«Infiernos» — Hades",
+          "text": "No es el infierno de la condenación, sino el «sheol»/hades: el lugar donde aguardan los justos muertos antes de la redención consumada."
+        },
+        {
+          "heading": "Sentido del descenso",
+          "text": "Cristo muerto visita a los muertos como Dios victorioso: «Levantándose de los infiernos, el Señor sacó a los cautivos» (CEC 637)."
+        }
+      ],
+      "citation": "CEC 631-637",
+      "motif": "rays-down"
+    },
+    {
+      "id": "resucito",
+      "layout": "doctrine",
+      "label": "Al tercer día resucitó",
+      "kicker": "LA RESURRECCIÓN",
+      "title": "Al tercer día, resucitó",
+      "quote": {
+        "text": "«Si Cristo no ha resucitado, vana es nuestra predicación y vana también vuestra fe» (1 Co 15, 14).",
+        "source": "1 Co 15, 14"
+      },
+      "points": [
+        { "text": "«Se dejó tocar, comió con ellos y les enseñó las heridas» (YOUCAT 107)." },
+        { "text": "Tránsito al estado definitivo de gloria: «un cuerpo espiritual» (1 Co 15, 44)." },
+        { "text": "«La verdad culminante de toda la fe cristiana»: confirma la divinidad de Cristo." }
+      ],
+      "citation": "CEC 638-655 · YOUCAT 104-108",
+      "images": [
+        {
+          "src": "assets/s25-resurrection.jpg",
+          "alt": "Cristo resucitado sale del sepulcro",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "ascendio",
+      "layout": "doctrine",
+      "label": "Ascendió a los cielos",
+      "kicker": "LA ASCENSIÓN",
+      "title": "Ascendió a los cielos",
+      "quote": {
+        "text": "«Con Jesús uno de nosotros ha llegado junto a Dios y está allí para siempre.»",
+        "source": "YOUCAT 109"
+      },
+      "points": [
+        { "text": "«Cuando yo sea elevado sobre la tierra, atraeré a todos hacia mí» (Jn 12, 32)." },
+        { "text": "Jesús entra con toda su humanidad en la gloria de Dios. «El hombre encuentra sitio en Dios» — Benedicto XVI." },
+        { "text": "Sigue presente en la Palabra, los Sacramentos y donde dos o tres están reunidos (Mt 18, 20)." }
+      ],
+      "citation": "CEC 659-667 · YOUCAT 109",
+      "images": [
+        {
+          "src": "assets/s26-ascension.jpg",
+          "alt": "Ascensión de Cristo a los cielos ante los apóstoles",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "sentado",
+      "layout": "doctrine",
+      "label": "Sentado a la derecha del Padre",
+      "kicker": "LA EXALTACIÓN",
+      "title": "Sentado a la derecha",
+      "subtitle": "y Juez del universo",
+      "quote": {
+        "text": "«Siéntate a mi derecha, hasta que yo ponga a tus enemigos por escabel de tus pies» (Sal 109, 1)."
+      },
+      "columns": [
+        {
+          "heading": "Sentado a la derecha",
+          "text": "«Señorear» significa reinar. Inauguración del Reino: el poder soberano del Resucitado."
+        },
+        {
+          "heading": "Juez del universo",
+          "text": "«Cristo glorioso revelará la disposición secreta de los corazones y dará a cada uno según sus obras» (CEC 682)."
+        }
+      ],
+      "citation": "CEC 663-667, 668-682",
+      "images": [
+        {
+          "src": "assets/s27-christ-majesty.jpg",
+          "alt": "Cristo en majestad, entronizado como Señor y Juez",
+          "slot": "right"
+        }
+      ]
+    },
+    {
+      "id": "juzgar",
+      "layout": "doctrine",
+      "label": "Ha de venir a juzgar",
+      "kicker": "LA PARUSÍA — ARTÍCULO 7",
+      "title": "Desde allí ha de venir a juzgar",
+      "subtitle": "a los vivos y a los muertos",
+      "quote": {
+        "text": "«Jesucristo es Señor del mundo y Señor de la historia porque todo fue creado para él. Todos los hombres han sido salvados por él y serán juzgados por él.»",
+        "source": "YOUCAT 110"
+      },
+      "columns": [
+        {
+          "heading": "¿Qué cambiará?",
+          "text": "«Habrá un cielo nuevo y una tierra nueva. Enjugará toda lágrima de sus ojos, y ya no habrá muerte, ni duelo, ni llanto, ni dolor» (Ap 21, 1.4)."
+        },
+        {
+          "heading": "¿Qué juicio?",
+          "text": "«Quien no quiere saber nada del amor, no le puede ayudar Cristo; se juzga a sí mismo» (YOUCAT 112)."
+        }
+      ],
+      "citation": "CEC 668-682 · YOUCAT 110-112",
+      "motif": "flame"
+    },
+    {
+      "id": "resumen-credo",
+      "layout": "summary",
+      "label": "Resumen · el Credo",
+      "kicker": "EN RESUMEN",
+      "title": "Lo que confesamos en el Credo",
+      "numbering": "arabic",
+      "items": [
+        { "text": "Creo en Jesucristo, su único Hijo, Nuestro Señor: Dios verdadero y hombre verdadero." },
+        { "text": "Concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen." },
+        { "text": "Padeció bajo Poncio Pilato, fue crucificado, muerto y sepultado." },
+        { "text": "Descendió a los infiernos; al tercer día resucitó de entre los muertos." },
+        { "text": "Subió a los cielos y está sentado a la derecha de Dios, Padre Todopoderoso." },
+        { "text": "Desde allí ha de venir a juzgar a los vivos y a los muertos." }
+      ],
+      "citation": "CEC 422-682 · YOUCAT 71-112"
+    },
+    {
+      "id": "cierre",
+      "layout": "closing",
+      "label": "Cierre · comunión en Cristo",
+      "kicker": "COMUNIÓN EN CRISTO",
+      "text": "«Lo que hemos visto y oído, os lo anunciamos, para que también vosotros estéis en comunión con nosotros. Y nosotros estamos en comunión con el Padre y con su Hijo, Jesucristo.»",
+      "reference": "1 Juan 1, 3",
+      "amen": true,
+      "motif": "cross"
+    }
+  ]
+}

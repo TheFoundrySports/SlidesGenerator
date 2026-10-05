@@ -2,6 +2,31 @@
 
 All notable changes to SlidesChurch are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.3.0 — 2026-10-05
+
+Rewrite as a deck-as-data system. Not backwards compatible; the previous implementation lives in `legacy/`.
+
+### Added
+
+- Decks are `decks/<slug>/deck.json` + `brief.md`; one build renders one standalone HTML per deck.
+- Node + TypeScript + React + Zod engine, Vite preview app and presenter, Vitest tests.
+- Pluggable design packs (`designs/<id>/`), with `catechism-liturgical` as the first and `_template` for new ones; JSON Schema per design in `schemas/`.
+- Two-stage lint (JSON rules and rendered-HTML rules) with P0/P1/P2 severities.
+- PPTX importer (`import:pptx`) and exporter (`export:pptx`).
+- Agents: `slide-builder`, `pptx-importer`, `design-author`.
+- Decks migrated: `jesuscristo-capitulo-2`, `demo`.
+- Edit speaker notes in the presenter (`E` / «Editar», markdown, autosave to `decks/<slug>/brief.md` through `npm run serve`), live sync to the presenter window, and «Exportar» to download all notes as markdown.
+- Hairline page frame on every slide of `catechism-liturgical` (`--frame-inset`; the festive variant keeps its double gold frame).
+
+### Fixed
+
+- `ichthys` motif redrawn as the classic two crossing arcs with a tail (it was a fat closed oval with a detached tail).
+- `alpha-omega` motif: removed the stray vertical tick and centered the A and Ω.
+
+### Removed
+
+- Python tooling (except legacy OCR), per-deck hand-written HTML, `presenter.html`, `scripts/lint-deck.js`, and the `gentle-ai-*` / `slide-craft` agents.
+
 ## v0.2.1 — 2026-10-05
 
 Patch release. Cleanup of the example decks from v0.1.0. No system changes; the slide-craft, presenter, and importer are unchanged.
