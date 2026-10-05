@@ -1,0 +1,50 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Look: typographic
+ * Purpose: slides where text is the visual — large display quotes,
+ *          single verse features, memorable sentence reveals.
+ * Budget: max 1 per deck.
+ * Valid archetypes: Scripture, Reflection.
+ * ───────────────────────────────────────────────────────────────── */
+
+/* Body text: pull up to display serif and a larger tier. */
+.look-typographic .slide p {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-display);
+}
+
+/* The named prose blocks become very large display, italic, display-led. */
+.look-typographic .slide .scripture,
+.look-typographic .slide .reflection {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--text-3xl);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Titles also at the top tier; the headline value slides into the largest
+   size in the type scale. */
+.look-typographic .slide h1,
+.look-typographic .slide h2 {
+  font-size: var(--text-3xl);
+}
+
+/* Footnotes and citations also pull up to display serif and a larger tier. */
+.look-typographic .scripture-ref,
+.look-typographic .ccc-ref,
+.look-typographic .prayer .amen,
+.look-typographic .blessing {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-display);
+}
+
+/* In typographic mode the ornament reads in ink, not gold — the text
+   is the only highlight. */
+.look-typographic .ornament,
+.look-typographic .ornament svg {
+  color: var(--fg);
+}

@@ -1,0 +1,14 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Shape: ultrawide-21:9 — 2520 × 1080
+ * Cinematic banner. Vertical center-band is the safe area; side
+ * margins widen to preserve the aspect ratio.
+ * ───────────────────────────────────────────────────────────────── */
+
+.stage {
+  width: 2520px;
+  height: 1080px;
+}
+
+.stage .slide {
+  padding: 96px 240px;
+}

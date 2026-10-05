@@ -1,0 +1,9 @@
+/* ─────────────────────────────────────────────────────────────────
+ * Shape: landscape-16:9 — 1920 × 1080
+ * Default. Projector, screen, the canonical SlidesChurch canvas.
+ * ───────────────────────────────────────────────────────────────── */
+
+.stage {
+  width: 1920px;
+  height: 1080px;
+}
