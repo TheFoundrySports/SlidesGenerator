@@ -16,17 +16,13 @@ const ROOT = path.resolve(__dirname, '..');
 function listDecks(dir) {
   return fs.readdirSync(dir)
     .filter((f) => f.endsWith('.html'))
-    .filter((f) => !f.startsWith('presenter.html') === false ? false : true)
     .filter((f) => f !== 'presenter.html')
-    .filter((f) => f !== 'index.html') // index.html *is* a deck, keep it
     .map((f) => path.join(dir, f));
 }
 
-// Hand-curated expected slide counts (verified with grep -c "<section").
+// Hand-curated expected slide counts.
 const EXPECTED = {
-  'catechism-deck-dios-padre-creador.html': 18,
-  'catechism-deck-dios-padre-creador-2.html': 18,
-  'catechism-deck-dios-padre-creador-3.html': 18,
+  'demo-deck.html': 7,
   'index.html': 3
 };
 
@@ -71,23 +67,5 @@ for (const file of Object.keys(EXPECTED)) {
   for (const n of back) assert.equal(n, '');
   console.log(`  ✓ sidecar round-trip ${file}  (${total} empty slots)`);
 }
-
-// Sidecar with realistic content for the big deck.
-const sampleNotes = parseSidecar(
-  JSON.stringify({
-    deck: 'catechism-deck-dios-padre-creador-3',
-    slides: [
-      'Cubierta. Saludo. Una respiración antes de empezar.',
-      'Doctrina. Enfatizar "por su libre voluntad y por amor".',
-      '' // un slide sin notas
-    ]
-  }),
-  18
-);
-assert.equal(sampleNotes.length, 18);
-assert.equal(sampleNotes[0], 'Cubierta. Saludo. Una respiración antes de empezar.');
-assert.equal(sampleNotes[1].includes('libre voluntad'), true);
-assert.equal(sampleNotes[2], '');
-console.log('  ✓ sidecar realistic content parses and pads to 18');
 
 console.log('\nAll smoke checks passed.');

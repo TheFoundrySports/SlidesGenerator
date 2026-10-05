@@ -2,6 +2,20 @@
 
 All notable changes to SlidesChurch are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.2.1 — 2026-10-05
+
+Patch release. Cleanup of the example decks from v0.1.0. No system changes; the slide-craft, presenter, and importer are unchanged.
+
+### Removed
+
+- `catechism-deck-dios-padre-creador.html` (v1) and its notes sidecar.
+- `catechism-deck-dios-padre-creador-2.html` (v2).
+- `catechism-deck-dios-padre-creador-3.html` (v3).
+- The corresponding DECKS entries in `presenter.js`.
+- The sample-notes test in `tests/smoke-parse-decks.js` (was hardcoded for v1).
+
+The `slides/img/cleaned/` directory (raster content used by v1) is still on disk and `.gitignore`-d, but no longer referenced by any deck in the repo. Regenerate with `generate_deck.py` if you want to bring a v1-style deck back.
+
 ## v0.2.0 — 2026-10-05
 
 Minor release. Adds a deterministic PPTX → HTML importer that takes any PowerPoint file and produces a catechetical HTML deck honoring the design system. The importer is the third piece of the slide-craft system, after the manual scaffolds (v0.1.0) and the visual styles + shapes (v0.1.1).

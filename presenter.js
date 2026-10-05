@@ -21,21 +21,6 @@
   // ship a curated list. Add new entries here as new decks land.
   const DECKS = [
     {
-      file: 'catechism-deck-dios-padre-creador.html',
-      title: 'Dios Padre Creador · v1',
-      label: '01 Cover · v1'
-    },
-    {
-      file: 'catechism-deck-dios-padre-creador-2.html',
-      title: 'Dios Padre Creador · v2',
-      label: '01 Cover · v2'
-    },
-    {
-      file: 'catechism-deck-dios-padre-creador-3.html',
-      title: 'Dios Padre Creador · v3',
-      label: '01 Cover · v3'
-    },
-    {
       file: 'demo-deck.html',
       title: 'Demo · PPTX importada',
       label: '01 Cover · demo'

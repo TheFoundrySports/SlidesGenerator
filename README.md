@@ -100,7 +100,7 @@ Each deck `<name>.html` may have a sibling `<name>.notes.json`:
 
 ```json
 {
-  "deck": "catechism-deck-dios-padre-creador-3",
+  "deck": "demo-deck",
   "slides": [
     "Notes for slide 1 — plain text or light markdown.",
     "Notes for slide 2 — keep it to the speaker's eye.",
@@ -158,7 +158,7 @@ Insert Divider (G) between sub-chapters and Prayer (E) as connective tissue. Nev
 ### Run the lint on the existing decks
 
 ```bash
-node scripts/lint-deck.js catechism-deck-dios-padre-creador*.html index.html
+node scripts/lint-deck.js demo-deck.html index.html
 ```
 
 Current results: v1 + index clean; v2 + v3 each show one P1 (`<img>` without `loading="lazy"`). These are pre-existing deviations in the older decks, not from slide-craft.
@@ -336,8 +336,8 @@ SlidesChurch/
 │   └── extending-slide-craft.md   # how to add a new style/shape/archetype
 │
 ├── DESIGN.md                   # canonical catechism design contract (850 lines)
-├── catechism-deck-dios-padre-creador*.html   # 3 example decks
-│   └── *.notes.json            # 18 notes per v1 deck (read-only sidecar)
+├── demo-deck.html             # generated demo (PPTX importer output)
+├── demo-deck.notes.json       # empty sidecar, ready for notes
 │
 ├── package.json                # npm scripts: test, lint
 ├── LICENSE                     # MIT
