@@ -3,6 +3,13 @@ name: Branch name convention
 # Enforces that every PR into this repo comes from a branch whose name
 # contains an issue number in the form #NNN (e.g. feat/#123-add-foo).
 # Pattern: /^.*#\d+.*$/  (RE2; same shape as the repo ruleset)
+#
+# Exempt: bot PRs that don't follow the convention. Listed by head_ref
+# prefix below; these are the well-known GitHub/App bots authenticated
+# by GitHub itself, so the prefix cannot be impersonated by a fork.
+# If you exempt a branch prefix here, also add it to repo ruleset
+# #24521221 or automerge on those PRs will still be blocked by the
+# ruleset side.
 
 on:
   pull_request:
@@ -22,15 +29,28 @@ jobs:
           HEAD_REF: ${{ github.head_ref }}
         run: |
           set -euo pipefail
+          shopt -s nocasematch
           if [[ -z "${HEAD_REF}" ]]; then
-            err="::error::Could not determine head_ref (expected on pull_request events)."
+            err="::error::Could not determine head_ref"
+            err+=" (expected on pull_request events)."
             echo "${err}"
             exit 1
           fi
 
+          # Bot PRs (Dependabot, Renovate, GitHub Copilot coding agent, …)
+          # are exempt from the #NNN convention so automerge can proceed.
+          case "${HEAD_REF}" in
+            dependabot/*|renovate/*|renovate-bot/*|codex/*)
+              echo "Branch '${HEAD_REF}' matches a bot prefix;"
+              echo "skipping #NNN check."
+              exit 0
+              ;;
+          esac
+
           # Mirror of the ruleset pattern: ^.*#\d+.*$
           if [[ ! "${HEAD_REF}" =~ ^.*#[0-9]+.*$ ]]; then
-            err1="::error::Branch name '${HEAD_REF}' must contain an issue number like #123 (pattern: ^.*#\d+.*$)."
+            err1="::error::Branch name '${HEAD_REF}' must contain an issue"
+            err1+=" number like #123 (pattern: ^.*#\d+.*$)."
             err2a="::error::Rename the branch (e.g. 'feat/#42-short-desc'),"
             err2b="::error::then update the PR."
             echo "${err1}"
