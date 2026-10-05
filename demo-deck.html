@@ -64,6 +64,21 @@ body {
 .help { position: absolute; bottom: 32px; left: 48px; font-family: var(--font-mono); font-size: var(--text-meta); letter-spacing: 0.10em; color: var(--muted); z-index: 100; }
 .help kbd { display: inline-block; font-family: var(--font-mono); font-size: 16px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); color: var(--muted); margin: 0 1px; }
 .subtitle { text-align: center; font-family: var(--font-body); font-size: var(--text-lg); color: var(--muted); margin: 0 auto; max-width: 56ch; }
+@media print {
+  @page { size: landscape; margin: 0; }
+  .slide {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 1 !important;
+    transform: none !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .slide:last-of-type { page-break-after: auto; }
+  .counter, .help { display: none !important; }
+  .slide-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+}
 </style>
 </head>
 <body>
