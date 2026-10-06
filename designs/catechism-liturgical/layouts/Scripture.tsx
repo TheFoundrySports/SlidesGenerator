@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
 import { Lines } from "../../../src/components";
-import { Frame, Ornament, citationField, motifField } from "./shared";
+import { Frame, Ornament, citationField, imageFrameField, motifField } from "./shared";
 
 export const scriptureLayout = defineLayout({
   name: "scripture",
@@ -13,10 +13,11 @@ export const scriptureLayout = defineLayout({
     commentary: z.string().optional().describe("One italic sentence of context"),
     citation: citationField,
     motif: motifField,
+    imageFrame: imageFrameField,
   },
   example: { reference: "Génesis 1, 1", text: "«En el principio creó Dios el cielo y la tierra.»", citation: "Gn 1, 1 · CEC 279" },
   component: ({ slide, ctx }) => (
-    <Frame images={slide.images} ctx={ctx}>
+    <Frame images={slide.images} imageFrame={slide.imageFrame} ctx={ctx}>
       <p className="reference">{slide.reference}</p>
       <Ornament name={slide.motif} ctx={ctx} size="sm" />
       <blockquote className={`scripture${slide.text.length > 150 ? " scripture--long" : ""}`}>

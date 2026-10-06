@@ -6,6 +6,10 @@ import { Figure, Motif, stepProps } from "../../../src/components";
 import { MOTIF_NAMES } from "../motifs";
 
 export const motifField = z.enum(MOTIF_NAMES).optional().describe("Optional ornament drawn from the design's motif library");
+export const imageFrameField = z
+  .enum(["framed", "bare"])
+  .default("framed")
+  .describe("`framed` (default): image sits in a bordered plate. `bare`: no border or fill, for transparent PNG diagrams that should sit on the slide background");
 export const citationField = z
   .string()
   .optional()
@@ -50,11 +54,21 @@ export const Points = ({ points, numbering, ctx }: { points: Point[]; numbering:
  * Lays a slide out either as a single centered column or, when it has an image, as a
  * text panel plus a framed plate (slots: right | left | top).
  */
-export const Frame = ({ images, ctx, children }: { images?: ImageRef[]; ctx: RenderContext; children: ReactNode }) => {
+export const Frame = ({
+  images,
+  ctx,
+  imageFrame = "framed",
+  children,
+}: {
+  images?: ImageRef[];
+  ctx: RenderContext;
+  imageFrame?: "framed" | "bare";
+  children: ReactNode;
+}) => {
   const image = images?.[0];
-  if (!image) return <div className="frame">{children}</div>;
+  if (!image || image.slot === "inset") return <div className="frame">{children}</div>;
   const text = <div className="frame frame--panel">{children}</div>;
-  const plate = <Figure image={image} ctx={ctx} className="plate" />;
+  const plate = <Figure image={image} ctx={ctx} className={imageFrame === "bare" ? "plate plate--bare" : "plate"} />;
   return (
     <div className={`split split--${image.slot}`}>
       {image.slot === "right" ? (

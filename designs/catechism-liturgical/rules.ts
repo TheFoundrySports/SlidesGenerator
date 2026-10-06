@@ -11,6 +11,7 @@ export const VALID_COMBINATIONS: Record<string, string[]> = {
   summary: ["monastic"],
   divider: ["monastic", "festive"],
   closing: ["monastic", "festive"],
+  triptych: ["monastic"],
 };
 
 export const VARIANT_BUDGETS: Record<string, number> = { festive: 2, typographic: 1 };

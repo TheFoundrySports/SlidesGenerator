@@ -7,9 +7,10 @@ import { prayerLayout } from "./Prayer";
 import { reflectionLayout } from "./Reflection";
 import { scriptureLayout } from "./Scripture";
 import { summaryLayout } from "./Summary";
+import { triptychLayout } from "./Triptych";
 
 export const catechismLayouts: Record<string, LayoutDef> = Object.fromEntries(
-  [coverLayout, scriptureLayout, doctrineLayout, reflectionLayout, prayerLayout, summaryLayout, dividerLayout, closingLayout].map(
+  [coverLayout, scriptureLayout, doctrineLayout, reflectionLayout, prayerLayout, summaryLayout, dividerLayout, closingLayout, triptychLayout].map(
     (layout) => [layout.name, layout],
   ),
 );

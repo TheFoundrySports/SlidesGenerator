@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
-import { Lines, Paragraphs } from "../../../src/components";
-import { ColumnSchema, Frame, Ornament, PointSchema, Points, QuoteSchema, citationField, motifField, titleClass } from "./shared";
+import { Figure, Lines, Paragraphs } from "../../../src/components";
+import { ColumnSchema, Frame, Ornament, PointSchema, Points, QuoteSchema, citationField, imageFrameField, motifField, titleClass } from "./shared";
 
 export const doctrineLayout = defineLayout({
   name: "doctrine",
   description:
     "C. Doctrine — a doctrinal topic: title, optional quote, then numbered points OR 2-3 headed columns (and an optional closing statement). Optional framed image (right | left | top).",
-  imageSlots: ["right", "left", "top"],
+  imageSlots: ["right", "left", "top", "inset"],
   content: {
     kicker: z.string().optional().describe("Uppercase mono topic line"),
     title: z.string(),
@@ -20,6 +20,7 @@ export const doctrineLayout = defineLayout({
     closing: z.string().optional().describe("Italic closing statement under the points/columns"),
     citation: citationField,
     motif: motifField,
+    imageFrame: imageFrameField,
   },
   example: {
     kicker: "DIOS PADRE",
@@ -28,7 +29,7 @@ export const doctrineLayout = defineLayout({
     citation: "CEC 279",
   },
   component: ({ slide, ctx }) => (
-    <Frame images={slide.images} ctx={ctx}>
+    <Frame images={slide.images} imageFrame={slide.imageFrame} ctx={ctx}>
       <Ornament name={slide.motif} ctx={ctx} size="sm" />
       {slide.kicker && <p className="kicker">{slide.kicker}</p>}
       <h2 className={titleClass(slide.title)}>{slide.title}</h2>
@@ -46,6 +47,9 @@ export const doctrineLayout = defineLayout({
           </p>
           {slide.quote.source && <p className="citation">{slide.quote.source}</p>}
         </blockquote>
+      )}
+      {slide.images?.[0]?.slot === "inset" && (
+        <Figure image={slide.images[0]} ctx={ctx} className={slide.imageFrame === "bare" ? "plate plate--bare" : "plate"} />
       )}
       {slide.points && <Points points={slide.points} numbering={slide.numbering} ctx={ctx} />}
       {slide.columns && (
