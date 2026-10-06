@@ -61,6 +61,8 @@ Regenerating a deck means editing the JSON and rebuilding. Keep slide ids stable
 
 ## Agents
 
+Load the skill in [AGENTS.md](AGENTS.md) before writing a deck or a design. `SKILL.md` is the contract; `agent.md` only points at it.
+
 | Agent | Job |
 |-------|-----|
 | [`slide-builder`](agent/slide-builder/SKILL.md) | Topic → `brief.md` + `deck.json` → validated HTML, in any design. |
