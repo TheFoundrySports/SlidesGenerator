@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { join } from "node:path";
+import { exportDeckPdf, findChrome, PdfExportError } from "../exporters/pdf";
 import { notesSidecar, serializeBriefNotes } from "../render/notes";
 import { DECKS_DIR, DIST_DIR } from "./project";
 
@@ -95,7 +96,31 @@ export const handleApiRequest = async (
   if (!pathname.startsWith("/api/")) return false;
 
   if (pathname === "/api/capabilities" && request.method === "GET") {
-    sendJson(response, 200, { notesWrite: true });
+    sendJson(response, 200, { notesWrite: true, pdf: Boolean(findChrome()) });
+    return true;
+  }
+
+  const pdfMatch = pathname.match(/^\/api\/pdf\/([^/]+)$/);
+  if (pdfMatch && request.method === "GET") {
+    if (!isTrustedWrite(request)) {
+      sendJson(response, 403, { error: "Forbidden" });
+      return true;
+    }
+    const slug = pdfMatch[1] as string;
+    try {
+      const exported = await exportDeckPdf(slug);
+      const bytes = readFileSync(exported.pdfPath);
+      response.writeHead(200, {
+        "Content-Type": "application/pdf",
+        "Content-Length": String(bytes.length),
+        "Content-Disposition": `attachment; filename="${slug}.pdf"`,
+        "Cache-Control": "no-store",
+      });
+      response.end(bytes);
+    } catch (error) {
+      const status = error instanceof PdfExportError ? error.status : 500;
+      sendJson(response, status, { error: (error as Error).message });
+    }
     return true;
   }
 

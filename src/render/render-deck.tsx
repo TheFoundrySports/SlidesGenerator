@@ -3,6 +3,7 @@ import { RUNTIME_SOURCE } from "../runtime/deck-runtime";
 import type { Deck, Slide } from "../schema/core";
 import type { Design } from "../schema/design-types";
 import type { RenderContext } from "../schema/layout";
+import { shapeDimensions } from "../shapes/dimensions";
 import { tokensCss } from "./css";
 
 export interface RenderOptions {
@@ -86,6 +87,7 @@ export const renderDeckHtml = (deck: Deck, design: Design, opts: RenderOptions):
     ...variantCss,
   ].join("\n\n");
 
+  const [pageWidth, pageHeight] = shapeDimensions(deck.shape);
   const indices = opts.onlySlide === undefined ? deck.slides.map((_, i) => i) : [opts.onlySlide];
   const sections = indices.map((i) => renderSlide(deck, design, i, opts, i === indices[0])).join("\n\n");
 
@@ -112,6 +114,9 @@ ${slideCss}
 </style>
 <style data-scope="page">
 ${mustRead(opts, "src/styles/page.css")}
+</style>
+<style data-scope="print">
+@page { size: ${pageWidth}px ${pageHeight}px; margin: 0; }
 </style>
 </head>
 <body>

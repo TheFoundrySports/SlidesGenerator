@@ -28,6 +28,7 @@ Use this skill to create, extend, or regenerate a SlidesChurch deck as data. Han
 | New slug | `npm run new -- <slug> --design <id> --title "…"`, then write both files. |
 | Folder already exists | Do not run `new`. Edit `deck.json`. Preserve ids and `## Notas`. |
 | No layout fits | Use the closest pack layout, or core `free`. If that fails, ask for `design-author`. |
+| User wants a PDF of the deck | `npm run export:pdf -- <slug>`. |
 
 ## Execution Steps
 

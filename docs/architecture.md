@@ -46,3 +46,4 @@ Severities: **P0** blocks the build, **P1** warns, **P2** informs.
 
 - Import: `src/importers/pptx.ts` extracts text boxes, positions, sizes and images; slides become `free` slides or are mapped to a layout.
 - Export: `src/exporters/pptx.ts` flattens layouts into typographic slides using the design tokens and the deck's palette.
+- PDF: `src/exporters/pdf.ts` rebuilds the deck HTML and prints it with headless Chrome, one slide per page at the shape's canvas size. `npm run serve` exposes the same file at `GET /api/pdf/<slug>` for the presenter.

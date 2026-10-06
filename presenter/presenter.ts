@@ -185,6 +185,7 @@ const initMain = async (): Promise<void> => {
   const notesStatus = byId<HTMLButtonElement>("notes-status");
   const notesEditor = byId<HTMLTextAreaElement>("notes-editor");
   const panelToggle = byId<HTMLButtonElement>("panel-toggle");
+  const pdfExport = byId<HTMLButtonElement>("pdf-export");
   const popupOpen = byId<HTMLButtonElement>("popup-open");
   const helpToggle = byId<HTMLButtonElement>("help-toggle");
   const help = byId("help");
@@ -313,6 +314,34 @@ const initMain = async (): Promise<void> => {
     event.stopPropagation();
     setEditing(false);
     notesEdit.focus();
+  };
+
+  const handlePdfClick = async (): Promise<void> => {
+    if (!current || pdfExport.disabled) return;
+    const slug = slugOf(current.entryFile);
+    if (!slug) return;
+    pdfExport.disabled = true;
+    pdfExport.textContent = "PDF…";
+    try {
+      const response = await fetch(new URL(`api/pdf/${slug}`, DIST_URL), {
+        headers: { "X-SlidesChurch": "1" },
+        cache: "no-store",
+      });
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? `No se pudo crear el PDF (${response.status})`);
+      }
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(await response.blob());
+      link.download = `${slug}.pdf`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      pdfExport.title = (error as Error).message;
+    } finally {
+      pdfExport.disabled = false;
+      pdfExport.textContent = "PDF";
+    }
   };
 
   const downloadNotes = (): void => {
@@ -495,10 +524,15 @@ const initMain = async (): Promise<void> => {
     return;
   }
   try {
-    const capabilities = (await (await fetch(new URL("api/capabilities", DIST_URL), { cache: "no-store" })).json()) as { notesWrite?: boolean };
+    const capabilities = (await (await fetch(new URL("api/capabilities", DIST_URL), { cache: "no-store" })).json()) as {
+      notesWrite?: boolean;
+      pdf?: boolean;
+    };
     canEdit = capabilities.notesWrite === true;
+    pdfExport.hidden = capabilities.pdf !== true;
   } catch {
     canEdit = false; // static host or plain file server: read-only notes + export
+    pdfExport.hidden = true;
   }
   notesEdit.hidden = !canEdit;
   if (decks.length === 0) {
@@ -519,6 +553,7 @@ const initMain = async (): Promise<void> => {
   panelToggle.addEventListener("click", () => toggleNotes());
   notesEdit.addEventListener("click", () => setEditing(!editing));
   notesExport.addEventListener("click", downloadNotes);
+  pdfExport.addEventListener("click", () => void handlePdfClick());
   notesStatus.addEventListener("click", () => void flushSave());
   notesEditor.addEventListener("input", handleEditorInput);
   notesEditor.addEventListener("keydown", handleEditorKeyDown);

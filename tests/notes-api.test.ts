@@ -51,7 +51,7 @@ describe("saveDeckNotes", () => {
 
 describe("notes API", () => {
   it("advertises write support", async () => {
-    expect(await (await fetch(`${base}/api/capabilities`)).json()).toEqual({ notesWrite: true });
+    expect(await (await fetch(`${base}/api/capabilities`)).json()).toMatchObject({ notesWrite: true });
   });
 
   it("writes brief.md and the sidecar, leaving other sections alone", async () => {
@@ -72,6 +72,15 @@ describe("notes API", () => {
     expect((await put("/api/notes/demo", "no json")).status).toBe(400);
     expect((await put("/api/notes/demo", { slides: ["x"] })).status).toBe(400);
     expect((await put("/api/notes/demo", { slides: ["x".repeat(300_000), "y"] })).status).toBe(413);
+  });
+
+  it("refuses a PDF download that does not come from the presenter", async () => {
+    expect((await fetch(`${base}/api/pdf/confirmacion-dios-padre`)).status).toBe(403);
+  });
+
+  it("reports an unknown deck instead of printing", async () => {
+    const response = await fetch(`${base}/api/pdf/no-such-deck`, { headers: { "X-SlidesChurch": "1" } });
+    expect(response.status).toBe(404);
   });
 
   it("ignores non-API paths", async () => {

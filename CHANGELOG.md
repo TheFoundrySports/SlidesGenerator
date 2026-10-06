@@ -4,6 +4,10 @@ All notable changes to SlidesChurch are documented here. Versions follow [Semant
 
 ## Unreleased
 
+### Added
+
+- `npm run export:pdf` prints a built deck to `dist/<slug>/<slug>.pdf` (one slide per page). The presenter shows a PDF button while `npm run serve` is running.
+
 ### Changed
 
 - Agent skills (`slide-builder`, `pptx-importer`, `design-author`) follow the Gentle AI skill contract. `AGENTS.md` is the index. Each `agent.md` only points at its skill.

@@ -66,20 +66,25 @@ body {
 }
 
 @media print {
-  @page { size: landscape; margin: 0; }
+  @page { margin: 0; }
   html, body { height: auto; overflow: visible; }
   body { display: block; width: auto; height: auto; }
-  .stage { transform: none; width: auto; height: auto; overflow: visible; }
+  .stage { transform: none; width: auto; height: auto; overflow: visible; background: transparent; }
+  .slide, .slide * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .slide {
     position: relative;
     width: var(--stage-w);
     height: var(--stage-h);
+    overflow: hidden;
     visibility: visible !important;
     opacity: 1 !important;
     transform: none !important;
-    page-break-after: always;
+    break-inside: avoid;
     page-break-inside: avoid;
+    break-after: auto;
+    page-break-after: auto;
   }
-  .slide:last-of-type { page-break-after: auto; }
+  /* Break before the next slide, not after this one, so the last page is not blank. */
+  .slide + .slide { break-before: page; page-break-before: always; }
   .counter, .help { display: none !important; }
 }

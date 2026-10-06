@@ -28,7 +28,7 @@ designs/<id>/        design.config.ts · tokens/base/variants CSS · layouts/*.t
 designs/_template/   skeleton copied by `npm run new:design`
 schemas/<id>.schema.json   JSON Schema per design (generated, for agents and editors)
 src/                 engine: schema, layouts, render, runtime, lint, importers, exporters
-cli/                 build · validate · new · new-design · designs · schemas · import-pptx · export-pptx · serve
+cli/                 build · validate · new · new-design · designs · schemas · import-pptx · export-pptx · export-pdf · serve
 preview/             Vite dev app (gallery + live deck view)
 presenter/           presenter app (deck picker, notes panel, popup)
 agent/               agent skills: slide-builder, pptx-importer, design-author
@@ -48,6 +48,7 @@ legacy/              the previous HTML/Python system, kept for reference
 | `npm run schemas` | Regenerate `schemas/<id>.schema.json`. |
 | `npm run import:pptx -- <file.pptx> <slug> --design <id> [--map "1:cover,…"]` | PPTX → `deck.json`. |
 | `npm run export:pptx -- <slug>` | `deck.json` → `.pptx` (text-first, with notes). |
+| `npm run export:pdf -- <slug> [--offline]` | Built HTML → `.pdf`, one slide per page. Needs Chrome, Chromium, or Edge (`CHROME_PATH`). The presenter button does the same while `npm run serve` is running. |
 | `npm run dev` / `build:presenter` / `serve` | Preview app, presenter build, static server for `dist/`. |
 | `npm run typecheck` / `npm test` | Type check and Vitest suite. |
 
