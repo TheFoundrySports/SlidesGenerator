@@ -1,0 +1,401 @@
+{
+  "$schema": "../../schemas/catechism-liturgical.schema.json",
+  "id": "confirmacion-dios-padre",
+  "title": "Creo en Dios Padre · CEC 198-324",
+  "lang": "es",
+  "design": "catechism-liturgical",
+  "variant": "monastic",
+  "palette": "ordinary",
+  "meta": {
+    "author": "Curso de Catequesis · Confirmación de Adultos",
+    "sources": [
+      "Catecismo de la Iglesia Católica 198-324",
+      "YOUCAT 30-50"
+    ]
+  },
+  "slides": [
+    {
+      "id": "portada",
+      "layout": "cover",
+      "label": "Portada",
+      "eyebrow": "CURSO DE CATEQUESIS",
+      "lead": "Confirmación de Adultos",
+      "title": "Creo en Dios Padre",
+      "subtitle": "Profesión de la fe cristiana",
+      "reference": "Capítulo primero de la segunda sección · CEC 198-282",
+      "invocation": "En el nombre del Padre, y del Hijo, y del Espíritu Santo.",
+      "motif": "alpha-omega"
+    },
+    {
+      "id": "shema",
+      "layout": "scripture",
+      "label": "Dt 6, 4-5",
+      "reference": "Deuteronomio 6, 4-5",
+      "text": "«Escucha, Israel: el Señor nuestro Dios es el único Señor.\nAmarás al Señor tu Dios con todo tu corazón, con toda tu alma y con toda tu fuerza.»",
+      "commentary": "El Shemá, profesión de fe más antigua de Israel, se sigue rezando hoy antes del descanso de la noche.",
+      "citation": "Dt 6, 4-5 · CEC 200-202",
+      "motif": "heart"
+    },
+    {
+      "id": "creo-en-dios",
+      "layout": "doctrine",
+      "label": "Creo en Dios",
+      "kicker": "LA PRIMERA AFIRMACIÓN",
+      "title": "Creo en Dios",
+      "quote": {
+        "text": "«\"Creo en Dios\": Esta primera afirmación de la Profesión de fe es también la más fundamental.»",
+        "source": "CEC 199"
+      },
+      "lead": "Es la afirmación más importante. La fuente de todas las demás verdades sobre el hombre y sobre el mundo y de toda la vida del que cree en Dios.\nProfesamos un solo Dios porque él se ha revelado al pueblo de Israel como el único.",
+      "citation": "CEC 198-201",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/arco-credo.png",
+          "alt": "Arco de piedra cuya clave es «Creo en Dios»; las dovelas de los lados son «Sacramentos», «Mandamientos» y «Moral cristiana».",
+          "slot": "right",
+          "fit": "contain",
+          "credit": "Material de la lección"
+        }
+      ]
+    },
+    {
+      "id": "yo-soy-el-que-soy",
+      "layout": "triptych",
+      "label": "Yo soy el que soy",
+      "kicker": "ÉXODO 3, 14",
+      "title": "Yo soy el que soy",
+      "leadHeading": "Es Misterio",
+      "lead": "«El que es», sin origen y sin fin, desde siempre y por siempre: Dios transciende el mundo y la historia. Es misterio, infinitamente por encima de todo lo que podemos comprender o decir.",
+      "aside": "Dios es la Verdad misma, ni se engaña ni puede engañar.\n«Dios es Luz, en él no hay tiniebla alguna» (1 Jn 1, 5).\n«Dios es amor» (1 Jn 4, 8.16).\n«Él es rico en amor y fidelidad» (Ex 34, 6).",
+      "asideHeading": "Es Verdad y Amor",
+      "asideSource": "CEC 214",
+      "citation": "Ex 3, 14 · CEC 206, 214 · YOUCAT 31",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/yhwh.png",
+          "alt": "Las letras YHWH, el nombre revelado de Dios, entre dos corchetes.",
+          "slot": "right",
+          "fit": "contain",
+          "credit": "Material de la lección"
+        }
+      ]
+    },
+    {
+      "id": "trinidad",
+      "layout": "doctrine",
+      "label": "La Trinidad",
+      "kicker": "SEGUNDA PARTE",
+      "title": "La Trinidad",
+      "subtitle": "Un solo Dios en tres Personas",
+      "lead": "No es una división de Dios, sino una comunión perfecta de amor. Es el misterio íntimo de Dios al que la sola razón humana no puede llegar sin la Revelación. El Padre engendra al Hijo, el Hijo es engendrado por el Padre, el Espíritu Santo procede del Padre y del Hijo.",
+      "citation": "CEC 234 · YOUCAT 35",
+      "motif": "trinity"
+    },
+    {
+      "id": "padre",
+      "layout": "doctrine",
+      "label": "Dios es «Padre»",
+      "kicker": "LA PATERNIDAD DE DIOS",
+      "title": "Dios es «Padre»",
+      "quote": {
+        "text": "«Al designar a Dios con el nombre de \"Padre\", el lenguaje de la fe indica principalmente dos aspectos: que Dios es origen primero de todo y autoridad transcendente y que es al mismo tiempo bondad y solicitud amorosa para todos sus hijos. [...] Nadie es padre como lo es Dios.»",
+        "source": "CEC 239"
+      },
+      "points": [
+        {
+          "text": "En Israel, Dios es llamado Padre en cuanto Creador del mundo (cf. Dt 32, 6; Ml 2, 10) — CEC 238."
+        },
+        {
+          "text": "«Jesús ha revelado que Dios es \"Padre\" en un sentido nuevo: no lo es sólo en cuanto Creador; Él es eternamente Padre en relación a su Hijo único» (CEC 240)."
+        },
+        {
+          "text": "«Veneramos a Dios como padre por el hecho de que es el Creador y cuida con amor de sus criaturas. Jesús, el Hijo de Dios, nos ha enseñado además a considerar a su Padre como nuestro Padre» (YOUCAT 37)."
+        }
+      ],
+      "citation": "CEC 238-240 · YOUCAT 37"
+    },
+    {
+      "id": "jesus-revela-padre",
+      "layout": "scripture",
+      "label": "Jn 14, 9",
+      "reference": "Juan 14, 9",
+      "text": "«Quien me ha visto a mí, ha visto al Padre.»",
+      "commentary": "Jesús no enseña sobre Dios desde fuera: lo muestra. Ver al Hijo es ver al Padre, porque el Hijo es imagen del Dios invisible.",
+      "citation": "Jn 14, 9 · CEC 240",
+      "motif": "rays-up"
+    },
+    {
+      "id": "misterio-trinidad",
+      "layout": "doctrine",
+      "label": "Un Dios en tres Personas",
+      "kicker": "EL MISTERIO CENTRAL",
+      "title": "Un Dios en tres Personas",
+      "quote": {
+        "text": "«El misterio de la Santísima Trinidad es el misterio central de la fe y de la vida cristiana.»",
+        "source": "CEC 234"
+      },
+      "points": [
+        {
+          "text": "«Sólo Dios puede dárnoslo a conocer revelándose como Padre, Hijo y Espíritu Santo» (CEC 261)."
+        },
+        {
+          "text": "«Creemos en un solo Dios en tres personas (Trinidad). \"Dios no es soledad, sino comunión perfecta\"» (YOUCAT 35)."
+        },
+        {
+          "text": "«La Trinidad de Dios es un misterio. Sólo por Jesucristo sabemos que Dios es Trinidad» (YOUCAT 36)."
+        }
+      ],
+      "closing": "«No es una división de Dios, sino una comunión perfecta de amor, misterio íntimo al que la sola razón humana no puede llegar sin la Revelación. El Padre engendra al Hijo, el Hijo es engendrado por el Padre, el Espíritu Santo procede del Padre y del Hijo.»",
+      "citation": "CEC 234, 261 · YOUCAT 35-36",
+      "motif": "trinity"
+    },
+    {
+      "id": "reflexion-trinidad",
+      "layout": "reflection",
+      "label": "Morada de la Trinidad",
+      "kicker": "REFLEXIÓN",
+      "title": "Morada de la Trinidad",
+      "text": "«Dios mío, Trinidad que adoro, ayúdame a olvidarme enteramente de mí mismo para establecerme en ti, inmóvil y apacible como si mi alma estuviera ya en la eternidad [...]. Pacifica mi alma. Haz de ella tu cielo, tu morada amada y el lugar de tu reposo.»",
+      "attribution": "— Beata Isabel de la Trinidad, O.C.D.",
+      "motif": "dove"
+    },
+    {
+      "id": "creador",
+      "layout": "doctrine",
+      "label": "Dios Padre, Creador",
+      "kicker": "LA CREACIÓN",
+      "title": "Dios Padre, Creador",
+      "quote": {
+        "text": "«El mundo ha sido creado para la gloria de Dios, no para aumentarla, sino para manifestarla y comunicarla.»",
+        "source": "San Buenaventura"
+      },
+      "points": [
+        {
+          "text": "Dios crea a partir de nada absoluta. No necesita materia preexistente."
+        },
+        {
+          "text": "El mundo no es el fruto de una necesidad, de un destino ciego o del azar. Crea libremente por sabiduría y amor."
+        },
+        {
+          "text": "«Dios Padre Creador ha hecho todas las cosas por sí mismo, y por el Hijo y el Espíritu, que son como sus manos» (CEC 279; San Ireneo, Adv. Haer. IV, 20, 1)."
+        }
+      ],
+      "citation": "CEC 279, 295-296 · YOUCAT 44",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/ex-nihilo.png",
+          "alt": "Un círculo de trazo discontinuo, «La Nada», y una flecha «Ex Nihilo» hacia un diseño geométrico, «El Cosmos».",
+          "slot": "inset",
+          "fit": "contain",
+          "credit": "Material de la lección"
+        }
+      ]
+    },
+    {
+      "id": "todopoderoso-providencia",
+      "layout": "doctrine",
+      "label": "Todopoderoso y providente",
+      "kicker": "LA DIVINA PROVIDENCIA",
+      "title": "Todopoderoso y providente",
+      "quote": {
+        "text": "«Dios realiza su designio: la divina Providencia, disposición sabia y amorosa con la que conduce todas las cosas hacia su fin último.»",
+        "source": "CEC 302"
+      },
+      "points": [
+        {
+          "term": "Universal",
+          "text": "«Para Dios nada hay imposible» (Lc 1, 37). Es omnipotente (YOUCAT 40)."
+        },
+        {
+          "term": "Misteriosa",
+          "text": "«Dios dirige el mundo y también mi vida», sí, pero de un modo misterioso: conduce todo por caminos que sólo Él conoce (YOUCAT 49)."
+        },
+        {
+          "term": "Amorosa",
+          "text": "«La impotencia del Viernes Santo fue el requisito de la Resurrección» (YOUCAT 40). «En Dios vivimos, nos movemos y existimos» (Hch 17, 28)."
+        }
+      ],
+      "closing": "«Dios no solo da la existencia; Él mantiene y sostiene a sus criaturas a cada instante por medio de su Verbo» (CEC 302; cf. Col 1, 17).",
+      "citation": "CEC 268, 302 · YOUCAT 40, 49 · Hch 17, 28",
+      "motif": "compass"
+    },
+    {
+      "id": "estado-de-via",
+      "layout": "doctrine",
+      "label": "El estado de vía",
+      "kicker": "LA DIVINA PROVIDENCIA",
+      "title": "El estado de vía",
+      "quote": {
+        "text": "«La creación tiene su bondad y su perfección propias, pero no salió plenamente acabada de las manos del Creador. Fue creada \"en estado de vía\" hacia una perfección última todavía por alcanzar, a la que Dios la destinó.»",
+        "source": "CEC 302"
+      },
+      "closing": "Llamamos divina Providencia a las disposiciones por las que Dios conduce la obra de su creación hacia esta perfección.",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/estado-de-via.png",
+          "alt": "Dos puntos unidos por una curva: el punto A, «Creación original», y el punto B, «Perfección última». La curva es el «Estado de vía».",
+          "slot": "right",
+          "fit": "contain",
+          "credit": "Elaboración propia"
+        }
+      ]
+    },
+    {
+      "id": "designio-providencia",
+      "layout": "doctrine",
+      "label": "Dios realiza su designio",
+      "kicker": "LA DIVINA PROVIDENCIA",
+      "title": "Dios realiza su designio",
+      "lead": "La divina Providencia, disposición sabia y amorosa con la que conduce todas las cosas hacia su fin último.",
+      "citation": "CEC 302, 321",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/providencia-brujula.png",
+          "alt": "Un camino con muchas curvas que va de la creación al fin último, con el glifo de la brújula sobre él.",
+          "slot": "right",
+          "fit": "contain",
+          "credit": "Elaboración propia"
+        }
+      ]
+    },
+    {
+      "id": "dignidad-libertad",
+      "layout": "doctrine",
+      "label": "La dignidad de nuestra libertad",
+      "kicker": "CAUSA PRIMERA Y CAUSAS SEGUNDAS",
+      "title": "La dignidad de nuestra libertad",
+      "quote": {
+        "text": "«Dios no da solamente a sus criaturas la existencia, les da también la dignidad de actuar por sí mismas, de ser causas y principios unas de otras y de cooperar así a la realización de su designio.»",
+        "source": "CEC 306"
+      },
+      "columns": [
+        {
+          "heading": "Causa primera: Dios",
+          "text": "Origen absoluto de todo lo que existe. Para realizar su designio se sirve del concurso de las criaturas. No es debilidad: es grandeza."
+        },
+        {
+          "heading": "Causas segundas: nosotros",
+          "text": "Criaturas inteligentes y libres. Dios nos otorga actuar por nosotros mismos y completar libremente la obra de la creación."
+        }
+      ],
+      "citation": "CEC 306-308"
+    },
+    {
+      "id": "escandalo-del-mal",
+      "layout": "doctrine",
+      "label": "El escándalo del mal",
+      "kicker": "LA PROVIDENCIA Y EL MAL",
+      "title": "El escándalo del mal",
+      "quote": {
+        "text": "«Si Dios Padre todopoderoso, Creador del mundo ordenado y bueno, tiene cuidado de todas sus criaturas, ¿por qué existe el mal?»",
+        "source": "CEC 309"
+      },
+      "numbering": "arabic",
+      "points": [
+        {
+          "text": "Dios no creó un mundo estático y cerrado. Lo creó en estado de vía: con el bien físico existe también el mal físico mientras la creación no haya alcanzado su perfección."
+        },
+        {
+          "text": "Al darnos una libertad real, cabe desviarse. Así entró el mal moral. Dios no es, ni directa ni indirectamente, su causa."
+        }
+      ],
+      "closing": "A esta pregunta, tan apremiante como inevitable, no se puede dar una respuesta simple.",
+      "citation": "CEC 309-311"
+    },
+    {
+      "id": "sabiduria-infinita",
+      "layout": "doctrine",
+      "label": "La sabiduría infinita de Dios",
+      "kicker": "LA SABIDURÍA DE DIOS",
+      "title": "La sabiduría infinita de Dios",
+      "lead": "En su poder infinito, Dios podría haber creado un mundo sin mal. En su bondad quiso libremente un mundo en estado de vía hacia su perfección última.",
+      "quote": {
+        "text": "«Porque el Dios todopoderoso [...] por ser soberanamente bueno, no permitiría jamás que en sus obras existiera algún mal, si Él no fuera suficientemente poderoso y bueno para hacer surgir un bien del mismo mal.»",
+        "source": "San Agustín, Enchiridion, 11, 3 · CEC 311"
+      },
+      "citation": "CEC 310-311",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/sabiduria.png",
+          "alt": "Un círculo de acuarela granate con un punto oscuro en el centro.",
+          "slot": "right",
+          "fit": "contain",
+          "credit": "Material de la lección"
+        }
+      ]
+    },
+    {
+      "id": "resumen",
+      "layout": "doctrine",
+      "label": "Resumen",
+      "kicker": "EN RESUMEN",
+      "title": "Lo que confesamos",
+      "closing": "«Creo en un solo Dios, Padre todopoderoso, Creador del cielo y de la tierra.»",
+      "citation": "CEC 198-324",
+      "imageFrame": "bare",
+      "images": [
+        {
+          "src": "assets/resumen.png",
+          "alt": "Seis etapas unidas por una línea: Un solo Dios, Padre, Trinidad, Creador, Providencia y El mal, cada una con un símbolo y una frase breve.",
+          "slot": "inset",
+          "fit": "contain",
+          "credit": "Elaboración propia"
+        }
+      ]
+    },
+    {
+      "id": "dios-nos-ayuda",
+      "layout": "doctrine",
+      "label": "Actividad · Dios nos ayuda",
+      "kicker": "ACTIVIDAD EN GRUPO",
+      "title": "Dios nos ayuda a través de otros",
+      "subtitle": "Compartimos con el grupo",
+      "columns": [
+        {
+          "heading": "Idea clave",
+          "text": "Dios es el autor de todo, pero cuenta con nosotros para ayudarnos unos a otros."
+        },
+        {
+          "heading": "Actividad en grupo",
+          "text": "Piensa en una persona que te haya ayudado en tu camino de fe.\n¿Qué hizo por ti?"
+        },
+        {
+          "heading": "Para pensar en casa",
+          "text": "¿Cómo puedes ser tú una «ayuda de Dios» para alguien esta semana?"
+        }
+      ],
+      "closing": "Basta un recuerdo concreto. No hace falta explicarlo todo.",
+      "citation": "CEC 306-308"
+    },
+    {
+      "id": "por-que-hay-cosas-malas",
+      "layout": "doctrine",
+      "label": "Actividad · ¿Por qué hay cosas malas?",
+      "kicker": "ACTIVIDAD EN GRUPO",
+      "title": "¿Por qué hay cosas malas?",
+      "subtitle": "Un recuerdo, y una oración para casa",
+      "columns": [
+        {
+          "heading": "Idea clave",
+          "text": "Dios no quiere el mal, pero es tan poderoso y bueno que puede sacar cosas buenas incluso de los momentos difíciles."
+        },
+        {
+          "heading": "Actividad en grupo",
+          "text": "¿Recuerdas alguna vez en que de algo malo o difícil terminara saliendo algo bueno con el tiempo?"
+        },
+        {
+          "heading": "Para pensar en casa",
+          "text": "Haz una oración sencilla pidiendo a Dios confianza cuando las cosas no salgan bien."
+        }
+      ],
+      "closing": "Si no encuentras el recuerdo, dilo. La oración de casa es el paso de esta semana.",
+      "citation": "CEC 309-311"
+    }
+  ]
+}

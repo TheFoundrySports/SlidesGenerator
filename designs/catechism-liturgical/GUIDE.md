@@ -26,7 +26,8 @@ Pick the archetype by the job the slide does. Fields marked `*` are required.
 |--------|-----------|--------|-------------|
 | `cover` | Opens the deck | `title*`, `eyebrow`, `lead`, `subtitle`, `reference`, `invocation`, `motif` | none |
 | `scripture` | One passage is the substance | `reference*`, `text*`, `commentary`, `citation`, `motif` | `right`, `left`, `top` |
-| `doctrine` | Teaching: Catechism point(s) | `title*`, `kicker`, `subtitle`, `lead`, `quote{text,source}`, **either** `points[1-8]{term?,text}` **or** `columns[2-3]{heading,text}`, `numbering` (`roman`/`arabic`), `closing`, `citation`, `motif` | `right`, `left`, `top` |
+| `doctrine` | Teaching: Catechism point(s) | `title*`, `kicker`, `subtitle`, `lead`, `quote{text,source}`, **either** `points[1-8]{term?,text}` **or** `columns[2-3]{heading,text}`, `numbering` (`roman`/`arabic`), `closing`, `citation`, `motif`, `imageFrame` | `right`, `left`, `top`, `inset` |
+| `triptych` | Teaching text, one image and a short aside side by side | `title*`, `aside*`, `kicker`, `subtitle`, `leadHeading`, `lead`, `asideHeading`, `asideSource`, `citation`, `motif`, `imageFrame`; one image required | `right` (rendered in the centre) |
 | `reflection` | One meditative sentence | `text*`, `kicker`, `title`, `attribution`, `motif` | none |
 | `prayer` | Full prayer text | `title*`, `text*`, `amen`, `motif` | none |
 | `summary` | Numbered recap | `title*`, `items[2-6]{term?,text}`, `kicker`, `numbering`, `citation` | none |
@@ -61,6 +62,7 @@ Every slide also has `id*` (kebab-case, unique, stable: speaker notes attach to 
 - Files go in `decks/<slug>/assets/`; reference as `assets/<file>` in `images[].src`. No remote URLs.
 - Each image: `alt*` (describe it), `slot` (see the catalog), `credit` (artist/source, strongly encouraged), optional `caption`, `fit` (`cover` | `contain`), `focal`.
 - One image per slide.
+- `imageFrame` (`doctrine`, `scripture`): `framed` (default) draws the bordered plate; `bare` removes border and fill so a transparent PNG diagram sits directly on the slide background. Use `bare` only with transparent PNGs and `fit: contain`. On `doctrine`, slot `inset` draws the image inside the text column, right after the quote and before the points or columns.
 
 ## Animations
 

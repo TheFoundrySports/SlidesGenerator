@@ -49,7 +49,7 @@ describe("decks in the repo", () => {
   const slugs = listDeckSlugs();
 
   it("finds the migrated decks", () => {
-    expect(slugs).toEqual(expect.arrayContaining(["demo", "jesuscristo-capitulo-2"]));
+    expect(slugs).toEqual(expect.arrayContaining(["confirmacion-dios-padre", "jesuscristo-capitulo-2"]));
   });
 
   it.each(slugs)("%s validates without P0 issues and every asset exists", (slug) => {

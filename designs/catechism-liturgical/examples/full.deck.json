@@ -128,6 +128,20 @@
       "kicker": "BENDICIÓN",
       "text": "«El Señor os bendiga y os guarde;\nhaga resplandecer su rostro sobre vosotros\ny os conceda su paz.»",
       "motif": "cross"
+    },
+    {
+      "id": "triptych",
+      "layout": "triptych",
+      "label": "Triptych",
+      "kicker": "DIOS, «EL QUE ES»",
+      "title": "Yo soy el que soy",
+      "leadHeading": "Es Misterio",
+      "lead": "«El que es», sin origen y sin fin, desde siempre y por siempre.",
+      "aside": "«Dios, \"El que es\", se reveló a Israel como el que es \"rico en amor y fidelidad\" (Ex 34, 6).»",
+      "asideHeading": "Verdad y Amor",
+      "asideSource": "CEC 214",
+      "citation": "Ex 3, 14 · CEC 206",
+      "images": [{ "src": "assets/plate.svg", "alt": "Abstract circular plate with a cross", "slot": "right", "fit": "contain", "credit": "Example asset" }]
     }
   ]
 }
