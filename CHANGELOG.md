@@ -2,6 +2,12 @@
 
 All notable changes to SlidesChurch are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Changed
+
+- Agent skills (`slide-builder`, `pptx-importer`, `design-author`) follow the Gentle AI skill contract. `AGENTS.md` is the index. Each `agent.md` only points at its skill.
+
 ## v0.3.0 — 2026-10-05
 
 Rewrite as a deck-as-data system. Not backwards compatible; the previous implementation lives in `legacy/`.
