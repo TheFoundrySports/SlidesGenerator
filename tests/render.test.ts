@@ -14,6 +14,7 @@ describe("render", () => {
     expect((html.match(/<section\b[^>]*class="slide/g) ?? []).length).toBe(deck.slides.length);
     expect(html).toContain('data-scope="slides"');
     expect(html).toContain('data-scope="page"');
+    expect(html).toContain("@page { size: 1920px 1080px; margin: 0; }");
     for (const slide of deck.slides) {
       expect(html).toContain(`data-slide-id="${slide.id}"`);
       expect(html).toContain(`data-layout="${slide.layout}"`);
