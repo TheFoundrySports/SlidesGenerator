@@ -142,6 +142,21 @@
       "asideSource": "CEC 214",
       "citation": "Ex 3, 14 · CEC 206",
       "images": [{ "src": "assets/plate.svg", "alt": "Abstract circular plate with a cross", "slot": "right", "fit": "contain", "credit": "Example asset" }]
+    },
+    {
+      "id": "three-column",
+      "layout": "three-column",
+      "label": "Three columns",
+      "kicker": "EN TRES",
+      "title": "Fe, esperanza y caridad",
+      "columns": [
+        { "heading": "Fe", "text": "Creer lo que Dios revela." },
+        { "heading": "Esperanza", "text": "Esperar lo que Dios promete." },
+        { "heading": "Caridad", "text": "Amar como Dios ama." }
+      ],
+      "citation": "CEC 1812-1829",
+      "images": [{ "src": "assets/plate.svg", "alt": "Abstract circular plate with a cross", "slot": "background", "fit": "cover", "credit": "Example asset" }],
+      "animation": { "image": "slow-zoom", "steps": true }
     }
   ]
 }

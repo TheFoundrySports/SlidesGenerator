@@ -147,6 +147,45 @@ describe("background image slot", () => {
   });
 });
 
+describe("three-column layout", () => {
+  const slide = {
+    id: "a",
+    layout: "three-column",
+    label: "a",
+    title: "Fe, esperanza y caridad",
+    columns: [
+      { heading: "Fe", text: "Creer lo que Dios revela." },
+      { heading: "Esperanza", text: "Esperar lo que Dios promete." },
+      { heading: "Caridad", text: "Amar como Dios ama." },
+    ],
+  };
+
+  it("renders exactly three columns", async () => {
+    const design = await getDesign();
+    const html = renderDeckHtml(parseDeck(design, deckOf([slide])), design, { readText: readProjectText, offline: true });
+    expect(html).toContain('class="cols cols--3"');
+    expect(html.match(/class="col__heading"/g) ?? []).toHaveLength(3);
+    expect(html).toContain("Esperanza");
+  });
+
+  it("reveals the three columns one by one with steps", async () => {
+    const design = await getDesign();
+    const html = renderDeckHtml(
+      parseDeck(design, deckOf([{ ...slide, animation: { steps: true } }])),
+      design,
+      { readText: readProjectText, offline: true },
+    );
+    expect(html.match(/data-step=""/g) ?? []).toHaveLength(3);
+  });
+
+  it("requires exactly three columns", async () => {
+    const design = await getDesign();
+    expect(() => parseDeck(design, deckOf([slide]))).not.toThrow();
+    const two = { ...slide, columns: slide.columns.slice(0, 2) };
+    expect(() => parseDeck(design, deckOf([two]))).toThrow();
+  });
+});
+
 describe("html lint", () => {
   it("passes on a rendered example", async () => {
     const design = await getDesign();
