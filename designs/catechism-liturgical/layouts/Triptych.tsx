@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
 import { Figure, Lines, Paragraphs } from "../../../src/components";
-import { Ornament, citationField, imageFrameField, motifField, titleClass } from "./shared";
+import { Backdrop, Ornament, citationField, imageFrameField, motifField, titleClass } from "./shared";
 
 export const triptychLayout = defineLayout({
   name: "triptych",
   description:
-    "D. Triptych — a centred header row (kicker, title, subtitle) above three zones in one row: teaching text on the left, one image in the centre, an aside (heading, italic statement, source) on the right. Needs one image (slot right).",
-  imageSlots: ["right"],
+    "D. Triptych — a centred header row (kicker, title, subtitle) above three zones in one row: teaching text on the left, one image in the centre, an aside (heading, italic statement, source) on the right. Needs one image (slot right). An optional image with slot background fills the slide behind the three zones.",
+  imageSlots: ["right", "background"],
   content: {
     kicker: z.string().optional().describe("Uppercase mono topic line"),
     title: z.string(),
@@ -33,8 +33,10 @@ export const triptychLayout = defineLayout({
     images: [{ src: "assets/plate.svg", alt: "Abstract circular plate with a cross", slot: "right", fit: "contain" }],
   },
   component: ({ slide, ctx }) => {
-    const image = slide.images?.[0];
+    const image = slide.images?.find((item) => item.slot !== "background");
     return (
+      <>
+      <Backdrop images={slide.images} ctx={ctx} />
       <div className="split split--trio">
         <header className="trio-head">
           <Ornament name={slide.motif} ctx={ctx} size="sm" />
@@ -61,6 +63,7 @@ export const triptychLayout = defineLayout({
           {slide.asideSource && <p className="citation">{slide.asideSource}</p>}
         </div>
       </div>
+      </>
     );
   },
 });

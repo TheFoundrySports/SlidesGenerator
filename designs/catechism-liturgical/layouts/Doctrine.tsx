@@ -6,8 +6,8 @@ import { ColumnSchema, Frame, Ornament, PointSchema, Points, QuoteSchema, citati
 export const doctrineLayout = defineLayout({
   name: "doctrine",
   description:
-    "C. Doctrine — a doctrinal topic: title, optional quote, then numbered points OR 2-3 headed columns (and an optional closing statement). Optional framed image (right | left | top).",
-  imageSlots: ["right", "left", "top", "inset"],
+    "C. Doctrine — a doctrinal topic: title, optional quote, then numbered points OR 2-3 headed columns (and an optional closing statement). Optional framed image (right | left | top | inset) and an optional full-bleed background.",
+  imageSlots: ["right", "left", "top", "inset", "background"],
   content: {
     kicker: z.string().optional().describe("Uppercase mono topic line"),
     title: z.string(),
@@ -28,7 +28,9 @@ export const doctrineLayout = defineLayout({
     points: [{ text: "Creemos en un solo Dios." }, { text: "Este Dios crea todas las cosas por su Verbo." }],
     citation: "CEC 279",
   },
-  component: ({ slide, ctx }) => (
+  component: ({ slide, ctx }) => {
+    const inset = slide.images?.find((image) => image.slot === "inset");
+    return (
     <Frame images={slide.images} imageFrame={slide.imageFrame} ctx={ctx}>
       <Ornament name={slide.motif} ctx={ctx} size="sm" />
       {slide.kicker && <p className="kicker">{slide.kicker}</p>}
@@ -48,9 +50,7 @@ export const doctrineLayout = defineLayout({
           {slide.quote.source && <p className="citation">{slide.quote.source}</p>}
         </blockquote>
       )}
-      {slide.images?.[0]?.slot === "inset" && (
-        <Figure image={slide.images[0]} ctx={ctx} className={slide.imageFrame === "bare" ? "plate plate--bare" : "plate"} />
-      )}
+      {inset && <Figure image={inset} ctx={ctx} className={slide.imageFrame === "bare" ? "plate plate--bare" : "plate"} />}
       {slide.points && <Points points={slide.points} numbering={slide.numbering} ctx={ctx} />}
       {slide.columns && (
         <div className={`cols cols--${slide.columns.length}`}>
@@ -65,5 +65,6 @@ export const doctrineLayout = defineLayout({
       {slide.closing && <p className="closing-statement">{slide.closing}</p>}
       {slide.citation && <p className="citation">{slide.citation}</p>}
     </Frame>
-  ),
+    );
+  },
 });

@@ -1,10 +1,11 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
-import { Ornament, PointSchema, Points, citationField, motifField, titleClass } from "./shared";
+import { Backdrop, Ornament, PointSchema, Points, citationField, motifField, titleClass } from "./shared";
 
 export const summaryLayout = defineLayout({
   name: "summary",
-  description: "F. Summary — 3-6 takeaways, numbered or labelled with a term. `animation.steps` reveals them one by one.",
+  description: "F. Summary — 3-6 takeaways, numbered or labelled with a term. `animation.steps` reveals them one by one. Optional full-bleed background image.",
+  imageSlots: ["background"],
   content: {
     kicker: z.string().optional().describe("Usually «EN RESUMEN»"),
     title: z.string(),
@@ -15,6 +16,8 @@ export const summaryLayout = defineLayout({
   },
   example: { kicker: "EN RESUMEN", title: "En resumen", items: [{ text: "Dios es Padre." }, { text: "Crea por amor." }, { text: "Sostiene lo creado." }] },
   component: ({ slide, ctx }) => (
+    <>
+    <Backdrop images={slide.images} ctx={ctx} />
     <div className="frame">
       <Ornament name={slide.motif} ctx={ctx} size="sm" />
       {slide.kicker && <p className="kicker">{slide.kicker}</p>}
@@ -23,5 +26,6 @@ export const summaryLayout = defineLayout({
       <Points points={slide.items} numbering={slide.numbering} ctx={ctx} />
       {slide.citation && <p className="citation">{slide.citation}</p>}
     </div>
+    </>
   ),
 });

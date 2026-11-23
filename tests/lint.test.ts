@@ -89,6 +89,40 @@ describe("catechism-liturgical rules", () => {
   });
 });
 
+describe("background image slot", () => {
+  it("accepts a background image on a layout that admits it", async () => {
+    const issues = await lint([{ ...reflection("a"), images: [{ src: "assets/x.jpg", alt: "x", slot: "background" }] }]);
+    expect(rules(issues)).not.toContain("image-slot");
+  });
+
+  it("allows one background plus one framed image, and warns on two backgrounds", async () => {
+    const framed = { src: "assets/plate.svg", alt: "plate", slot: "right", credit: "c" };
+    const background = { src: "assets/bg.jpg", alt: "bg", slot: "background", credit: "c" };
+    expect(rules(await lint([doctrine("a", { images: [background, framed] })]))).not.toContain("image-count");
+    const second = { ...background, src: "assets/bg2.jpg" };
+    expect(rules(await lint([doctrine("a", { images: [background, second] })]))).toContain("image-count");
+  });
+
+  it("keeps the framed plate when a background image comes first", async () => {
+    const design = await getDesign();
+    const deck = parseDeck(
+      design,
+      deckOf([
+        doctrine("a", {
+          images: [
+            { src: "assets/bg.jpg", alt: "bg", slot: "background" },
+            { src: "assets/plate.svg", alt: "plate", slot: "right" },
+          ],
+        }),
+      ]),
+    );
+    const html = renderDeckHtml(deck, design, { readText: readProjectText, offline: true });
+    expect(html).toContain("backdrop");
+    expect(html).toContain("split--right");
+    expect(html).toContain("assets/plate.svg");
+  });
+});
+
 describe("html lint", () => {
   it("passes on a rendered example", async () => {
     const design = await getDesign();

@@ -5,8 +5,8 @@ import { Frame, Ornament, citationField, imageFrameField, motifField } from "./s
 
 export const scriptureLayout = defineLayout({
   name: "scripture",
-  description: "B. Scripture — one biblical passage is the slide; optional framed image (right | left | top).",
-  imageSlots: ["right", "left", "top"],
+  description: "B. Scripture — one biblical passage is the slide; optional framed image (right | left | top) and an optional full-bleed background.",
+  imageSlots: ["right", "left", "top", "background"],
   content: {
     reference: z.string().describe("Spanish citation, «Libro cap, vv» (e.g. «Mateo 16, 16»)"),
     text: z.string().describe("The passage wrapped in «» quotes; \\n for verse breaks"),

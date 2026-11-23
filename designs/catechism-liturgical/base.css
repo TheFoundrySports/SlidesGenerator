@@ -22,6 +22,17 @@
   gap: 20px; width: 100%; margin: auto; text-align: center;
 }
 .cover, .divider, .closing { gap: 28px; }
+.frame, .cover, .divider, .closing, .reflection-wrap, .prayer-wrap, .split { position: relative; z-index: 1; }
+
+/* Full-bleed image behind the type. The wash keeps the oxblood ink readable. */
+.figure--background.backdrop { z-index: 0; }
+.figure--background.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--bg) 72%, transparent);
+  pointer-events: none;
+}
 .frame--panel { margin: 0; height: 100%; }
 
 /* Type */

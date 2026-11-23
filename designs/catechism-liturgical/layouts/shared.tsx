@@ -50,9 +50,16 @@ export const Points = ({ points, numbering, ctx }: { points: Point[]; numbering:
   );
 };
 
+/** Full-bleed image behind the type. Animated by `animation.image` (slow-zoom, fade-in-late) or by an animated image file. */
+export const Backdrop = ({ images, ctx }: { images?: ImageRef[]; ctx: RenderContext }) => {
+  const image = images?.find((item) => item.slot === "background");
+  if (!image) return null;
+  return <Figure image={image} ctx={ctx} className="backdrop" />;
+};
+
 /**
- * Lays a slide out either as a single centered column or, when it has an image, as a
- * text panel plus a framed plate (slots: right | left | top).
+ * Lays a slide out either as a single centered column or, when it has a plate image, as a
+ * text panel plus a framed plate (slots: right | left | top). A `background` image sits behind both.
  */
 export const Frame = ({
   images,
@@ -65,24 +72,35 @@ export const Frame = ({
   imageFrame?: "framed" | "bare";
   children: ReactNode;
 }) => {
-  const image = images?.[0];
-  if (!image || image.slot === "inset") return <div className="frame">{children}</div>;
+  const image = images?.find((item) => item.slot !== "background" && item.slot !== "inset");
+  const backdrop = <Backdrop images={images} ctx={ctx} />;
+  if (!image) {
+    return (
+      <>
+        {backdrop}
+        <div className="frame">{children}</div>
+      </>
+    );
+  }
   const text = <div className="frame frame--panel">{children}</div>;
   const plate = <Figure image={image} ctx={ctx} className={imageFrame === "bare" ? "plate plate--bare" : "plate"} />;
   return (
-    <div className={`split split--${image.slot}`}>
-      {image.slot === "right" ? (
-        <>
-          {text}
-          {plate}
-        </>
-      ) : (
-        <>
-          {plate}
-          {text}
-        </>
-      )}
-    </div>
+    <>
+      {backdrop}
+      <div className={`split split--${image.slot}`}>
+        {image.slot === "right" ? (
+          <>
+            {text}
+            {plate}
+          </>
+        ) : (
+          <>
+            {plate}
+            {text}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
