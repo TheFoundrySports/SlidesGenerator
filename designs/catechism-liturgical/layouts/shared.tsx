@@ -50,7 +50,7 @@ export const Points = ({ points, numbering, ctx }: { points: Point[]; numbering:
   );
 };
 
-/** Full-bleed image behind the type. Animated by `animation.image` (slow-zoom) or by an animated image file. */
+/** Full-bleed image behind the type. Animated by `animation.image` (slow-zoom, fade-in-late) or by an animated image file. */
 export const Backdrop = ({ images, ctx }: { images?: ImageRef[]; ctx: RenderContext }) => {
   const image = images?.find((item) => item.slot === "background");
   if (!image) return null;

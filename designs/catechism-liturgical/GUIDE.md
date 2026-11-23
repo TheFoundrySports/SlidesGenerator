@@ -63,12 +63,12 @@ Every slide also has `id*` (kebab-case, unique, stable: speaker notes attach to 
 - Files go in `decks/<slug>/assets/`; reference as `assets/<file>` in `images[].src`. No remote URLs.
 - Each image: `alt*` (describe it), `slot` (see the catalog), `credit` (artist/source, strongly encouraged), optional `caption`, `fit` (`cover` | `contain`), `focal`.
 - One framed image per slide, plus an optional image with `slot: "background"`. The background fills the slide behind the type. A parchment wash keeps the ink readable.
-- An animated GIF, APNG, or animated WebP in that slot plays in the presenter. `animation.image` of `slow-zoom` moves a still image the same way.
+- An animated GIF, APNG, or animated WebP in that slot plays in the presenter. `animation.image` of `slow-zoom` or `fade-in-late` moves a still image the same way.
 - `imageFrame` (`doctrine`, `scripture`, `triptych`): `framed` (default) draws the bordered plate; `bare` removes border and fill so a transparent PNG diagram sits directly on the slide. Use `bare` only with transparent PNGs and `fit: contain`. On `doctrine`, slot `inset` draws the image inside the text column, right after the quote and before the points or columns.
 
 ## Animations
 
-`animation` per slide, all optional: `enter` (`fade-lift` default, `fade`, `none`), `image` (`slow-zoom`, max 3 slides per deck, including on a `background` image), `steps: true` (reveal list items or the three columns one by one with → key). Use `steps` on slides with points, items, or `three-column`. Default to no animation overrides.
+`animation` per slide, all optional: `enter` (`fade-lift` default, `fade`, `none`), `image` (`slow-zoom` or `fade-in-late`, including on a `background` image), `steps: true` (reveal list items or the three columns one by one with → key). Use `steps` on slides with points, items, or `three-column`. Default to no animation overrides.
 
 ## Hard rules
 

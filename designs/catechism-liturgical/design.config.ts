@@ -48,9 +48,8 @@ export default defineDesign({
     custom: catechismLayouts,
   },
   animations: {
-    allow: ["fade-lift", "fade", "steps", "slow-zoom"],
+    allow: ["fade-lift", "fade", "steps", "slow-zoom", "fade-in-late"],
     default: "fade-lift",
-    budget: { "slow-zoom": 3 },
   },
   rules,
   motifs: MOTIFS,
