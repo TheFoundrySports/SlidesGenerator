@@ -1712,6 +1712,239 @@
               },
               "layout": {
                 "type": "string",
+                "const": "three-column"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Short human label shown in the presenter (data-screen-label)"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "monastic",
+                  "festive",
+                  "typographic"
+                ]
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Path relative to the deck folder, e.g. assets/peter.jpg"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Accessible description (required)"
+                    },
+                    "slot": {
+                      "default": "right",
+                      "description": "Where the layout places the image",
+                      "type": "string",
+                      "enum": [
+                        "background",
+                        "left",
+                        "right",
+                        "top",
+                        "full",
+                        "inset"
+                      ]
+                    },
+                    "fit": {
+                      "default": "cover",
+                      "type": "string",
+                      "enum": [
+                        "cover",
+                        "contain"
+                      ]
+                    },
+                    "focal": {
+                      "description": "Focal point 0..1 used as object-position when fit=cover",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "box": {
+                      "description": "Only for layout `free`: percent-of-canvas rectangle",
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "w": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "h": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "alt"
+                  ]
+                }
+              },
+              "animation": {
+                "type": "object",
+                "properties": {
+                  "enter": {
+                    "type": "string",
+                    "enum": [
+                      "fade-lift",
+                      "fade",
+                      "none"
+                    ]
+                  },
+                  "image": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "slow-zoom"
+                    ]
+                  },
+                  "steps": {
+                    "description": "Reveal list items one by one",
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "kicker": {
+                "description": "Uppercase mono topic line",
+                "type": "string"
+              },
+              "title": {
+                "type": "string",
+                "description": "Slide title"
+              },
+              "subtitle": {
+                "description": "Italic line under the title",
+                "type": "string"
+              },
+              "columns": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "heading": {
+                        "description": "Short heading for this column",
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Column body; a blank line starts a new paragraph"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "heading": {
+                        "description": "Short heading for this column",
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Column body; a blank line starts a new paragraph"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "heading": {
+                        "description": "Short heading for this column",
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Column body; a blank line starts a new paragraph"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  }
+                ],
+                "items": false,
+                "minItems": 3,
+                "maxItems": 3,
+                "description": "Exactly three columns, left to right"
+              },
+              "citation": {
+                "description": "Footer reference line in mono, e.g. «CEC 422-424 · YOUCAT 72»",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "layout",
+              "label",
+              "title",
+              "columns"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "layout": {
+                "type": "string",
                 "const": "reflection"
               },
               "label": {
