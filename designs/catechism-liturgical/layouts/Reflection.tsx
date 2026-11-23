@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
 import { Lines } from "../../../src/components";
-import { Ornament, motifField } from "./shared";
+import { Backdrop, Ornament, motifField } from "./shared";
 
 export const reflectionLayout = defineLayout({
   name: "reflection",
-  description: "D. Reflection — one meditative sentence (or short passage) with attribution.",
+  description: "D. Reflection — one meditative sentence (or short passage) with attribution. Optional full-bleed background image.",
+  imageSlots: ["background"],
   content: {
     kicker: z.string().optional(),
     title: z.string().optional(),
@@ -15,6 +16,8 @@ export const reflectionLayout = defineLayout({
   },
   example: { text: "«Antes de que la luz fuera luz, ya eras Tú.»", attribution: "— Adaptado de San Agustín" },
   component: ({ slide, ctx }) => (
+    <>
+    <Backdrop images={slide.images} ctx={ctx} />
     <div className="reflection-wrap">
       <Ornament name={slide.motif} ctx={ctx} size="sm" />
       {slide.kicker && <p className="kicker">{slide.kicker}</p>}
@@ -25,5 +28,6 @@ export const reflectionLayout = defineLayout({
       </blockquote>
       {slide.attribution && <p className="citation">{slide.attribution}</p>}
     </div>
+    </>
   ),
 });

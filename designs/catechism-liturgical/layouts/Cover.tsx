@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
 import { Lines } from "../../../src/components";
-import { Ornament, motifField } from "./shared";
+import { Backdrop, Ornament, motifField } from "./shared";
 
 export const coverLayout = defineLayout({
   name: "cover",
-  description: "A. Cover — opens the deck or a chapter: ornament, title, subtitle and an optional invocation.",
+  description: "A. Cover — opens the deck or a chapter: ornament, title, subtitle and an optional invocation. Optional full-bleed background image.",
+  imageSlots: ["background"],
   content: {
     eyebrow: z.string().optional().describe("Mono line above (course name)"),
     lead: z.string().optional().describe("Italic line under the eyebrow (audience or series)"),
@@ -17,6 +18,8 @@ export const coverLayout = defineLayout({
   },
   example: { eyebrow: "CURSO DE CATEQUESIS", title: "Creo en Dios Padre", subtitle: "Creador del cielo y de la tierra", motif: "cross" },
   component: ({ slide, ctx }) => (
+    <>
+    <Backdrop images={slide.images} ctx={ctx} />
     <div className="cover">
       {slide.eyebrow && <p className="kicker">{slide.eyebrow}</p>}
       {slide.lead && <p className="lead">{slide.lead}</p>}
@@ -30,5 +33,6 @@ export const coverLayout = defineLayout({
         </p>
       )}
     </div>
+    </>
   ),
 });

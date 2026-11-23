@@ -24,15 +24,15 @@ Pick the archetype by the job the slide does. Fields marked `*` are required.
 
 | Layout | Use it for | Fields | Image slots |
 |--------|-----------|--------|-------------|
-| `cover` | Opens the deck | `title*`, `eyebrow`, `lead`, `subtitle`, `reference`, `invocation`, `motif` | none |
-| `scripture` | One passage is the substance | `reference*`, `text*`, `commentary`, `citation`, `motif` | `right`, `left`, `top` |
-| `doctrine` | Teaching: Catechism point(s) | `title*`, `kicker`, `subtitle`, `lead`, `quote{text,source}`, **either** `points[1-8]{term?,text}` **or** `columns[2-3]{heading,text}`, `numbering` (`roman`/`arabic`), `closing`, `citation`, `motif`, `imageFrame` | `right`, `left`, `top`, `inset` |
-| `triptych` | Teaching text, one image and a short aside side by side | `title*`, `aside*`, `kicker`, `subtitle`, `leadHeading`, `lead`, `asideHeading`, `asideSource`, `citation`, `motif`, `imageFrame`; one image required | `right` (rendered in the centre) |
-| `reflection` | One meditative sentence | `text*`, `kicker`, `title`, `attribution`, `motif` | none |
-| `prayer` | Full prayer text | `title*`, `text*`, `amen`, `motif` | none |
-| `summary` | Numbered recap | `title*`, `items[2-6]{term?,text}`, `kicker`, `numbering`, `citation` | none |
-| `divider` | Part change | `title*`, `kicker`, `subtitle`, `motif` | none |
-| `closing` | Ends the deck | `text*`, `kicker`, `reference`, `amen`, `motif` | none |
+| `cover` | Opens the deck | `title*`, `eyebrow`, `lead`, `subtitle`, `reference`, `invocation`, `motif` | `background` |
+| `scripture` | One passage is the substance | `reference*`, `text*`, `commentary`, `citation`, `motif` | `right`, `left`, `top`, `background` |
+| `doctrine` | Teaching: Catechism point(s) | `title*`, `kicker`, `subtitle`, `lead`, `quote{text,source}`, **either** `points[1-8]{term?,text}` **or** `columns[2-3]{heading,text}`, `numbering` (`roman`/`arabic`), `closing`, `citation`, `motif`, `imageFrame` | `right`, `left`, `top`, `inset`, `background` |
+| `triptych` | Teaching text, one image and a short aside side by side | `title*`, `aside*`, `kicker`, `subtitle`, `leadHeading`, `lead`, `asideHeading`, `asideSource`, `citation`, `motif`, `imageFrame`; one image required | `right` (rendered in the centre), `background` |
+| `reflection` | One meditative sentence | `text*`, `kicker`, `title`, `attribution`, `motif` | `background` |
+| `prayer` | Full prayer text | `title*`, `text*`, `amen`, `motif` | `background` |
+| `summary` | Numbered recap | `title*`, `items[2-6]{term?,text}`, `kicker`, `numbering`, `citation` | `background` |
+| `divider` | Part change | `title*`, `kicker`, `subtitle`, `motif` | `background` |
+| `closing` | Ends the deck | `text*`, `kicker`, `reference`, `amen`, `motif` | `background` |
 
 Core layouts allowed besides these: `text-image`, `image-text`, `image-overlay`, `image-full`, `free`. Prefer the catechism layouts; use core ones only when the user insists on a free composition.
 
@@ -61,12 +61,13 @@ Every slide also has `id*` (kebab-case, unique, stable: speaker notes attach to 
 - Only framed sacred art: icons, manuscript illuminations, paintings. No stock photography, no generated photo-real people, no haloed clip-art.
 - Files go in `decks/<slug>/assets/`; reference as `assets/<file>` in `images[].src`. No remote URLs.
 - Each image: `alt*` (describe it), `slot` (see the catalog), `credit` (artist/source, strongly encouraged), optional `caption`, `fit` (`cover` | `contain`), `focal`.
-- One image per slide.
-- `imageFrame` (`doctrine`, `scripture`): `framed` (default) draws the bordered plate; `bare` removes border and fill so a transparent PNG diagram sits directly on the slide background. Use `bare` only with transparent PNGs and `fit: contain`. On `doctrine`, slot `inset` draws the image inside the text column, right after the quote and before the points or columns.
+- One framed image per slide, plus an optional image with `slot: "background"`. The background fills the slide behind the type. A parchment wash keeps the ink readable.
+- An animated GIF, APNG, or animated WebP in that slot plays in the presenter. `animation.image` of `slow-zoom` moves a still image the same way.
+- `imageFrame` (`doctrine`, `scripture`): `framed` (default) draws the bordered plate; `bare` removes border and fill so a transparent PNG diagram sits directly on the slide. Use `bare` only with transparent PNGs and `fit: contain`. On `doctrine`, slot `inset` draws the image inside the text column, right after the quote and before the points or columns.
 
 ## Animations
 
-`animation` per slide, all optional: `enter` (`fade-lift` default, `fade`, `none`), `image` (`slow-zoom`, max 3 slides per deck), `steps: true` (reveal list items one by one with → key). Use `steps` only on slides with points or items. Default to no animation overrides.
+`animation` per slide, all optional: `enter` (`fade-lift` default, `fade`, `none`), `image` (`slow-zoom`, max 3 slides per deck, including on a `background` image), `steps: true` (reveal list items one by one with → key). Use `steps` only on slides with points or items. Default to no animation overrides.
 
 ## Hard rules
 
@@ -77,7 +78,7 @@ The validator (`npm run validate -- <slug>`) blocks on P0:
 - Fonts, colors and shadows are owned by the design; never put raw CSS or HTML in text fields.
 - No more than 2 motifs per slide; images need `alt`.
 
-P1 (warnings you should fix): rhythm, variant pairing and budgets, exclamations, `CCC` spelling, 6+ points, point/column mix, several images on one slide.
+P1 (warnings you should fix): rhythm, variant pairing and budgets, exclamations, `CCC` spelling, 6+ points, point/column mix, more than one background or more than one framed image on one slide.
 
 ## Examples
 

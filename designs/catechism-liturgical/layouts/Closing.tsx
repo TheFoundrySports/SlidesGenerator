@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { defineLayout } from "../../../src/schema/layout";
 import { Lines } from "../../../src/components";
-import { Ornament, motifField } from "./shared";
+import { Backdrop, Ornament, motifField } from "./shared";
 
 export const closingLayout = defineLayout({
   name: "closing",
-  description: "H. Closing — blessing or final passage, ending with «Amén.».",
+  description: "H. Closing — blessing or final passage, ending with «Amén.». Optional full-bleed background image.",
+  imageSlots: ["background"],
   content: {
     kicker: z.string().optional(),
     text: z.string().describe("Blessing / exhortation; \\n for line breaks"),
@@ -15,6 +16,8 @@ export const closingLayout = defineLayout({
   },
   example: { text: "«El Señor os bendiga y os guarde;\nhaga resplandecer su rostro sobre vosotros\ny os conceda su paz.»", motif: "cross" },
   component: ({ slide, ctx }) => (
+    <>
+    <Backdrop images={slide.images} ctx={ctx} />
     <div className="closing">
       <Ornament name={slide.motif} ctx={ctx} />
       {slide.kicker && <p className="kicker">{slide.kicker}</p>}
@@ -24,5 +27,6 @@ export const closingLayout = defineLayout({
       {slide.reference && <p className="citation">{slide.reference}</p>}
       {slide.amen && <p className="amen">Amén.</p>}
     </div>
+    </>
   ),
 });

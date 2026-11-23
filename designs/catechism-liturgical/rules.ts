@@ -118,10 +118,18 @@ const structure: Rule = ({ deck }) => {
     if (slide.layout === "doctrine" && slide.points && slide.columns) {
       issues.push({ rule: "doctrine-density", severity: "P1", slide: slide.id, message: "points and columns together are dense; pick one" });
     }
-    if (Array.isArray(slide.images) && slide.images.length > 1) {
-      issues.push({ rule: "image-count", severity: "P1", slide: slide.id, message: "one framed image per slide" });
+    const images = (slide.images ?? []) as { src: string; credit?: string; slot?: string }[];
+    const backgrounds = images.filter((image) => image.slot === "background").length;
+    const framed = images.length - backgrounds;
+    if (backgrounds > 1 || framed > 1) {
+      issues.push({
+        rule: "image-count",
+        severity: "P1",
+        slide: slide.id,
+        message: "one background image and one framed image per slide",
+      });
     }
-    for (const image of (slide.images ?? []) as { src: string; credit?: string }[]) {
+    for (const image of images) {
       if (!image.credit) {
         issues.push({ rule: "image-credit", severity: "P2", slide: slide.id, message: `image ${image.src} has no credit (artist/source)` });
       }
