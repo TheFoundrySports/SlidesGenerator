@@ -117,9 +117,33 @@ describe("background image slot", () => {
       ]),
     );
     const html = renderDeckHtml(deck, design, { readText: readProjectText, offline: true });
-    expect(html).toContain("backdrop");
+    expect(html).toContain('class="figure figure--background backdrop"');
+    expect(html).toContain('src="assets/bg.jpg"');
     expect(html).toContain("split--right");
-    expect(html).toContain("assets/plate.svg");
+    expect(html).toContain('src="assets/plate.svg"');
+  });
+
+  it("keeps the triptych plate when a background image comes first", async () => {
+    const design = await getDesign();
+    const deck = parseDeck(
+      design,
+      deckOf([
+        {
+          id: "a",
+          layout: "triptych",
+          label: "a",
+          title: "Título",
+          aside: "Al margen.",
+          images: [
+            { src: "assets/bg.jpg", alt: "bg", slot: "background" },
+            { src: "assets/plate.svg", alt: "plate", slot: "right" },
+          ],
+        },
+      ]),
+    );
+    const html = renderDeckHtml(deck, design, { readText: readProjectText, offline: true });
+    expect(html).toContain('class="figure figure--background backdrop"');
+    expect(html).toContain('src="assets/plate.svg"');
   });
 });
 
