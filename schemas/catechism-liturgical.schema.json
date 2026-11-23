@@ -220,7 +220,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -396,7 +397,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -572,7 +574,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -748,7 +751,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -914,7 +918,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -1167,7 +1172,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -1367,7 +1373,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -1571,7 +1578,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -1843,7 +1851,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -2076,7 +2085,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -2268,7 +2278,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -2459,7 +2470,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -2677,7 +2689,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -2865,7 +2878,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
@@ -3058,7 +3072,8 @@
                     "type": "string",
                     "enum": [
                       "none",
-                      "slow-zoom"
+                      "slow-zoom",
+                      "fade-in-late"
                     ]
                   },
                   "steps": {
